@@ -1,14 +1,21 @@
 \documentclass{beamer}
-\setbeamertemplate{navigation symbols}{}
 
-\setbeamercolor{frametitle}{fg=black,bg=white}
-\setbeamercolor{title}{fg=black,bg=white!85!blue}
 \usetheme{Rochester}
+\usecolortheme{material}
 
-\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\setbeamertemplate{footline}[text line]{%
+  \parbox{0.5\linewidth}{
+    \vspace*{-12pt}\insertshorttitle~(\insertshortauthor)
+  }
+  \hfill%
+  \parbox{0.5\linewidth}{
+    \vspace*{-12pt}\raggedleft\insertpagenumber
+  }
+}
+\setbeamertemplate{navigation symbols}{}
 \begin{document}
-\title{HW/SW Entwurfssprachen am Beispiel System-C}
-\author{Florian Zaruba, Thomas Weber}
+\title[Entwurssprachen]{HW/SW Entwurfssprachen am Beispiel System-C}
+\author[Zaruba F., Weber T.]{Florian Zaruba, Thomas Weber}
 \date{\today} 
 
 \begin{frame}

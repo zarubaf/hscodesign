@@ -24,7 +24,7 @@ export LC_ALL		?= C
 #
 # If you specify sources here, all other files with the same suffix
 # will be treated as if they were _include_ files.
-onlysources.tex	?= thesis.tex
+onlysources.tex	?= presentation.tex
 #onlysources.tex.sh	?=
 #onlysources.tex.pl	?=
 #onlysources.tex.py	?=

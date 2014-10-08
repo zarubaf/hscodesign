@@ -1,8 +1,19 @@
+
+# Editor related ignores
+*~
+
+# LaTex related ignores
 *.aux
 *.log
 *.nav
 *.out
 *.pdf
 *.snm
-*.tex~
 *.toc
+*.d
+*.fls
+
+# Makefile ignorse
+*.make
+
+
