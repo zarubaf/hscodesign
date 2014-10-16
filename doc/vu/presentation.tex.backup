@@ -1,0 +1,159 @@
+\documentclass{beamer}
+
+\usetheme{Rochester}
+\usecolortheme{material}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{0.5\linewidth}{
+    \vspace*{-12pt}\insertshorttitle~(\insertshortauthor)
+  }
+  \hfill%
+  \parbox{0.5\linewidth}{
+    \vspace*{-12pt}\raggedleft\insertpagenumber
+  }
+}
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\title[Entwurssprachen]{HW/SW Entwurfssprachen am Beispiel System-C}
+\author[Zaruba F., Weber T.]{Florian Zaruba, Thomas Weber}
+\date{\today} 
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}\frametitle{Table of contents}\tableofcontents
+\end{frame} 
+
+\section{HW/SW Entwurfssprachen} 
+\begin{frame}\frametitle{HW/SW Entwurfssprachen} 
+tba
+\end{frame}
+
+\section{SystemC Overview}
+\begin{frame}\frametitle{What is SystemC} 
+tba
+\end{frame}
+\subsection{History}
+\subsection{Benefits/Drawbacks}
+
+\section{Section no.1} 
+\begin{frame}\frametitle{Title} 
+Each frame should have a title.
+\end{frame}
+\subsection{Subsection no.1.1  }
+\begin{frame} 
+Without title somethink is missing. 
+\end{frame}
+
+
+\section{Section no. 2} 
+\subsection{Lists I}
+\begin{frame}\frametitle{unnumbered lists}
+\begin{itemize}
+\item Introduction to  \LaTeX  
+\item Course 2 
+\item Termpapers and presentations with \LaTeX 
+\item Beamer class
+\end{itemize} 
+\end{frame}
+
+\begin{frame}\frametitle{lists with pause}
+\begin{itemize}
+\item Introduction to  \LaTeX \pause 
+\item Course 2 \pause 
+\item Termpapers and presentations with \LaTeX \pause 
+\item Beamer class
+\end{itemize} 
+\end{frame}
+
+\subsection{Lists II}
+\begin{frame}\frametitle{numbered lists}
+\begin{enumerate}
+\item Introduction to  \LaTeX  
+\item Course 2 
+\item Termpapers and presentations with \LaTeX 
+\item Beamer class
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{numbered lists with pause}
+\begin{enumerate}
+\item Introduction to  \LaTeX \pause 
+\item Course 2 \pause 
+\item Termpapers and presentations with \LaTeX \pause 
+\item Beamer class
+\end{enumerate}
+\end{frame}
+
+\section{Section no.3} 
+\subsection{Tables}
+\begin{frame}\frametitle{Tables}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Date} & \textbf{Instructor} & \textbf{Title} \\
+\hline
+WS 04/05 & Sascha Frank & First steps with  \LaTeX  \\
+\hline
+SS 05 & Sascha Frank & \LaTeX \ Course serial \\
+\hline
+\end{tabular}
+\end{frame}
+
+
+\begin{frame}\frametitle{Tables with pause}
+\begin{tabular}{c c c}
+A & B & C \\ 
+\pause 
+1 & 2 & 3 \\  
+\pause 
+A & B & C \\ 
+\end{tabular} 
+\end{frame}
+
+
+\section{Section no. 4}
+\subsection{blocs}
+\begin{frame}\frametitle{blocs}
+
+\begin{block}{title of the bloc}
+bloc text
+\end{block}
+
+\begin{exampleblock}{title of the bloc}
+bloc text
+\end{exampleblock}
+
+
+\begin{alertblock}{title of the bloc}
+bloc text
+\end{alertblock}
+\end{frame}
+
+\section{Section no. 5}
+\subsection{split screen}
+
+\begin{frame}\frametitle{splitting screen}
+\begin{columns}
+\begin{column}{5cm}
+\begin{itemize}
+\item Beamer 
+\item Beamer Class 
+\item Beamer Class Latex 
+\end{itemize}
+\end{column}
+\begin{column}{5cm}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Instructor} & \textbf{Title} \\
+\hline
+Sascha Frank &  \LaTeX \ Course 1 \\
+\hline
+Sascha Frank &  Course serial  \\
+\hline
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+\end{document}
