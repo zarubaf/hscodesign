@@ -38,9 +38,10 @@
 	      \caption{Design flow \textit{(c.f. Hardware Modelling VO)}.}
 	      \label{fig:flow}
 	    \end{figure}  
-	  If the hardware and software parts should be modified because of, e.g., performance reasons, 
-	  Unless there are other circumstances, the \textit{system definition} and the \textit{specification} steps are part of the project management.
-	  \subsection{}
+	  If the hardware and software parts should be modified because of, e.g., performance reasons, these two parts must be modified or completely redesigned in order to fit the specifications.
+	  This leads to an much higher and probably expensive procedure for the hardware part, thus its design-flow is much longer and every change in the \textit{VHDL/Verilog} code leads to a new compilation, technology-mapping and place and route.
+%	  Unless there are other circumstances, the \textit{system definition} and the \textit{specification} steps are part of the project management which have to be done only once.
+	  \subsection{Tools for Automatic Partitioning}
 	  
 	\section{Tools}
 
