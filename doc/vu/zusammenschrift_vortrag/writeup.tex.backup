@@ -28,9 +28,18 @@
 
 	\section{Automatic Partitioning}
 	  \subsection{What is Partitioning?}
-	  Partitioning means the separation of hardware and software parts in focus on hardware/software co-design.
-	  Traditionally the hardware part of an embedded system is written in VHDL \textit{more present in Europe} or Verilog \textit{more present in the USA} while the software part is written in \textit{assembly}, \textit{C} or \textit{C++}.
-	  The 
+	  Partitioning means the separation of hardware and software parts with focus on hardware/software co-design.
+	  Traditionally the hardware part of an embedded system is written in VHDL \textit{(more present in Europe)} or Verilog \textit{(more present in the USA)} while the software part is written in \textit{assembly}, \textit{C} or \textit{C++}.
+	  The common design-flow (depicted in Figure~\ref{fig:flow}) shows that partitioning splits the design in hardware and software.
+	  The software part is the shorter one of this two paths because it needs only an compiler to translate it to machine-code. Therefore, the hardware part is the much longer way because of the hardware design-flow which is necessary for every chip-design.
+	    \begin{figure}[tp]
+	      \centering
+	      \includegraphics[scale=0.18]{../pictures/flow.pdf}
+	      \caption{Design flow \textit{(c.f. Hardware Modelling VO)}.}
+	      \label{fig:flow}
+	    \end{figure}  
+	  If the hardware and software parts should be modified because of, e.g., performance reasons, 
+	  Unless there are other circumstances, the \textit{system definition} and the \textit{specification} steps are part of the project management.
 	  \subsection{}
 	  
 	\section{Tools}
