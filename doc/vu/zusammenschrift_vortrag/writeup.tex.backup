@@ -1,0 +1,40 @@
+\documentclass{article}
+	\usepackage{graphicx}
+
+	\begin{document}
+
+	\title{HW/SW Entwurfssprachen am Beispiel System-C}
+	\author{Florian Zaruba, Thomas Weber}
+
+	\maketitle
+
+	%\begin{abstract}
+	%The abstract text goes here.
+	%\end{abstract}
+
+	\section{HW/SW Design Languages}
+	tba
+	\section{What is SystemC}
+	tba
+	  \subsection{History}
+	  tba
+	  \subsection{Benefits}
+	  tba
+	  \subsection{Drawbacks}
+	  tba
+	  \subsection{SysC vs. C}
+	  tba
+	  \subsection{SysC vs. VHDL}
+
+	\section{Automatic Partitioning}
+	  \subsection{What is Partitioning?}
+	  Partitioning means the separation of hardware and software parts in focus on hardware/software co-design.
+	  Traditionally the hardware part of an embedded system is written in VHDL \textit{more present in Europe} or Verilog \textit{more present in the USA} while the software part is written in \textit{assembly}, \textit{C} or \textit{C++}.
+	  The 
+	  \subsection{}
+	  
+	\section{Tools}
+
+	\section{Users}
+
+\end{document}
