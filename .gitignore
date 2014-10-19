@@ -16,4 +16,8 @@
 # Makefile ignorse
 *.make
 
+# Mac related ignores
+*.DS_Store
 
+# Linux related ignores
+*.backup
