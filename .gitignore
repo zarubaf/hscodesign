@@ -21,3 +21,6 @@
 
 # Linux related ignores
 *.backup
+
+# Matlab related ignores
+*.asv
