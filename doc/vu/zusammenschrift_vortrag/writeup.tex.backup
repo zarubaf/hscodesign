@@ -32,7 +32,7 @@
 	  Traditionally the hardware part of an embedded system is written in VHDL \textit{(more present in Europe)} or Verilog \textit{(more present in the USA)} while the software part is written in \textit{assembly}, \textit{C} or \textit{C++}.
 	  The common design-flow (depicted in Figure~\ref{fig:flow}) shows that partitioning splits the design in hardware and software.
 	  The software part is the shorter one of this two paths because it needs only an compiler to translate it to machine-code. Therefore, the hardware part is the much longer way because of the hardware design-flow which is necessary for every chip-design.
-	    \begin{figure}[tp]
+	    \begin{figure}[hp]
 	      \centering
 	      \includegraphics[scale=0.18]{../pictures/flow.pdf}
 	      \caption{Design flow \textit{(c.f. Hardware Modelling VO)}.}
@@ -41,10 +41,28 @@
 	  If the hardware and software parts should be modified because of, e.g., performance reasons, these two parts must be modified or completely redesigned in order to fit the specifications.
 	  This leads to an much higher and probably expensive procedure for the hardware part, thus its design-flow is much longer and every change in the \textit{VHDL/Verilog} code leads to a new compilation, technology-mapping and place and route.
 %	  Unless there are other circumstances, the \textit{system definition} and the \textit{specification} steps are part of the project management which have to be done only once.
-	  \subsection{Tools for Automatic Partitioning}
-	  
 	\section{Tools}
-
+	    \subsection{Tools for Automatic Partitioning}
+	  
+	  \subsection{LegUP}
+	  LegUP is an open source high level synthesis tool for fpga based systems. It takes an standart C program as input and implements the hardware fitting part to hardware and the software fitting part to software.
+	   
+	  Automatic Partitioning? - Yes in a way.
 	\section{Users}
-
+	  \subsection{Accellera}
+	  Accellera Systems Initiative is a non-profit organisation composed of an broad range of members which aims to create system-level standards for the worldwide electronics industry.
+	  One of the IEEE\footnote{This standards organisation also ratified VHDL, Verilog and SystemVerilog} standards ratified by accellera was IEEE 1666 SystemC.
+	  \subsection{ARM}
+	    \begin{figure}[hp]
+	      \centering
+	      \includegraphics[scale=0.18]{../pictures/armlogo.jpg}
+	      \caption{ARM Ltd.}
+	      \label{fig:arm}
+	    \end{figure}  
+	    ARM (Advanced RISC Machines) Ltd. has an active community\footnote{http://community.arm.com} and there are many informations about tools and IP cores available.
+	    SystemC is used by many chip designers and they use the systemC-IP-cores from ARM Ltd. to simulate their designs.
+	  \subsection{AMD}
+	  
+	  \subsection{Intel}
+	  
 \end{document}

@@ -1,0 +1,19 @@
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Design flow \textit  {(c.f. Hardware Modelling VO)}.}}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces ARM Ltd.}}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}HW/SW Design Languages}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}What is SystemC}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Automatic Partitioning}{1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Tools}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Creators}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Users}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}History}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Benefits}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Drawbacks}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}SysC vs. C}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}SysC vs. VHDL}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}What is Partitioning?}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}LegUP}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Accellera}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}ARM}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}AMD}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Intel}{3}}
