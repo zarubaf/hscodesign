@@ -17,7 +17,11 @@
 	\section{What is SystemC}
 	tba
 	  \subsection{History}
-	  tba
+	    SystemC were started in 1999 as SystemC 1.0. At this time it provided some basic features, e.g., Signals, Simulation of a kernel and fixed point arithmetic.
+	    It was also possible to break down designs it into modules in order to reuse code.
+	    
+	    SystemC 2.0 was started in the late 2000. It extends the previous version with events as primitive behaviour triggers as well as channels, interfaces and ports.
+	    It was also more powerful in modeling at transaction level.
 	  \subsection{Benefits}
 	  tba
 	  \subsection{Drawbacks}
@@ -41,18 +45,24 @@
 	  If the hardware and software parts should be modified because of, e.g., performance reasons, these two parts must be modified or completely redesigned in order to fit the specifications.
 	  This leads to an much higher and probably expensive procedure for the hardware part, thus its design-flow is much longer and every change in the \textit{VHDL/Verilog} code leads to a new compilation, technology-mapping and place and route.
 %	  Unless there are other circumstances, the \textit{system definition} and the \textit{specification} steps are part of the project management which have to be done only once.
-	\section{Tools}
-	    \subsection{Tools for Automatic Partitioning}
-	  
+	\section{Tools}	  
 	  \subsection{LegUP}
-	  LegUP is an open source high level synthesis tool for fpga based systems. It takes an standart C program as input and implements the hardware fitting part to hardware and the software fitting part to software.
-	   
-	  Automatic Partitioning? - Yes in a way.
-	\section{Users}
+	  LegUP\footnote{Its current version is 3.0} is an open source high level synthesis tool for fpga based systems from the University of Toronto. 
+	  It takes an standart C program as input and implements the hardware fitting part to hardware and the software fitting part to software.
+	  LegUP uses an MIPS soft core and uses a standard bus interface for communication between the hardware parts and the processor.  
+	  \textbf{Automatic Partitioning? - Yes in a way.}
+	  
+	  \subsection{Bambu}
+	  Bambu\footnote{It can be downloaded at http://panda.dei.polimi.it} is a free framework for the high-level synthesis of complex applications.
+	  
+	  
+	\section{Creators}
 	  \subsection{Accellera}
 	  Accellera Systems Initiative is a non-profit organisation composed of an broad range of members which aims to create system-level standards for the worldwide electronics industry.
 	  One of the IEEE\footnote{This standards organisation also ratified VHDL, Verilog and SystemVerilog} standards ratified by accellera was IEEE 1666 SystemC.
-	  \subsection{ARM}
+	  
+	\section{Users}
+	\subsection{ARM}
 	    \begin{figure}[hp]
 	      \centering
 	      \includegraphics[scale=0.18]{../pictures/armlogo.jpg}
