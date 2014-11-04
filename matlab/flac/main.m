@@ -60,9 +60,13 @@ while 1
         
         blockSize = bitand(data(dataPointer), hex2dec('f'))
         sampleRate = bitshift(bitand(data(dataPointer), hex2dec('f0')), -4)
+        
         dataPointer = dataPointer + 1;
+        
         channelAssignment = bitand(data(dataPointer), hex2dec('f'))
         sampleSizeInBits = bitshift(bitand(data(dataPointer), hex2dec('70')), -4)
+        
+        % blocksize
         break;
     end
     

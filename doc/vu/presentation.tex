@@ -6,7 +6,7 @@
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{0.5\linewidth}{
-    \vspace*{-12pt}\insertshorttitle~(\insertshortauthor)
+    \vspace*{-12pt} %\insertshorttitle~(\insertshortauthor)
   }
   \hfill%
   \parbox{0.5\linewidth}{
@@ -31,13 +31,29 @@
 
 
 \section{HW/SW Design Languages} 
-\begin{frame}\frametitle{HW/SW Design Languages} 
+
+\begin{frame}\frametitle{Motivation} 
 tba
+\begin{itemize}
+	\item Rapidly increasing number of embedded systems.
+	\item complexity (! graph)
+\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{System-Level Description Language (SDL)} 
+\begin{itemize}
+	\item Specification and design at various abstraction levels
+	\item Faster design cycles %? 
+\end{itemize}
 \end{frame}
 
 \section{SystemC Overview}
-\begin{frame}\frametitle{What is SystemC} 
-tba
+\begin{frame}\frametitle{What is SystemC}
+\begin{itemize}
+	\item Set of C++ classes and macros (Concurrency and notion of time)
+	\item Common language for SW and HW, C++
+	\item Enhanced productivity, higher abstraction level (TLM)
+\end{itemize}
 \end{frame}
 
 \subsection{History}
@@ -45,9 +61,23 @@ tba
 tba
 \end{frame}
 
+
+\begin{frame}\frametitle{Where does it fit in?} 
+	    \begin{figure}[hp]
+	      \centering
+	      \includegraphics[width=0.7\textwidth]{pictures/Hardware_Description_Languages_and_Abstraction_Levels.png}
+	      \caption{Hardware Description Languages and Abstraction Levels\footnote[frame]{\url{http://www.esa.int/Our_Activities/Space_Engineering/Microelectronics/System-Level_Modeling_in_SystemC}}}
+	      \label{fig:flow}
+	    \end{figure} 
+
+\end{frame}
+
 \subsection{Benefits/Drawbacks}
 \begin{frame}\frametitle{Benefits} 
 tba
+\begin{itemize}
+	\item Lot of C++ tools already available and useful
+\end{itemize}
 \end{frame}
 \begin{frame}\frametitle{Drawbacks} 
 tba
