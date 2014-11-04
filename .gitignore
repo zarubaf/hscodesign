@@ -24,3 +24,9 @@
 
 # Matlab related ignores
 *.asv
+
+# BibTex related ignores
+*.dvi
+*.blg
+*.bbl
+*.gz(busy)

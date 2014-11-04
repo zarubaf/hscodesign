@@ -3,6 +3,8 @@
 \usetheme{Rochester}
 \usecolortheme{material}
 \usepackage{multicol}
+\usepackage{svg}
+
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{0.5\linewidth}{
@@ -36,8 +38,12 @@
 tba
 \begin{itemize}
 	\item Rapidly increasing number of embedded systems.
-	\item complexity (! graph)
 \end{itemize}
+	    \begin{figure}[hp]
+		  \includegraphics[width=0.6\textwidth]{pictures/complexity.pdf}
+	      \caption{Increasing complexity \cite{black2004systemc}}
+	      \label{fig:flow}
+	    \end{figure} 
 \end{frame}
 
 \begin{frame}\frametitle{System-Level Description Language (SDL)} 
@@ -138,7 +144,8 @@ tba
 \section{Bibliography}
 \begin{frame}\frametitle{Literature} 
 Haubelt, Christian. Digitale Hardware/Software-Systeme. Springer-Verlag, 2010.
-
+\bibliographystyle{plain}
+\bibliography{references}
 \end{frame}
 
 
