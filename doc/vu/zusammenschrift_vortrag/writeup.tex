@@ -13,7 +13,47 @@
 	%\end{abstract}
 
 	\section{HW/SW Design Languages}
-	tba
+	\subsection{Motivation}
+	The primary driver leading to the need for a new system design language is the same that previously lead to the need for the current design languages: increasing design complexity.
+	
+	Modern electronic systems consist of many sub-systems and components, but we will focus primarily on hardware, software, and algorithms. In modern systems, each of these disciplines has become more complex. Likewise, the interaction has become increasingly complex.
+	Interactions imply that trade offs between the domains are becoming more important for meeting customer requirements. System development teams find themselves asking questions like, “Should this function be implemented in hardware, software, or with a better algorithm?” Systems are so complex, just deriving specifications from customer requirements has become a daunting task.
+	
+	Increasing number of embedded devices significantly stresses the topic of what should be implemented in HW and what in SW. To be resource efficient is a key aspect of an embedded design.
+	
+	\begin{itemize}
+		\item Abstraction
+		\item Design reuse
+		\item Team discipline
+		\item project reuse
+		\item Automation    
+	\end{itemize}
+	
+	
+	SW leverages all aspects while hardware is stuck on a relatively low abstraction layer (RTL - Level) and focuses on the other 4 aspects.
+	\subsection{SDL}
+	The key goal is now to find an appropiate abstraction level between HW and SW (algorithms) which possibly can describe both equally good.  
+		
+	The underlying concept of TLM is to model only the level of detail that is needed by the engineers developing the system components and sub- system for a particular task in the development process. By modeling only the necessary details, design teams can realize huge gains in modeling speed thus enabling a new methodology. At this level, changes are relatively easy because the development team has not yet painted itself into a corner with low-level details such as a parallel bus implementation versus a serial bus implementation (a classical top down approach).
+	
+	Using TLMs makes tasks usually reserved for hardware implementations practical to run on a model early in the system development process. TLM is a concept independent of language. However, to implement and refine TLM models, it is helpful to have a language like SystemC whose features support independent refinement of functionality and communication that is crucial to efficient TLM development.
+	
+	Some of the refinemand tasks can even be automated.
+	
+	[JPEG example]
+		
+	Advantage for software: TLM allows an early model of software. It is simulated along with the hardware model and gets cross compiled to the specific arichtecture.
+	
+	At the 2010 DVCon event, OSCI produced a specification of the first synthesizable subset of SystemC for industry standardization.
+	
+	Alternatives:
+	\begin{itemize}
+		\item SystemC - by accelera systems initiative
+		\item SpecC - ANSI C programming language. By Embedded Computer Systems at University of California, Irvine in 2001 - used mainly in Japan. SpecC is more simplictic. Architectural model maps directly to silicon.
+		\item System Verilog - Extension of classical verilog with verification.
+	\end{itemize}
+	
+	
 	\section{What is SystemC}
 	SystemC is a High Level Abstraction Language which aims to combine the benefits of hardware description languages and software.
 	
