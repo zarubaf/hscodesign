@@ -15,7 +15,17 @@
 	\section{HW/SW Design Languages}
 	tba
 	\section{What is SystemC}
-	tba
+	SystemC is a High Level Abstraction Language which aims to combine the benefits of hardware description languages and software.
+	
+	Hardware description languages have the big advantage that they are very performant.
+	They execute exactly this operations for which they are designed for.	
+	Software that runs on a processor is relatively easy to read and can be, in contrast to HDL, easy  tested and verified.	
+	The long compilation process of the hardware modules and the design cycle which is very time consuming, hence the whole partitioning procedure had to be passed, make a better solution desireable.
+	Futhermore hardware cannot be easily tested and verified and it cannot be updated\footnote{Except over an JTAG interface, in configureable chips like FPGAs}.
+	
+	SystemC shortens the design cycle because it makes it possible to write hardware and software in one language.
+	It is an additional library to C/C++ which is mostly used in context of embedded systems today.
+	The SystemC modules can be compiled in hardware and the C/C++ program which uses this modules fits best on the chip hence both components are tested together.
 	  \subsection{History}
 	    SystemC were introduced in 1999 as SystemC 1.0. At this time it provided some basic features, e.g., Signals, Simulation of a kernel and fixed point arithmetic.
 	    It was also possible to break down designs it into modules in order to reuse code.
