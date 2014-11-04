@@ -114,56 +114,127 @@
 \end{itemize}
 \end{frame}
 
-\subsection{Differences to other languages}
-\begin{frame}\frametitle{SysC vs. C} 
-tba
-\end{frame}
-\begin{frame}\frametitle{SysC vs. VHDL} 
-tba
+
+\subsection{Features of SystemC}
+\begin{frame}\frametitle{Features of SystemC} 
+  \begin{itemize}
+   \item C
+    \begin{itemize}
+      \item{notion of time}
+      \item{hardware datatypes}
+    \end{itemize}
+   \item VHDL
+    \begin{itemize}
+      \item{verification}
+      \item{complexity}
+    \end{itemize}
+   \item SystemC Features
+    \begin{itemize}
+      \item{Modules}
+      \item{Processes/Threads}    
+      \item{Ports and Signals}
+      \item{Time}
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \subsection{Examples - Comparison}
-\begin{frame}\frametitle{SysC vs. C} 
-Code von Thomas
+\begin{frame}\frametitle{SysC vs. C Architecture} 
+Architecture code in SystemC auf der linken spalte.
+C code auf der rechten spalte.
 \end{frame}
-\begin{frame}\frametitle{SysC vs. VHDL} 
-Code von Thomas
-\end{frame}
-
-
-\section{Automatic Partitioning}
-\begin{frame}\frametitle{Automatic Partitioning} 
-
-\begin{block}{title of the bloc}
-bloc text
-\end{block}
-
-\begin{exampleblock}{title of the bloc}
-bloc text
-\end{exampleblock}
-
-
-\begin{alertblock}{title of the bloc}
-bloc text
-\end{alertblock}
+\begin{frame}\frametitle{SysC vs. VHDL Architecture} 
+Architecture code in SystemC auf der linken spalte.
+VHDL code auf der rechten spalte.
 \end{frame}
 
-\section{Tools}
-\begin{frame}\frametitle{Tools} 
+\subsection{Examples - Comparison}
+\begin{frame}\frametitle{SysC vs. C Entity} 
+Entity code in SystemC auf der linken spalte.
+C code auf der rechten spalte.
+\end{frame}
+\begin{frame}\frametitle{SysC vs. VHDL Entity} 
+Entity code in SystemC auf der linken spalte.
+VHDL code auf der rechten spalte.
+\end{frame}
+
+\subsection{Examples - Question}
+\begin{frame}\frametitle{SysC} 
+SystemC code von Gatter oder counter.
+was ist das
+\end{frame}
+
+\section{Partitioning}
+\begin{frame}\frametitle{Partitioning} 
+	    \begin{figure}[hp]
+	      \centering
+	      \includegraphics[width=0.7\textwidth]{pictures/design_flow.pdf}
+	      \caption{Partitioning of HW and SW \ref{}}
+	      \label{fig:flow}
+	    \end{figure} 
+%\begin{block}{title of the bloc}
+%bloc text
+%\end{block}
+
+%\begin{exampleblock}{title of the bloc}
+%bloc text
+%\end{exampleblock}
+
+
+%\begin{alertblock}{title of the bloc}
+%bloc text
+%\end{alertblock}
+\end{frame}
+
+
+\section{Automated Partitioning}
+\begin{frame}\frametitle{Automated Partitioning} 
+
+\begin{itemize}
+  \item Techniques
+  \begin{itemize}
+   \item Partitioning Algorithms (Graph Theory)
+    \begin{itemize}
+      \item{Kernighan-Lin-Algorithm}
+      \item{Simulated annealing}  
+    \end{itemize}
+   \item Design Space Exploration
+  \end{itemize}
+  
+  \item{Tools}
+    \begin{itemize}
+   \item{LegUP - Open Source}
+    \end{itemize}
+ \end{itemize}
+\end{frame}
+
+
+\section{SystemC Tools}
+\begin{frame}\frametitle{SystemC Tools} 
 \textbf{SystemC to VHDL}
-
-http://calypto.com/en 	Catapult SL/LP
-
-http://www.forteds.com	Cynthesizer 5 
-
-\textbf{SystemC Simulation}
-
-Modelsim
+    \begin{itemize}
+      \item{gcc/gdb for simualtion/debugging}
+      \item{Catapult SL/LP}
+      \item{Cynthesizer 5 }
+      \item{Modelsim - Verification}
+      \item{Bambu - Open Source}
+      \item{Mentor Graphics Catapult C/Mentor Graphics System Vision}
+      \item{Cadence C-to-Silicon Compiler}
+      \item{Xilinx Vivado Design Suite}
+    \end{itemize}
 \end{frame}
 
 \section{Who uses it?}
 \begin{frame}\frametitle{Users} 
-tba
+    \begin{itemize}
+      \item{ARM Ltd.}
+      \item{AMD}
+      \item{Intel}
+      \item{Futjitsu VSLI}
+      \item{STMicroelectronics}
+      \item{Realtek}
+      \item{...}
+    \end{itemize}
 \end{frame}
       
 \section{Bibliography}
