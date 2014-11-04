@@ -67,20 +67,36 @@
 	It is an additional library to C/C++ which is mostly used in context of embedded systems today.
 	The SystemC modules can be compiled in hardware and the C/C++ program which uses this modules fits best on the chip hence both components are tested together.
 	  \subsection{History}
-	    SystemC were introduced in 1999 as SystemC 1.0. At this time it provided some basic features, e.g., Signals, Simulation of a kernel and fixed point arithmetic.
+	  ARM Ltd., CoWare, Synopsys and CynApps teamed up to develop SystemC (CynApps later became Forte Design Systems) to launch it first draft version in 1999.
+	  
+	   At this time it provided some basic features, e.g., structural hierarchy and connectivity, clock-cycle accuracy, delta cycles, four-valued logic (0, 1, X, Z), and bus-resolution functions.
+		
 	    It was also possible to break down designs it into modules in order to reuse code.
 	    
 	    SystemC 2.0 was started in the late 2000. It extends the previous version with events as primitive behavior triggers as well as channels, interfaces and ports.
+		
 	    It was also more powerful in modeling at transaction level.
 	    Furthermore its complete library were new coded to upgrade it to an independent System Level Description Language (SLDL).
+		
+		 The (Language Reference Manual) LRM provides the definitive statement of the semantics of SystemC.
+		 
+		 OSCI also provide an open-source proof-of-concept simulator (sometimes incorrectly referred to as the reference simulator), which can be downloaded from the OSCI website.[2] Although it was the intent of OSCI that commercial vendors and academia could create original software compliant to IEEE 1666, in practice most SystemC implementations have been at least partly based on the OSCI proof-of-concept simulator.
+		 
 		\subsection{Comparison}
 		Several languages have emerged to address the various aspects of system design. Although Ada and Java have proven their value, C/C++ is predominately used today for embedded system software. The hardware description languages (HDLs), VHDL and Verilog, are used for simulating and synthesizing digital circuits. Vera and e are the languages of choice for functional verification of complex application-specific integrated circuits (ASICs). SystemVerilog is a new language that evolves the Verilog language to address many hardware-oriented system design issues. Matlab and several other tools and languages such as SPW and System Studio are widely used for capturing system requirements and developing signal processing algorithms.
+		
 	  \subsection{Benefits}
+	  
 	  tba
+	  
 	  \subsection{Drawbacks}
+	  
 	  tba
+	  
 	  \subsection{SysC vs. C}
+	  
 	  tba
+	  
 	  \subsection{SysC vs. VHDL}
 
 	\section{Automatic Partitioning}
