@@ -93,6 +93,15 @@
 	  
 	  tba
 	  
+	  \subsection{Features}
+	  SystemC contains a lot of features like (logical) datatypes, modules, processes/threads, ports, signals or the time which is very important in context of an System Level Modelling language.
+	   \begin{itemize}
+ 	    \item{Datatypes}
+ 	    \item{Modules}
+ 	    \item{Processes/Threads}
+ 	    \item{Ports and Signals}
+  	    \item{Time}
+	   \end{itemize}
 	  \subsection{SysC vs. C}
 	  
 	  tba
@@ -122,6 +131,9 @@
 	    Examples for algorithms: \\
 	     \texttt{Kernighan-Lin-Algorithm}\\
 	     \texttt{Simulated annealing}(Algorithmen und Datenstrukturen 2 VU)
+	     
+	  \subsection{Design Space Exploration}
+	    
 	  
 	\section{Tools}	  
 	  \subsection{LegUP}
@@ -130,6 +142,12 @@
 	  LegUP uses an MIPS soft core and uses a standard bus interface for communication between the hardware parts and the processor.  
 	  \textbf{Automatic Partitioning? - Yes in a way.}
 	  
+	    \begin{figure}[hp]
+	      \centering
+	      \includegraphics[scale=0.2]{../pictures/legup.pdf}
+	      \caption{LegUP \ref{canis2011legup}.}
+	      \label{fig:legup}
+	    \end{figure}
 	  
 	  \subsection{Bambu}
 	  Bambu\footnote{It can be downloaded at http://panda.dei.polimi.it} is a free framework for the high-level synthesis of complex applications.
@@ -145,23 +163,25 @@
 	  One of the IEEE\footnote{This standards organization also ratified VHDL, Verilog and SystemVerilog} standards ratified by accellera was IEEE 1666 SystemC.
 	  
 	\section{Users}
-	\subsection{ARM}
-	    \begin{figure}[hp]
-	      \centering
-	      \includegraphics[scale=0.18]{../pictures/armlogo.jpg}
-	      \caption{ARM Ltd.}
-	      \label{fig:arm}
-	    \end{figure}  
-	    ARM (Advanced RISC Machines) Ltd. has an active community\footnote{http://community.arm.com} and there are many informations about tools and IP cores available.
-	    SystemC is used by many chip designers and they use the systemC-IP-cores from ARM Ltd. to simulate their designs.
-	  \subsection{AMD}
-	  
-	  \subsection{Intel}
-	  
-	  \subsection{Futjitsu}
-	  
-	  \subsection{Casio}
-	  
-	  \subsection{STMicroelectronics}
-	  
+	  \begin{itemize}
+	  \item{ARM}
+	      \begin{figure}[hp]
+		\centering
+		\includegraphics[scale=0.18]{../pictures/armlogo.jpg}
+		\caption{ARM Ltd.}
+		\label{fig:arm}
+	      \end{figure}  
+	      ARM (Advanced RISC Machines) Ltd. has an active community\footnote{http://community.arm.com} and there are many informations about tools and IP cores available.
+	      SystemC is used by many chip designers and they use the systemC-IP-cores from ARM Ltd. to simulate their designs.
+	   \item{AMD}
+	   \item{Intel}	    
+	   \item{Futjitsu VSLI}	    
+	   \item{Casio}	    
+	   \item{STMicroelectronics}
+	   \item{Realtek}
+	  \end{itemize}
+\nocite{haubelt2010digitale}
+\bibliographystyle{plain}
+\bibliography{../references}
+
 \end{document}
