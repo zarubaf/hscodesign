@@ -13,6 +13,7 @@ FILE *flac_music;
 
 unsigned int sizecounter = FLACFILESIZE;
 char content[FLACFILESIZE];
+uint8_t samplesisze = 0;
 
 uint32_t get_utf8(unsigned char *get_byte)
 {
@@ -50,10 +51,10 @@ void printbincharpad(char c)
 char *flac_decode_frame_header(unsigned char *buffer)
 {
 	unsigned int blocking_strategy = 0;
-	unsigned int bs_code = 0;
-	unsigned int sr_code = 0;
-	unsigned int channel_assignment = 0;	
-	unsigned int samplesisze = 0;
+	uint8_t bs_code = 0;
+	uint8_t sr_code = 0;
+	unsigned int channel_assignment = 0;
+	
 	uint16_t samplerate = 0;	
 	uint16_t blocksize = 0;
 	/* frame sync code */
@@ -94,7 +95,7 @@ char *flac_decode_frame_header(unsigned char *buffer)
 	channel_assignment = buffer[0] >> 4;
 	samplesisze = buffer[0]&0x0E >> 1;
 	buffer++; /* next byte */
-	
+	printf("samplesisze:%x\n",samplesisze);
 	uint32_t val = get_utf8(buffer);
 	if(blocking_strategy)
 	{
@@ -157,6 +158,8 @@ int main (void)
 	uint8_t subframe_fixed_order = 0;
 	uint8_t wbpsf = 0;					//Wasted bits-per-sample flag
 	
+	unsigned int warmup_sample_bitnumber=0;
+	
 	subframe_type = (filestream[0]&0b01111110) >> 1;
 	
 	if(subframe_type&0x20 == 0x20)			/* SUBFRAME_LPC, xxxxx=order-1  */
@@ -175,7 +178,26 @@ int main (void)
 	}
 	
 	wbpsf = (filestream[0]&0x01);
-	printf("wasted bits per sample:%i\n",wbpsf);
+	printf("wasted bits per sample:%i,subframe_lpc_order:%i,samplerate(in hex):%x\n",wbpsf,subframe_lpc_order,samplesisze);
+	
+	/*calculate the number of bits of warmup samples - if LPC*/
+	if(samplesisze == 0b001)
+	{
+			warmup_sample_bitnumber = subframe_lpc_order*8;
+	}else if(samplesisze == 0b010){
+			warmup_sample_bitnumber = subframe_lpc_order*12;
+	}else if(samplesisze == 0b100){
+			warmup_sample_bitnumber = subframe_lpc_order*16;
+	}else if(samplesisze == 0b101){
+			warmup_sample_bitnumber = subframe_lpc_order*20;
+	}else if(samplesisze == 0b110){
+			warmup_sample_bitnumber = subframe_lpc_order*24;
+	}
+	
+	printf("warmup sample bit number (is mitm marvin null - geht aber mit anderen):%i\n",warmup_sample_bitnumber);
+	/*get warmup samples for rice decoder*/
+	//tba
+	
 	/* skip frame footer */
 //	printbincharpad(buffer[0]);
 //	printbincharpad(buffer[1]);
