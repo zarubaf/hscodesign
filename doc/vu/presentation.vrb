@@ -1,4 +1,4 @@
-\frametitle {SystemC Quizz}
+\frametitle{SystemC Quizz}
 SystemC code von Gatter oder counter.
 \begin{lstlisting}[language=C++, basicstyle=\footnotesize]
 while(1) {

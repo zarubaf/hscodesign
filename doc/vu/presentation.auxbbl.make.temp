@@ -1,4 +1,4 @@
-\@writefile{nav}{\beamer@endinputifotherversion {3.10pt}}
+\@writefile{nav}{\beamer@endinputifotherversion {3.26pt}}
 \@writefile{nav}{\headcommand {\beamer@documentpages {18}}}
 \@writefile{nav}{\headcommand {\beamer@framepages {10}{10}}}
 \@writefile{nav}{\headcommand {\beamer@framepages {11}{11}}}
@@ -70,7 +70,7 @@
 \@writefile{snm}{\beamer@slide {fig:flow}{3}}
 \@writefile{snm}{\beamer@slide {fig:flow}{6}}
 \@writefile{snm}{\beamer@slide {fig:flow}{8}}
-\@writefile{toc}{\beamer@endinputifotherversion {3.10pt}}
+\@writefile{toc}{\beamer@endinputifotherversion {3.26pt}}
 \@writefile{toc}{\beamer@sectionintoc {1}{HW/SW Design Languages}{3}{0}{1}}
 \@writefile{toc}{\beamer@sectionintoc {2}{SystemC Overview}{5}{0}{2}}
 \@writefile{toc}{\beamer@sectionintoc {3}{Partitioning}{14}{0}{3}}
@@ -100,5 +100,7 @@
 \global\let\oldnewlabel\newlabel
 \let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\providecommand\hyper@newdestlabel[2]{}
