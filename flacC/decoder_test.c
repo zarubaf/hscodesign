@@ -103,23 +103,27 @@ char *flac_decode_frame_header(unsigned char *buffer)
 		printf("Frame number in UTF-8:%d\n",val);		
 	}	
 	buffer++;
-	if((bs_code& 0x0111)==0x0110)				/*if(blocksize bits == 011x)*/
+	if((bs_code& 0b0111)==0b0110)				/*if(blocksize bits == 011x)*/
 	{
 		blocksize = buffer[0];
 		buffer++;
-	}else if((bs_code& 0x0111)==0x0111){
+		printf("Blocksize 8 bit\n");
+	}else if((bs_code& 0b0111)==0b0111){
 		blocksize = 8 << buffer[0];
 		blocksize |= buffer[1];
 		buffer += 2;
+		printf("Blocksize 16 bit\n");
 	}
-	if((sr_code& 0x1101)==0x1100)				/*if(sample rate bits == 11xx)*/
+	if((sr_code& 0b1101)==0b1100)				/*if(sample rate bits == 11xx)*/
 	{
 		samplerate = buffer[0];
 		buffer++;
-	}else if((sr_code& 0x1101)==0x1101){
+		printf("Sample rate 8 bit\n");
+	}else if((sr_code& 0b1101)==0b1101){
 		samplerate = 8 << buffer[0];
 		samplerate |= buffer[1];
 		buffer += 2;
+		printf("Sample rate 16 bit\n");
 	}
 	/* skip crc check */
 	buffer++;
@@ -151,10 +155,10 @@ int main (void)
 	uint8_t subframe_type = 0;
 	uint8_t subframe_lpc_order = 0;
 	uint8_t subframe_fixed_order = 0;
+	uint8_t wbpsf = 0;					//Wasted bits-per-sample flag
 	
-	subframe_type = (filestream[0]&01111110) >> 1;
-	printbincharpad(subframe_type);
-	printf("da");
+	subframe_type = (filestream[0]&0b01111110) >> 1;
+	
 	if(subframe_type&0x20 == 0x20)			/* SUBFRAME_LPC, xxxxx=order-1  */
 	{
 		printf("SUBFRAME LPC\n");
@@ -169,15 +173,18 @@ int main (void)
 		
 		printf("SUBFRAME CONSTANT\n");
 	}
+	
+	wbpsf = (filestream[0]&0x01);
+	printf("wasted bits per sample:%i\n",wbpsf);
 	/* skip frame footer */
 //	printbincharpad(buffer[0]);
 //	printbincharpad(buffer[1]);
 //	buffer += 2;
 	
-	for(int i=0;i<600;i++)
-	{
-		printbincharpad(filestream[i]);
+//	for(int i=0;i<600;i++)
+//	{
+//		printbincharpad(filestream[i]);
 		//printf("%x\n",buffer[i]);
-	}	
+//	}	
 	return 0;
 }
