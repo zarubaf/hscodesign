@@ -158,6 +158,8 @@ int main (void)
 	uint8_t subframe_fixed_order = 0;
 	uint8_t wbpsf = 0;					//Wasted bits-per-sample flag
 	
+	uint8_t warmup_samples[64];
+	
 	unsigned int warmup_sample_bitnumber=0;
 	
 	subframe_type = (filestream[0]&0b01111110) >> 1;
@@ -179,7 +181,7 @@ int main (void)
 	
 	wbpsf = (filestream[0]&0x01);
 	printf("wasted bits per sample:%i,subframe_lpc_order:%i,samplerate(in hex):%x\n",wbpsf,subframe_lpc_order,samplesisze);
-	
+	filestream++;
 	/*calculate the number of bits of warmup samples - if LPC*/
 	if(samplesisze == 0b001)
 	{
@@ -194,8 +196,14 @@ int main (void)
 			warmup_sample_bitnumber = subframe_lpc_order*24;
 	}
 	
-	printf("warmup sample bit number (is mitm marvin null - geht aber mit anderen):%i\n",warmup_sample_bitnumber);
-	/*get warmup samples for rice decoder*/
+	printf("warmup sample bit number (is mitm marvin null - geht aber mit anderen):%i,%i\n",warmup_sample_bitnumber,warmup_sample_bitnumber/8);
+	//fetch all warmup samples for rice decoder
+	for(uint8_t i=0;(warmup_sample_bitnumber/8)>i;i++){		//<- geht natürlich nur mit einer geraden anzahl an bytes, get bits vom michael wär da ned schlecht
+		warmup_samples[i] = filestream[0];
+		filestream++;		
+		printf("loop round %i\n",i);
+	}
+	
 	//tba
 	
 	/* skip frame footer */
