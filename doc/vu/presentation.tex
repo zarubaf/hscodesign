@@ -155,10 +155,28 @@ printf("Bla");
 }
 \end{lstlisting}
 & 
-\begin{lstlisting}[language=C++, ]
-while(1) {
-printf("Bla");
-}
+\begin{lstlisting}[language=C++,basicstyle=\tiny]
+  
+  SC_MODULE(sample_module){
+    sc_in_clk	  clk;//clock
+    sc_in<sc_bit> reset;//signals
+    sc_in<sc_bit> enable;
+    sc_out<sc_bit> a;	//output
+        
+    void a_function(){      
+      if(reset.read() != 0){
+        a.write('1');	
+      }
+      
+     SC_CTOR(){
+       SC_METHOD(a_function);
+       sensitive_pos << clk; 
+       //sensitive << clk.pos();
+     }
+      
+    }
+  }
+  
 \end{lstlisting}
  &  
 \begin{lstlisting}[language=VHDL]
