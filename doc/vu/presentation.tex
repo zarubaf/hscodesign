@@ -3,6 +3,7 @@
 \usetheme{Rochester}
 \usecolortheme{material}
 \usepackage{multicol}
+\usepackage{listings}
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{0.5\linewidth}{
@@ -12,6 +13,12 @@
   \parbox{0.5\linewidth}{
     \vspace*{-12pt}\raggedleft\insertpagenumber
   }
+}
+\lstset{
+breaklines=true, 
+basicstyle=\scriptsize, 
+keywordstyle=\color{blue700},
+basewidth=0.4em
 }
 \setbeamertemplate{navigation symbols}{}
 \begin{document}
@@ -116,7 +123,7 @@
 
 
 \subsection{Features of SystemC}
-\begin{frame}\frametitle{Features of SystemC} 
+\begin{frame} \frametitle{Features of SystemC} 
   \begin{itemize}
    \item C
     \begin{itemize}
@@ -139,28 +146,71 @@
 \end{frame}
 
 \subsection{Examples - Comparison}
-\begin{frame}\frametitle{SysC vs. C Architecture} 
-Architecture code in SystemC auf der linken spalte.
-C code auf der rechten spalte.
-\end{frame}
-\begin{frame}\frametitle{SysC vs. VHDL Architecture} 
-Architecture code in SystemC auf der linken spalte.
-VHDL code auf der rechten spalte.
+\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Architecture} 
+\begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
+\multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
+\begin{lstlisting}[language=C]
+while(1) {
+printf("Bla");
+}
+\end{lstlisting}
+& 
+\begin{lstlisting}[language=C++, ]
+while(1) {
+printf("Bla");
+}
+\end{lstlisting}
+ &  
+\begin{lstlisting}[language=VHDL]
+entity signed_mult is
+ port
+  (
+   a : in signed (7 downto 0);
+   b : in signed (7 downto 0);
+   result: out signed 
+   		     (15 downto 0)
+  );
+\end{lstlisting}
+\end{tabular}
 \end{frame}
 
-\subsection{Examples - Comparison}
-\begin{frame}\frametitle{SysC vs. C Entity} 
-Entity code in SystemC auf der linken spalte.
-C code auf der rechten spalte.
-\end{frame}
-\begin{frame}\frametitle{SysC vs. VHDL Entity} 
-Entity code in SystemC auf der linken spalte.
-VHDL code auf der rechten spalte.
+\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Entity} 
+\begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
+\multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
+\begin{lstlisting}[language=C]
+while(1) {
+printf("Bla");
+}
+\end{lstlisting}
+& 
+\begin{lstlisting}[language=C++, ]
+while(1) {
+printf("Bla");
+}
+\end{lstlisting}
+ &  
+\begin{lstlisting}[language=VHDL]
+entity signed_mult is
+ port
+  (
+   a : in signed (7 downto 0);
+   b : in signed (7 downto 0);
+   result: out signed 
+   		     (15 downto 0)
+  );
+\end{lstlisting}
+\end{tabular}
+
 \end{frame}
 
 \subsection{Examples - Question}
-\begin{frame}\frametitle{SysC} 
+\begin{frame}[fragile]\frametitle{SystemC Quizz} 
 SystemC code von Gatter oder counter.
+\begin{lstlisting}[language=C++, basicstyle=\footnotesize]
+while(1) {
+printf("Bla");
+}
+\end{lstlisting}
 was ist das
 \end{frame}
 
