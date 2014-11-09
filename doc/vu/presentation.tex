@@ -146,12 +146,18 @@ basewidth=0.4em
 \end{frame}
 
 \subsection{Examples - Comparison}
-\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Architecture} 
+\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Architecture/Entity} 
 \begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
 \multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
-\begin{lstlisting}[language=C]
-while(1) {
-printf("Bla");
+\begin{lstlisting}[language=C,basicstyle=\tiny]
+/* c - header*/
+
+bool sample_module(bool clk, bool reset, bool enable)
+{
+  //timefunction?
+  if(reset == false){
+    a = true;
+  }
 }
 \end{lstlisting}
 & 
@@ -179,8 +185,10 @@ printf("Bla");
   
 \end{lstlisting}
  &  
-\begin{lstlisting}[language=VHDL]
-architecture sample_module is
+\begin{lstlisting}[language=VHDL,basicstyle=\tiny]
+
+
+architecture sample_arch of sample_module is
 
    clk : in std_logic;
    reset : in std_logic;
@@ -191,7 +199,9 @@ architecture sample_module is
   
   a_function : process(clk)
   begin
+  if reset = '1' then
     a <= '1';
+  end if;
   
 end architecture ;
 
@@ -199,30 +209,31 @@ end architecture ;
 \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Entity} 
+\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Datatypes} 
 \begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
 \multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
 \begin{lstlisting}[language=C]
-while(1) {
-printf("Bla");
-}
+bool
+char
+uintk_t
+int 
+long
+...
 \end{lstlisting}
 & 
 \begin{lstlisting}[language=C++, ]
-while(1) {
-printf("Bla");
-}
+sc_bit
+sc_logic
+sc_lv[k]
+sc_uint<k>
+sc_signal<...>
 \end{lstlisting}
  &  
 \begin{lstlisting}[language=VHDL]
-entity signed_mult is
- port
-  (
-   a : in signed (7 downto 0);
-   b : in signed (7 downto 0);
-   result: out signed 
-   		     (15 downto 0)
-  );
+bit
+std_logic
+std_logic_vector (k dowto 0)
+signal
 \end{lstlisting}
 \end{tabular}
 
@@ -245,7 +256,7 @@ SC_MODULE (first_prog) {
       output.write(something);
     } else if (enable.read() == 1) {
       something = something + 1;
-      output.write(count);
+      output.write(something);
       cout<<"@" << sc_time_stamp() <<" :: Incremented Something "
         <<output.read()<<endl;
     }
