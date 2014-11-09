@@ -158,7 +158,10 @@ int main (void)
 	uint8_t subframe_fixed_order = 0;
 	uint8_t wbpsf = 0;					//Wasted bits-per-sample flag
 	
-	uint8_t warmup_samples[64];
+	int32_t warmup_samples[32];
+	
+	int predictor_coeff_bits = 0;
+	int predictor_coeff_shift = 0;
 	
 	unsigned int warmup_sample_bitnumber=0;
 	
@@ -204,6 +207,16 @@ int main (void)
 		printf("loop round %i\n",i);
 	}
 	
+	//(Quantized linear predictor coefficients' precision in bits)-1 (1111 = invalid). 
+	predictor_coeff_bits = ((filestream[0]&0b11110000) >> 4)+1;
+	if(predictor_coeff_bits == 0b1111){
+			printf("invalid coeff bits\n");
+			return 1;
+	}	
+	predictor_coeff_shift = (1 << (filestream[0]&0b00001111) )&(filestream[1]&0b10000000);	//take 5 bits - NOTE: this number is signed two's-complement
+	//Unencoded predictor coefficients (n = qlp coeff precision * lpc order)
+	
+	
 	//tba
 	
 	/* skip frame footer */
@@ -211,10 +224,10 @@ int main (void)
 //	printbincharpad(buffer[1]);
 //	buffer += 2;
 	
-//	for(int i=0;i<600;i++)
-//	{
-//		printbincharpad(filestream[i]);
+	for(int i=0;i<600;i++)
+	{
+		printbincharpad(filestream[i]);
 		//printf("%x\n",buffer[i]);
-//	}	
+	}	
 	return 0;
 }
