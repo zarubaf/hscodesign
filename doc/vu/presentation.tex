@@ -180,14 +180,21 @@ printf("Bla");
 \end{lstlisting}
  &  
 \begin{lstlisting}[language=VHDL]
-entity signed_mult is
- port
-  (
-   a : in signed (7 downto 0);
-   b : in signed (7 downto 0);
-   result: out signed 
-   		     (15 downto 0)
-  );
+architecture sample_module is
+
+   clk : in std_logic;
+   reset : in std_logic;
+   enable: in std_logic;
+   a	: out std_logic;
+   
+  begin
+  
+  a_function : process(clk)
+  begin
+    a <= '1';
+  
+end architecture ;
+
 \end{lstlisting}
 \end{tabular}
 \end{frame}
@@ -223,13 +230,35 @@ entity signed_mult is
 
 \subsection{Examples - Question}
 \begin{frame}[fragile]\frametitle{SystemC Quizz} 
-SystemC code von Gatter oder counter.
-\begin{lstlisting}[language=C++, basicstyle=\footnotesize]
-while(1) {
-printf("Bla");
-}
+SystemC Codesample.
+\begin{lstlisting}[language=C++,basicstyle=\tiny]
+#include "systemc.h"
+SC_MODULE (first_prog) {
+  sc_in_clk     clock ;      // Clock input of the design
+  sc_in<bool>   reset ;      // active high, synchronous Reset input
+  sc_in<bool>   enable;     
+  sc_out<sc_uint<4> > output;
+  sc_uint<4>	something;
+  void incr_something () {
+    if (reset.read() == 1) {
+      something =  0;
+      output.write(something);
+    } else if (enable.read() == 1) {
+      something = something + 1;
+      output.write(count);
+      cout<<"@" << sc_time_stamp() <<" :: Incremented Something "
+        <<output.read()<<endl;
+    }
+  }
+  SC_CTOR(first_prog) {
+    cout<<"Executing new"<<endl;
+    SC_METHOD(incr_something);
+    sensitive << reset;
+    sensitive << clock.pos();
+  }
+};
 \end{lstlisting}
-was ist das
+AND-Gatter? OR-Gatter? Counter? FlipFlop?
 \end{frame}
 
 \section{Partitioning}
