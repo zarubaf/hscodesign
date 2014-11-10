@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         }
 
         len = buf[3] + (buf[2] << 8) + (buf[1] << 16);
-        printf("reading metadata block of size %d%s\n", len, (buf[0] & 1) ? ", last block" : "");
+        printf("reading metadata block of size %d%s\n", len, (buf[0] & 0x80) ? ", last block" : "");
 
         ptr = realloc(ptr, len);
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    while (!(buf[0] & 1));
+    while (!(buf[0] & 0x80));
 
     GetBitContext gb;
     gb.file = file;
