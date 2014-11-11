@@ -18,7 +18,7 @@
 breaklines=true, 
 basicstyle=\scriptsize, 
 keywordstyle=\color{blue700},
-basewidth=0.4em
+basewidth=0.55em
 }
 \setbeamertemplate{navigation symbols}{}
 \begin{document}
@@ -36,6 +36,7 @@ basewidth=0.4em
 %\end{multicols}
 \end{frame}
 
+\note{Everything you want}
 
 \section{HW/SW Design Languages} 
 
@@ -72,7 +73,7 @@ basewidth=0.4em
 
 \begin{frame}\frametitle{SystemC Architecture}
     \begin{figure}[hp]
-	  \includegraphics[width=0.6\textwidth]{pictures/systemc-architecture}
+	  \includegraphics[width=0.70\textwidth]{pictures/systemc-architecture}
       \caption{SystemC architecture \footnote{\url{http://www.accellera.org/community/systemc/about_systemc/}}}
       \label{fig:flow}
     \end{figure}
@@ -146,69 +147,6 @@ basewidth=0.4em
 \end{frame}
 
 \subsection{Examples - Comparison}
-\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Architecture/Entity} 
-\begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
-\multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
-\begin{lstlisting}[language=C,basicstyle=\tiny]
-/* c - header*/
-
-bool sample_module(bool clk, bool reset, bool enable)
-{
-  //timefunction?
-  if(reset == false){
-    a = true;
-  }
-}
-\end{lstlisting}
-& 
-\begin{lstlisting}[language=C++,basicstyle=\tiny]
-  
-  SC_MODULE(sample_module){
-    sc_in_clk	  clk;//clock
-    sc_in<sc_bit> reset;//signals
-    sc_in<sc_bit> enable;
-    sc_out<sc_bit> a;	//output
-        
-    void a_function(){      
-      if(reset.read() != 0){
-        a.write('1');	
-      }
-      
-     SC_CTOR(){
-       SC_METHOD(a_function);
-       sensitive_pos << clk; 
-       //sensitive << clk.pos();
-     }
-      
-    }
-  }
-  
-\end{lstlisting}
- &  
-\begin{lstlisting}[language=VHDL,basicstyle=\tiny]
-
-
-architecture sample_arch of sample_module is
-
-   clk : in std_logic;
-   reset : in std_logic;
-   enable: in std_logic;
-   a	: out std_logic;
-   
-  begin
-  
-  a_function : process(clk)
-  begin
-  if reset = '1' then
-    a <= '1';
-  end if;
-  
-end architecture ;
-
-\end{lstlisting}
-\end{tabular}
-\end{frame}
-
 \begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Datatypes} 
 \begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
 \multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
@@ -237,6 +175,66 @@ signal
 \end{lstlisting}
 \end{tabular}
 
+\end{frame}
+
+\begin{frame}[fragile] \frametitle{C vs. SysC vs. VHDL Architecture} 
+\begin{tabular}{p{0.27\textwidth}|p{0.31\textwidth}|p{0.36\textwidth}}
+\multicolumn{1}{c}{\textbf{C}} & \multicolumn{1}{c}{\textbf{SystemC}} & \multicolumn{1}{c}{\textbf{VHDL}} \\
+\begin{lstlisting}[language=C,basicstyle=\tiny]
+/* c - header*/
+
+bool sample_module(bool clk, bool reset, bool enable)
+{
+  //timefunction?
+  if(reset == false){
+    a = true;
+  }
+}
+\end{lstlisting}
+& 
+\begin{lstlisting}[language=C++,basicstyle=\tiny]
+  SC_MODULE(sample_module){
+    sc_in_clk	  clk;//clock
+    sc_in<sc_bit> reset;//signals
+    sc_in<sc_bit> enable;
+    sc_out<sc_bit> a;	//output
+        
+    void a_function(){      
+      if(reset.read() != 0){
+        a.write('1');	
+      }
+      
+     SC_CTOR(){
+       SC_METHOD(a_function);
+       sensitive_pos << clk; 
+       //sensitive << clk.pos();
+     }
+      
+    }
+  }
+  
+\end{lstlisting}
+ &  
+\begin{lstlisting}[language=VHDL,basicstyle=\tiny]
+architecture sample_arch of sample_module is
+
+   clk : in std_logic;
+   reset : in std_logic;
+   enable: in std_logic;
+   a	: out std_logic;
+   
+  begin
+  
+  a_function : process(clk)
+  begin
+  if reset = '1' then
+    a <= '1';
+  end if;
+  
+end architecture ;
+
+\end{lstlisting}
+\end{tabular}
 \end{frame}
 
 \subsection{Examples - Question}
@@ -276,7 +274,7 @@ AND-Gatter? OR-Gatter? Counter? FlipFlop?
 \begin{frame}\frametitle{Partitioning} 
 	    \begin{figure}[hp]
 	      \centering
-	      \includegraphics[width=0.7\textwidth]{pictures/design_flow.pdf}
+	      \includegraphics[width=1.0\textwidth]{pictures/design_flow.pdf}
 	      \caption{Partitioning of HW and SW \ref{}}
 	      \label{fig:flow}
 	    \end{figure} 
