@@ -1,39 +1,19 @@
 [file]
 presentation.pdf
 [notes]
-### 1
-S1 - Coole Notitzen
-Absatz
-### 2
-S2
-### 3
-S3
-### 4
-S4
-### 5
-S5
-### 6
-S6
-### 7
-S7
-### 8
-S8
-### 9
-S9
 ### 10
-S10
-### 11
-S11
-### 12
-S12
-### 13
-S13
-### 14
-S14
-### 15
-S15
-### 16
-S16
-### 17
-S17
+Konkreteres zur Sprache selbst.
+C-Software und Verifikation, SystemC-HW/SW-Verifikation, VHDL - Hardware. 
 
+C: z.b. kein Z wert für tri-state -  eher die sprache um funtkionierende hardware anzusprechen (mircocontroller,cpu - ungeeignet für hardwaremodellierung)
+
+VHDL: Funktionale verification schwierig, sehr komplex um alles mit TB abzudecken, für softwareprojekte eher ungeeignet ( hw/sw codesign) 
+
+SystemC: klassenerweiterung von C++, aktuelle version kann von github bezogen werden, komplexität kann durch diese erweiterung gemanaged werden.
+Nachteile: syntaktischer overhead
+Vorteile: man hat nur eine sprache ,verfeinerungen werden natürlich in VHDL und C gemacht
+Funktionen können verifiziert werden, in version 3 von systemC sollen ganze betriebssysteme modelliert werden können.
+### 11
+C rein auf software bezogene datentypen
+
+VHDL hat auch integer 
