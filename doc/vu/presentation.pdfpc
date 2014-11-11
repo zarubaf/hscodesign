@@ -49,20 +49,71 @@ Matlab: Algos -> system requirements
 Drawback:
 Viele Dinge müssen aber noch händisch gemacht werden und sind noch nicht automatisiert - Industrie braucht noch weiter Zeit um sich an die neuen Optionen zu "gewöhnen"
 ### 10
-Konkreteres zur Sprache selbst.
-C-Software und Verifikation, SystemC-HW/SW-Verifikation, VHDL - Hardware. 
+Konkret: C-Software und Verifikation, SystemC-HW/SW-Verifikation, VHDL - HW
 
 C: z.b. kein Z wert für tri-state -  eher die sprache um funtkionierende hardware anzusprechen (mircocontroller,cpu - ungeeignet für hardwaremodellierung)
 
 VHDL: Funktionale verification schwierig, sehr komplex um alles mit TB abzudecken, für softwareprojekte eher ungeeignet ( hw/sw codesign) 
+SystemC: klassenerweiterung von C++, GitHub, komplexität besser managen.
+Nachteile: syntaktischer overhead, debug C++,nicht SysC
 
-SystemC: klassenerweiterung von C++, aktuelle version kann von github bezogen werden, komplexität kann durch diese erweiterung gemanaged werden.
-Nachteile: syntaktischer overhead
-Vorteile: man hat nur eine sprache ,verfeinerungen werden natürlich in VHDL und C gemacht
-Funktionen können verifiziert werden, in version 3 von systemC sollen ganze betriebssysteme modelliert werden können.
+Vorteile: man hat nur eine sprache ,verfeinerungen werden natürlich in VHDL und C gemacht, leicht zu lernen, Open Source, Funktionale Verification
+In version 3 von systemC sollen ganze betriebssysteme modelliert werden können.
 ### 11
-C rein auf software bezogene datentypen
+C rein auf software bezogene datentypen, hardwaredatentypen fehlen
 
-VHDL hat auch integer 
+VHDL hat auch integer aber long short union eher ned
+kann natürlich definiert werden, höherer aufwand
+
+SystemC mischt das ganze
+
+präfix systemC (sc_*)
+### 12
+Vergleich von den programmiersprachen
+
+C: entity wäre c header
+SysC: SC_MODULE spiegelt am ehesten die entity wieder
+VHDL: entity sample_entity is port( input: port1 std_logic;....
+
+C: modularisierung; funktionen in *.c files anlegen
+SysC: in SC_MODULE gliedern
+VHDL: entities erstellen, packages...
+
+### 13
+Modulkopf kann als entity gesehen werden, deklarationen werden dort gemacht (input sowie output)
+
+dann kommt der process der ausgeführt wird, je nachdem wie die sensitivity list unten konfiguriert ist.
+
+SC_CTOR beinhaltet die prozesse (SC_METHOD()) und die sensitivity sachn.
+
+DEMO
+### 14
+was ist partitioning?
+
+modellierung von hw und sw, versch. ebenen: verhalten bis rtl ebene. macht es möglich hw und sw in einer höheren sprache zu spezifizieren.
+### 15
+Partitioning-technologien, Graphentheorie (Discrete Mathematics)
+
+Kerninghan-Lin (lösung des Graphpartitionierungsproblems)
+
+Simulated annealing - (Algorithmen und Datenstrukturen 2)
+
+LegUP Uni Toronto, kann ganzes oder gewählte teile von C programm in hardware modelieren, verbleibende software - TigerMIPS (softcore)
 
 
+
+### 16
+gcc/g++ mit gdb und natürlich systemC 2.3.0/2.3.1 für die kompilierung.
+
+Catapult SL/LP - nimmt C/C++ oder SystemC als input und generiert Register Transfer Level code für FPGAs oder ASICs. Komplette suite zum programmieren und verifizieren. 
+
+### 17
+Derzeit jobs in österreich betreffend SystemC (NXP Infineon)
+
+Cadence success stories, stehen viele projekte von namhaften oder eher unbekannten firmen.
+
+ARM hat Softcores welche in SystemC code verfügbar sind und auch simuliert werden können. ARM hat genau so wie AMD eine aktive community und die community seite wird von mitarbeitern supportet.
+
+Auf Accerella gibt es auch ein paar (ältere) success stories.
+
+Kompilieren von systemC kann man kostenlos (open source), tools für die verwendung (Catapult, Cadence, Synopsis ...) kostenpflichtig, sind ja für die verschiedenen FPGAs
