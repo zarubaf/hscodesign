@@ -65,9 +65,14 @@ C rein auf software bezogene datentypen, hardwaredatentypen fehlen
 VHDL hat auch integer aber long short union eher ned
 kann natürlich definiert werden, höherer aufwand
 
-SystemC mischt das ganze
+SystemC mischt das ganze:
 
 präfix systemC (sc_*)
+
+Eingang sc_in<porttyp> portname|	Ausgang sc_out<porttyp> portname
+
+Bidirektional sc_inout<porttyp> portname| Signal sc_signal<sigtype> name
+
 ### 12
 Vergleich von den programmiersprachen
 
@@ -91,6 +96,9 @@ DEMO
 was ist partitioning?
 
 modellierung von hw und sw, versch. ebenen: verhalten bis rtl ebene. macht es möglich hw und sw in einer höheren sprache zu spezifizieren.
+
+mithilfe von tools oder händisch, interfaces - tradeoffs hw/sw.
+prozessor beschäftigen nicht alles in hw machen - kommt immer drauf an.
 ### 15
 Partitioning-technologien, Graphentheorie (Discrete Mathematics)
 
@@ -98,17 +106,20 @@ Kerninghan-Lin (lösung des Graphpartitionierungsproblems)
 
 Simulated annealing - (Algorithmen und Datenstrukturen 2)
 
+DSE - verschiedene mögliche implementierungen schnell ausprobieren
+geschieht mit suchalgorithmus (wählen, rekombinieren, ändern) allocation and binding. Guten vortrag vom swiss federal institute of technology.
+
 LegUP Uni Toronto, kann ganzes oder gewählte teile von C programm in hardware modelieren, verbleibende software - TigerMIPS (softcore)
-
-
-
 ### 16
 gcc/g++ mit gdb und natürlich systemC 2.3.0/2.3.1 für die kompilierung.
 
-Catapult SL/LP - nimmt C/C++ oder SystemC als input und generiert Register Transfer Level code für FPGAs oder ASICs. Komplette suite zum programmieren und verifizieren. 
+Catapult SL/LP (Calypto) - nimmt C/C++ oder SystemC als input und generiert Register Transfer Level code für FPGAs oder ASICs. Komplette suite zum programmieren und verifizieren. 
 
+Cyntesizer (Forte Design Systems/ teil von cadence) - SystemC IDE,Methodology und Design Flow, IP cores, NG algorithmen
+
+ 
 ### 17
-Derzeit jobs in österreich betreffend SystemC (NXP Infineon)
+Derzeit jobs in österreich betreffend SystemC (NXP, Infineon) von gestern
 
 Cadence success stories, stehen viele projekte von namhaften oder eher unbekannten firmen.
 
@@ -117,3 +128,4 @@ ARM hat Softcores welche in SystemC code verfügbar sind und auch simuliert werd
 Auf Accerella gibt es auch ein paar (ältere) success stories.
 
 Kompilieren von systemC kann man kostenlos (open source), tools für die verwendung (Catapult, Cadence, Synopsis ...) kostenpflichtig, sind ja für die verschiedenen FPGAs
+
