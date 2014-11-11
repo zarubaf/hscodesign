@@ -1,6 +1,11 @@
-OBJECTS=ff_flac.o flac_dec.o flac_dsp.o golomb.o utils.o
+OBJECTS=ff_flac.o flac_dec.o utils.o
 
-all: run
+.PHONY: all
+all: ff_flac
+
+%.flac: ff_flac
+	./ff_flac $@ out.pcm
+	cat dummy_header.wav out.pcm > out.wav
 
 run: ff_flac
 	./ff_flac ../../hscodesign/matlab/flac/marvin.flac out.pcm
@@ -12,5 +17,6 @@ ff_flac: $(OBJECTS)
 %.o: %.c
 	gcc -c -o $@ $<
 
+.PHONY: clean
 clean:
 	rm out.wav out.pcm ff_flac *.o

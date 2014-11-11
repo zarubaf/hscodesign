@@ -2,6 +2,7 @@
 #define FLAC_DEC_H
 
 #include "utils.h"
+#include "get_bits.h"
 
 #define FLAC_MAX_CHANNELS 8
 
