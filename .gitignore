@@ -12,6 +12,7 @@ presentation.pdf
 *.toc
 *.d
 *.fls
+*.vrb
 
 # Makefile ignorse
 *.make
@@ -30,3 +31,9 @@ presentation.pdf
 *.blg
 *.bbl
 *.gz(busy)
+
+# C related ignores
+*.o
+*out*
+*.temp
+ff_flac
