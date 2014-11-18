@@ -31,8 +31,6 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
     
     assert(pred_order > 0 && pred_order <= 32);
     
-    printf("block size: %d\n", len);
-    
     for (i = pred_order; i < len - 3; i += 4, decoded += 4) {
         int c, d0 = 0, d1 = 0, d2 = 0, d3 = 0, s0 = 0, s1 = 0, s2 = 0, s3 = 0;
         
