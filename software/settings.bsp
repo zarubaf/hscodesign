@@ -2,11 +2,11 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Oct 8, 2014 4:11:22 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1412777482765</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Nov 21, 2014 4:53:39 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1416585219420</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
-        <BspSettingsFile>./settings.bsp</BspSettingsFile>
-        <SopcDesignFile>../quartus/de2_115_nios2.sopcinfo</SopcDesignFile>
+        <BspSettingsFile>settings.bsp</BspSettingsFile>
+        <SopcDesignFile>../quartus/displaydriver.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
         <Cpu>cpu</Cpu>
         <SchemaVersion>1.9</SchemaVersion>
@@ -746,7 +746,7 @@
                 <SettingName>hal.enable_c_plus_plus</SettingName>
                 <Identifier>ALT_NO_C_PLUS_PLUS</Identifier>
                 <Type>Boolean</Type>
-                <Value>1</Value>
+                <Value>0</Value>
                 <DefaultValue>1</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
                 <Description>Enable support for a subset of the C++ language. This option increases code footprint by adding support for C++ constructors. Certain features, such as multiple inheritance and exceptions are not supported. If false, adds -DALT_NO_C_PLUS_PLUS to ALT_CPPFLAGS in public.mk, and reduces code footprint.</Description>
@@ -863,22 +863,52 @@
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
         <MemoryMap>
+                <slaveDescriptor>framereader</slaveDescriptor>
+                <addressRange>0x00000800 - 0x0000087F</addressRange>
+                <addressSpan>128</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>audio_0</slaveDescriptor>
+                <addressRange>0x00000880 - 0x0000088F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>audio_and_video_config_0</slaveDescriptor>
+                <addressRange>0x00000890 - 0x0000089F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>jtag_uart</slaveDescriptor>
+                <addressRange>0x000008A0 - 0x000008A7</addressRange>
+                <addressSpan>8</addressSpan>
+                <attributes>printable</attributes>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>Altera_UP_SD_Card_Avalon_Interface_0</slaveDescriptor>
+                <addressRange>0x00000C00 - 0x00000FFF</addressRange>
+                <addressSpan>1024</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>onchip_mem</slaveDescriptor>
                 <addressRange>0x00008000 - 0x0000CFFF</addressRange>
                 <addressSpan>20480</addressSpan>
                 <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>avalon_demo</slaveDescriptor>
-                <addressRange>0x00011000 - 0x0001103F</addressRange>
-                <addressSpan>64</addressSpan>
-                <attributes/>
+                <slaveDescriptor>sdram</slaveDescriptor>
+                <addressRange>0x08000000 - 0x0FFFFFFF</addressRange>
+                <addressSpan>134217728</addressSpan>
+                <attributes>memory</attributes>
         </MemoryMap>
         <MemoryMap>
-                <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00011060 - 0x00011067</addressRange>
-                <addressSpan>8</addressSpan>
-                <attributes>printable</attributes>
+                <slaveDescriptor>altpll</slaveDescriptor>
+                <addressRange>0x10009080 - 0x1000908F</addressRange>
+                <addressSpan>16</addressSpan>
+                <attributes/>
         </MemoryMap>
         <LinkerSection>
                 <sectionName>.text</sectionName>

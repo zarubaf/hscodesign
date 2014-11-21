@@ -1,0 +1,5 @@
+PLL_Name	displaydriver:u0|displaydriver_altpll:altpll|displaydriver_altpll_altpll_39o2:sd1|pll7
+PLLJITTER	48
+PLLSPEmax	84
+PLLSPEmin	-53
+

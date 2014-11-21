@@ -3,65 +3,49 @@ ifndef QUARTUS_ROOTDIR
 $(error The environment variable QUARTUS_ROOTDIR is NOT set. \
 This indicates that you are not running the Nios2 Command Shell. \
 Execute /path/to/altera_dir/nios2eds/nios2_command_shell.sh and run make again. \
-To find the path to the nios2_command_shell you can run the command "which quartus". \
-This should give you "/path/to/altera_dir/quartus/bin/quartus" )
+On TI-LAB computers the Nios2 Command Shell is should be located in /opt/altera/quartus-12.1_177/nios2eds/nios2_command_shell.sh )
 endif
 
 
-# PROJECT_NAME must contain the name of the quartus project
-PROJECT_NAME=de2_115_nios2
-SOPC_FILE=../quartus/$(PROJECT_NAME).sopcinfo
-BSP_SETTINGS_FILE=./settings.bsp
-BSP_DIR=./bsp
-QUARTUS_PROJECT_DIR=`pwd`/../../quartus
-APPLICATION_MAKEFILE=$(PROJECT_NAME)/Makefile 
+
+PROJECT_NAME=displaydriver
+SOPC_FILE=../quartus/displaydriver.sopcinfo
+BSP_DIR=./$(PROJECT_NAME)_bsp
+QUARTUS_PROJECT_DIR=../quartus
+
+export PROJECT_NAME
+export SOPC_FILE
+export BSP_DIR
+export QUARTUS_PROJECT_DIR
+
 ELF_FILE=$(PROJECT_NAME)/$(PROJECT_NAME).elf
 
-#used in the create-app shell script
-export PROJECT_NAME
-export QUARTUS_PROJECT_DIR
-export BSP_DIR
 
-
-#info: The application makefile automatically runs the bsp makefile
-
-all: $(ELF_FILE) 
+all: $(ELF_FILE) app-makefile bsp
 	
 
-run: $(ELF_FILE) 
+run:
 	nios2-download -g $(ELF_FILE) && nios2-terminal
+	
 
-download: 
-	nios2-download -g $(ELF_FILE)
+$(ELF_FILE): app-makefile
+	make -C displaydriver
 
-term:
-	nios2-terminal
+app-makefile: displaydriver/Makefile 
 
-edit_bsp:
-	nios2-bsp-editor &
-
-$(ELF_FILE): $(APPLICATION_MAKEFILE)
-	make -C $(PROJECT_NAME)
-
-
-$(APPLICATION_MAKEFILE): $(BSP_DIR) 
+displaydriver/Makefile: $(BSP_DIR) 
 	./create-app-makefile
 
 
-$(BSP_DIR): $(SOPC_FILE) $(BSP_SETTINGS_FILE)
-	mkdir -p $(BSP_DIR)
-	nios2-bsp-update-settings --settings $(BSP_SETTINGS_FILE) --sopc $(SOPC_FILE)
-	nios2-bsp-generate-files --settings $(BSP_SETTINGS_FILE) --bsp-dir $(BSP_DIR)
+bsp: $(BSP_DIR)
+
+$(BSP_DIR): $(SOPC_FILE)
+	./create-bsp
+	
 
 
 clean:
 	rm -rf $(BSP_DIR)
 	rm -rf $(PROJECT_NAME)
-
-
-.PHONY: bsp_edit
-.PHONY: term
-.PHONY: download
-.PHONY: run
-
-
+	
+.PHONY: bsp
