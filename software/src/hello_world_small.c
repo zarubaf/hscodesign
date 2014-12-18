@@ -207,10 +207,5 @@ int main()
 
 		fb_f = 0x01 & (~fb_f);*/
 	}
-
-
   return 0;
 }
-
-
-

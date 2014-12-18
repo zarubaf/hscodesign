@@ -115,7 +115,7 @@
          type = "int";
       }
    }
-   element sgdma_fft.csr
+   element sgdma_display.csr
    {
       datum baseAddress
       {
@@ -123,7 +123,7 @@
          type = "String";
       }
    }
-   element sgdma_display.csr
+   element sgdma_fft.csr
    {
       datum baseAddress
       {
@@ -808,7 +808,7 @@
   <parameter name="video_format" value="NTSC" />
   <parameter name="d5m_resolution" value="2592 x 1944" />
   <parameter name="exposure" value="false" />
-  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="100000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
  <module
@@ -820,7 +820,7 @@
   <parameter name="audio_in" value="true" />
   <parameter name="audio_out" value="true" />
   <parameter name="dw" value="16" />
-  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="100000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
  <module
@@ -828,7 +828,7 @@
    version="13.1"
    enabled="1"
    name="sd_card_interface">
-  <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="100000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
  </module>
  <module
@@ -853,7 +853,7 @@
   <parameter name="deviceFamilyString" value="Cyclone IV E" />
  </module>
  <module kind="fft_wrapper" version="1.0" enabled="1" name="fft_wrapper">
-  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_CLOCK_CLOCK_RATE" value="100000000" />
  </module>
  <module
    kind="altera_avalon_sgdma"
@@ -1034,11 +1034,6 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
-   kind="clock"
-   version="14.0"
-   start="inclk50.clk"
-   end="audio_config.clock_reset" />
- <connection
    kind="reset"
    version="14.0"
    start="inclk50.clk_reset"
@@ -1052,11 +1047,6 @@
   <parameter name="baseAddress" value="0x0890" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection
-   kind="clock"
-   version="14.0"
-   start="inclk50.clk"
-   end="audio_chip.clock_reset" />
  <connection
    kind="reset"
    version="14.0"
@@ -1088,16 +1078,10 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
-   kind="clock"
-   version="14.0"
-   start="inclk50.clk"
-   end="sd_card_interface.clock_sink" />
- <connection
    kind="reset"
    version="14.0"
    start="inclk50.clk_reset"
    end="sd_card_interface.clock_sink_reset" />
- <connection kind="clock" version="14.0" start="inclk50.clk" end="sgdma_fft.clk" />
  <connection
    kind="reset"
    version="14.0"
@@ -1116,20 +1100,10 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
-   kind="clock"
-   version="14.0"
-   start="inclk50.clk"
-   end="fft_wrapper.clock" />
- <connection
    kind="reset"
    version="14.0"
    start="inclk50.clk_reset"
    end="fft_wrapper.reset" />
- <connection
-   kind="clock"
-   version="14.0"
-   start="inclk50.clk"
-   end="sgdma_display.clk" />
  <connection
    kind="reset"
    version="14.0"
@@ -1202,6 +1176,24 @@
    version="14.0"
    start="fft_wrapper.avalon_streaming_source"
    end="sgdma_display.in" />
+ <connection
+   kind="clock"
+   version="14.0"
+   start="altpll.c0"
+   end="audio_config.clock_reset" />
+ <connection
+   kind="clock"
+   version="14.0"
+   start="altpll.c0"
+   end="audio_chip.clock_reset" />
+ <connection
+   kind="clock"
+   version="14.0"
+   start="altpll.c0"
+   end="sd_card_interface.clock_sink" />
+ <connection kind="clock" version="14.0" start="altpll.c0" end="fft_wrapper.clock" />
+ <connection kind="clock" version="14.0" start="altpll.c0" end="sgdma_fft.clk" />
+ <connection kind="clock" version="14.0" start="altpll.c0" end="sgdma_display.clk" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
