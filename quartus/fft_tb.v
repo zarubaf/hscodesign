@@ -31,8 +31,8 @@ module fft_tb;
    reg sink_valid;
    reg[16 - 1:0] sink_real;
    reg[16 - 1:0] sink_imag;
-   wire [9:0]    fftpts_in;
-   wire [9:0]    fftpts_out;
+   wire [10:0]    fftpts_in;
+   wire [10:0]    fftpts_out;
    wire                 inverse;
    wire                 sink_sop;
    wire                 sink_eop;
@@ -81,10 +81,10 @@ initial
 
 
     
-     fftpts_array[0]=512;
-     fftpts_array[1]=512;
-     fftpts_array[2]=512;
-     fftpts_array[3]=512;
+     fftpts_array[0]=1024;
+     fftpts_array[1]=1024;
+     fftpts_array[2]=1024;
+     fftpts_array[3]=1024;
      data_rf = $fopen("fft_real_input.txt","r");
      data_if = $fopen("fft_imag_input.txt","r");
      fft_rf = $fopen("fft_real_output_ver.txt");

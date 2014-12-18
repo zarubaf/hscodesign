@@ -18,7 +18,7 @@
 %                                                                                            
 %   2001-2009 Altera Corporation, All Rights Reserved 
 %                                                                                                  
-%   Automatically Generated: FFT MegaCore Function 13.1 Build 162 October, 2013                                                                                                   
+%   Automatically Generated: FFT MegaCore Function 14.0 Build 200 June, 2014                                                                                                   
 %
 function [y, exp_out] = fft_model(x,N,INVERSE) 
 addpath(strcat(getenv('QUARTUS_ROOTDIR'),'/../ip/altera/fft/lib/'));

@@ -115,6 +115,22 @@
          type = "int";
       }
    }
+   element sgdma_fft.csr
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element sgdma_display.csr
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
    element sgdma_fft.descriptor_read
    {
       datum _tags
@@ -213,19 +229,6 @@
          type = "String";
       }
    }
-   element onchip_mem.s1
-   {
-      datum _lockedAddress
-      {
-         value = "1";
-         type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "32768";
-         type = "String";
-      }
-   }
    element sdram.s1
    {
       datum _lockedAddress
@@ -236,6 +239,19 @@
       datum baseAddress
       {
          value = "134217728";
+         type = "String";
+      }
+   }
+   element onchip_mem.s1
+   {
+      datum _lockedAddress
+      {
+         value = "1";
+         type = "boolean";
+      }
+      datum baseAddress
+      {
+         value = "32768";
          type = "String";
       }
    }
@@ -852,7 +868,7 @@
   <parameter name="enableDescriptorReadMasterBurst" value="false" />
   <parameter name="enableUnalignedTransfers" value="false" />
   <parameter name="internalFIFODepth" value="2" />
-  <parameter name="readBlockDataWidth" value="32" />
+  <parameter name="readBlockDataWidth" value="16" />
   <parameter name="readBurstcountWidth" value="4" />
   <parameter name="sinkErrorWidth" value="2" />
   <parameter name="sourceErrorWidth" value="0" />
