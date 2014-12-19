@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <stdio.h>
+//#include <stdio.h>
 #include <stdint.h>
 
 const uint8_t fast_log2_tab[256];

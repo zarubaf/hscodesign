@@ -1,7 +1,6 @@
 #ifndef FLAC_DSP_H
 #define FLAC_DSP_H
 
-#include <stdio.h>
 #include <stdint.h>
 
 #include "utils.h"

@@ -115,7 +115,7 @@
          type = "int";
       }
    }
-   element sgdma_fft.csr
+   element sgdma_display.csr
    {
       datum baseAddress
       {
@@ -123,7 +123,7 @@
          type = "String";
       }
    }
-   element sgdma_display.csr
+   element sgdma_fft.csr
    {
       datum baseAddress
       {

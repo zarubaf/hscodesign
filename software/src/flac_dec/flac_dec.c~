@@ -4,8 +4,7 @@
 
 #include "flac_dsp.h"
 
-//#include "sys/alt_stdio.h"
-#include <stdio.h>
+#include "sys/alt_stdio.h"
 //#define printf alt_printf
 #define fprintf(shit, fmt, ...) printf(fmt, ##__VA_ARGS__)
 

@@ -1,0 +1,222 @@
+---------------------------------------------
+-                 QSYS                      -
+---------------------------------------------
+2014.12.19.15:17:14 Progress: Loading quartus/displaydriver.qsys
+2014.12.19.15:17:14 Progress: Reading input file
+2014.12.19.15:17:14 Progress: Adding inclk50 [clock_source 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module inclk50
+2014.12.19.15:17:15 Progress: Adding onchip_mem [altera_avalon_onchip_memory2 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module onchip_mem
+2014.12.19.15:17:15 Progress: Adding cpu [altera_nios2_qsys 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module cpu
+2014.12.19.15:17:15 Progress: Adding jtag_uart [altera_avalon_jtag_uart 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module jtag_uart
+2014.12.19.15:17:15 Progress: Adding altpll [altpll 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module altpll
+2014.12.19.15:17:15 Progress: Adding sdram [altera_avalon_new_sdram_controller 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module sdram
+2014.12.19.15:17:15 Progress: Adding framereader [alt_vip_vfr 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module framereader
+2014.12.19.15:17:15 Progress: Adding ltm [alt_vip_itc 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module ltm
+2014.12.19.15:17:15 Progress: Adding clock_bridge [altera_clock_bridge 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module clock_bridge
+2014.12.19.15:17:15 Progress: Adding audio_config [altera_up_avalon_audio_and_video_config 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module audio_config
+2014.12.19.15:17:15 Progress: Adding audio_chip [altera_up_avalon_audio 13.1]
+2014.12.19.15:17:15 Progress: Parameterizing module audio_chip
+2014.12.19.15:17:15 Progress: Adding sd_card_interface [Altera_UP_SD_Card_Avalon_Interface 13.1]
+2014.12.19.15:17:47 Progress: Parameterizing module sd_card_interface
+2014.12.19.15:17:47 Progress: Adding sgdma_fft [altera_avalon_sgdma 13.1]
+2014.12.19.15:17:47 Progress: Parameterizing module sgdma_fft
+2014.12.19.15:17:47 Progress: Adding sgdma_display [altera_avalon_sgdma 13.1]
+2014.12.19.15:17:47 Progress: Parameterizing module sgdma_display
+2014.12.19.15:17:47 Progress: Adding fft_wrapper_0 [fft__wrapper 1.0]
+2014.12.19.15:17:47 Progress: Parameterizing module fft_wrapper_0
+2014.12.19.15:17:47 Progress: Building connections
+2014.12.19.15:17:47 Progress: Parameterizing connections
+2014.12.19.15:17:47 Progress: Validating
+2014.12.19.15:17:48 Progress: Done reading input file
+2014.12.19.15:17:48 Warning: displaydriver.framereader: The module properties SIMULATION_MODEL_IN_VERILOG and SIMULATION_MODEL_IN_VHDL can not both be set when using the SIMULATION file property: src_hdl/alt_vipvfr131_vfr.v, src_hdl/alt_vipvfr131_vfr_controller.v, src_hdl/alt_vipvfr131_vfr_control_packet_encoder.v, src_hdl/alt_vipvfr131_prc.v, src_hdl/alt_vipvfr131_prc_core.v, src_hdl/alt_vipvfr131_prc_read_master.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_package.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_master.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_unpack_data.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_slave.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_stream_output.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_pulling_width_adapter.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_general_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_fifo_usedw_calculator.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_gray_clock_crosser.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_std_logic_vector_delay.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_one_bit_delay.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_logic_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_ram_fifo.vhd
+2014.12.19.15:17:51 Progress: Loading quartus/displaydriver.qsys
+2014.12.19.15:17:51 Progress: Reading input file
+2014.12.19.15:17:51 Progress: Adding inclk50 [clock_source 13.1]
+2014.12.19.15:17:51 Progress: Parameterizing module inclk50
+2014.12.19.15:17:51 Progress: Adding onchip_mem [altera_avalon_onchip_memory2 13.1]
+2014.12.19.15:17:51 Progress: Parameterizing module onchip_mem
+2014.12.19.15:17:51 Progress: Adding cpu [altera_nios2_qsys 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module cpu
+2014.12.19.15:17:52 Progress: Adding jtag_uart [altera_avalon_jtag_uart 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module jtag_uart
+2014.12.19.15:17:52 Progress: Adding altpll [altpll 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module altpll
+2014.12.19.15:17:52 Progress: Adding sdram [altera_avalon_new_sdram_controller 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module sdram
+2014.12.19.15:17:52 Progress: Adding framereader [alt_vip_vfr 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module framereader
+2014.12.19.15:17:52 Progress: Adding ltm [alt_vip_itc 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module ltm
+2014.12.19.15:17:52 Progress: Adding clock_bridge [altera_clock_bridge 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module clock_bridge
+2014.12.19.15:17:52 Progress: Adding audio_config [altera_up_avalon_audio_and_video_config 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module audio_config
+2014.12.19.15:17:52 Progress: Adding audio_chip [altera_up_avalon_audio 13.1]
+2014.12.19.15:17:52 Progress: Parameterizing module audio_chip
+2014.12.19.15:17:52 Progress: Adding sd_card_interface [Altera_UP_SD_Card_Avalon_Interface 13.1]
+2014.12.19.15:18:23 Progress: Parameterizing module sd_card_interface
+2014.12.19.15:18:23 Progress: Adding sgdma_fft [altera_avalon_sgdma 13.1]
+2014.12.19.15:18:23 Progress: Parameterizing module sgdma_fft
+2014.12.19.15:18:23 Progress: Adding sgdma_display [altera_avalon_sgdma 13.1]
+2014.12.19.15:18:23 Progress: Parameterizing module sgdma_display
+2014.12.19.15:18:23 Progress: Adding fft_wrapper_0 [fft__wrapper 1.0]
+2014.12.19.15:18:24 Progress: Parameterizing module fft_wrapper_0
+2014.12.19.15:18:24 Progress: Building connections
+2014.12.19.15:18:24 Progress: Parameterizing connections
+2014.12.19.15:18:24 Progress: Validating
+2014.12.19.15:18:24 Progress: Done reading input file
+2014.12.19.15:18:25 Warning: displaydriver.framereader: The module properties SIMULATION_MODEL_IN_VERILOG and SIMULATION_MODEL_IN_VHDL can not both be set when using the SIMULATION file property: src_hdl/alt_vipvfr131_vfr.v, src_hdl/alt_vipvfr131_vfr_controller.v, src_hdl/alt_vipvfr131_vfr_control_packet_encoder.v, src_hdl/alt_vipvfr131_prc.v, src_hdl/alt_vipvfr131_prc_core.v, src_hdl/alt_vipvfr131_prc_read_master.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_package.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_bursting_master_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_master.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_unpack_data.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_avalon_mm_slave.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_stream_output.v, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_pulling_width_adapter.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_general_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_fifo_usedw_calculator.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_gray_clock_crosser.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_std_logic_vector_delay.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_one_bit_delay.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_logic_fifo.vhd, /opt/altera/13.1/ip/altera/frame_reader/common_hdl/alt_vipvfr131_common_ram_fifo.vhd
+2014.12.19.15:18:25 Info: displaydriver: Generating displaydriver "displaydriver" for QUARTUS_SYNTH
+2014.12.19.15:18:25 Info: pipeline_bridge_swap_transform: After transform: 12 modules, 40 connections
+2014.12.19.15:18:25 Info: No custom instruction connections, skipping transform 
+2014.12.19.15:18:25 Info: merlin_initial_interconnect_transform: After transform: 10 modules, 33 connections
+2014.12.19.15:18:26 Info: merlin_translator_transform: After transform: 22 modules, 72 connections
+2014.12.19.15:18:26 Info: merlin_domain_transform: After transform: 46 modules, 202 connections
+2014.12.19.15:18:26 Info: merlin_router_transform: After transform: 58 modules, 241 connections
+2014.12.19.15:18:26 Info: merlin_traffic_limiter_transform: After transform: 59 modules, 246 connections
+2014.12.19.15:18:26 Info: merlin_burst_transform: After transform: 60 modules, 249 connections
+2014.12.19.15:18:26 Info: merlin_network_to_switch_transform: After transform: 83 modules, 300 connections
+2014.12.19.15:18:26 Info: Inserting clock-crossing logic between cmd_xbar_demux_001.src3 and cmd_xbar_mux_004.sink0
+2014.12.19.15:18:26 Info: Inserting clock-crossing logic between cmd_xbar_demux_001.src4 and cmd_xbar_mux_005.sink0
+2014.12.19.15:18:26 Info: Inserting clock-crossing logic between rsp_xbar_demux_004.src0 and rsp_xbar_mux_001.sink3
+2014.12.19.15:18:26 Info: Inserting clock-crossing logic between rsp_xbar_demux_005.src0 and rsp_xbar_mux_001.sink4
+2014.12.19.15:18:26 Info: com_altera_sopcmodel_transforms_avalon_ClockCrossingTransform: After transform: 87 modules, 324 connections
+2014.12.19.15:18:27 Info: limiter_update_transform: After transform: 87 modules, 325 connections
+2014.12.19.15:18:27 Info: merlin_clock_and_reset_bridge_transform: After transform: 94 modules, 423 connections
+2014.12.19.15:18:27 Info: merlin_hierarchy_transform: After transform: 13 modules, 48 connections
+2014.12.19.15:18:27 Info: merlin_mm_transform: After transform: 13 modules, 48 connections
+2014.12.19.15:18:28 Info: merlin_interrupt_mapper_transform: After transform: 14 modules, 52 connections
+2014.12.19.15:18:28 Info: merlin_interrupt_sync_transform: After transform: 15 modules, 58 connections
+2014.12.19.15:18:28 Info: reset_adaptation_transform: After transform: 21 modules, 75 connections
+2014.12.19.15:18:29 Info: onchip_mem: Starting RTL generation for module 'displaydriver_onchip_mem'
+2014.12.19.15:18:29 Info: onchip_mem:   Generation command is [exec /opt/altera/13.1/quartus/linux/perl/bin/perl -I /opt/altera/13.1/quartus/linux/perl/lib -I /opt/altera/13.1/quartus/sopc_builder/bin/europa -I /opt/altera/13.1/quartus/sopc_builder/bin/perl_lib -I /opt/altera/13.1/quartus/sopc_builder/bin -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=displaydriver_onchip_mem --dir=/tmp/alt6423_8157919252655854207.dir/0003_onchip_mem_gen/ --quartus_dir=/opt/altera/13.1/quartus --verilog --config=/tmp/alt6423_8157919252655854207.dir/0003_onchip_mem_gen//displaydriver_onchip_mem_component_configuration.pl  --do_build_sim=0  ]
+2014.12.19.15:18:29 Info: onchip_mem: Done RTL generation for module 'displaydriver_onchip_mem'
+2014.12.19.15:18:29 Info: onchip_mem: "displaydriver" instantiated altera_avalon_onchip_memory2 "onchip_mem"
+2014.12.19.15:18:30 Info: cpu: Starting RTL generation for module 'displaydriver_cpu'
+2014.12.19.15:18:30 Info: cpu:   Generation command is [exec /opt/altera/13.1/quartus/linux/eperlcmd -I /opt/altera/13.1/quartus/linux/perl/lib -I /opt/altera/13.1/quartus/sopc_builder/bin/europa -I /opt/altera/13.1/quartus/sopc_builder/bin/perl_lib -I /opt/altera/13.1/quartus/sopc_builder/bin -I /opt/altera/13.1/quartus/../ip/altera/nios2_ip/altera_nios2/cpu_lib -I /opt/altera/13.1/quartus/../ip/altera/nios2_ip/altera_nios2/nios_lib -I /opt/altera/13.1/quartus/../ip/altera/nios2_ip/altera_nios2 -I /opt/altera/13.1/quartus/../ip/altera/nios2_ip/altera_nios2 -- /opt/altera/13.1/quartus/../ip/altera/nios2_ip/altera_nios2/generate_rtl.epl --name=displaydriver_cpu --dir=/tmp/alt6423_8157919252655854207.dir/0004_cpu_gen/ --quartus_dir=/opt/altera/13.1/quartus --verilog --config=/tmp/alt6423_8157919252655854207.dir/0004_cpu_gen//displaydriver_cpu_processor_configuration.pl  --do_build_sim=0  ]
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:30 (*) Starting Nios II generation
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:30 (*)   Checking for plaintext license.
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:31 (*)   Couldn't query license setup in Quartus directory /opt/altera/13.1/quartus
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:31 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:40 (*)   Plaintext license not found.
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:40 (*)   Checking for encrypted license (non-evaluation).
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:41 (*)   Couldn't query license setup in Quartus directory /opt/altera/13.1/quartus
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:41 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:49 (*)   Encrypted license found.  SOF will not be time-limited.
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:49 (*)   Elaborating CPU configuration settings
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:49 (*)   Creating all objects for CPU
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:50 (*)     Pipeline frontend
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:51 (*)   Generating RTL from CPU objects
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:54 (*)   Creating encrypted RTL
+2014.12.19.15:18:54 Info: cpu: # 2014.12.19 15:18:54 (*) Done Nios II generation
+2014.12.19.15:18:54 Info: cpu: Done RTL generation for module 'displaydriver_cpu'
+2014.12.19.15:18:54 Info: cpu: "displaydriver" instantiated altera_nios2_qsys "cpu"
+2014.12.19.15:18:55 Info: jtag_uart: Starting RTL generation for module 'displaydriver_jtag_uart'
+2014.12.19.15:18:55 Info: jtag_uart:   Generation command is [exec /opt/altera/13.1/quartus/linux/perl/bin/perl -I /opt/altera/13.1/quartus/linux/perl/lib -I /opt/altera/13.1/quartus/sopc_builder/bin/europa -I /opt/altera/13.1/quartus/sopc_builder/bin/perl_lib -I /opt/altera/13.1/quartus/sopc_builder/bin -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=displaydriver_jtag_uart --dir=/tmp/alt6423_8157919252655854207.dir/0005_jtag_uart_gen/ --quartus_dir=/opt/altera/13.1/quartus --verilog --config=/tmp/alt6423_8157919252655854207.dir/0005_jtag_uart_gen//displaydriver_jtag_uart_component_configuration.pl  --do_build_sim=0  ]
+2014.12.19.15:18:55 Info: jtag_uart: Done RTL generation for module 'displaydriver_jtag_uart'
+2014.12.19.15:18:55 Info: jtag_uart: "displaydriver" instantiated altera_avalon_jtag_uart "jtag_uart"
+2014.12.19.15:19:10 Info: altpll: "displaydriver" instantiated altpll "altpll"
+2014.12.19.15:19:10 Info: sdram: Starting RTL generation for module 'displaydriver_sdram'
+2014.12.19.15:19:10 Info: sdram:   Generation command is [exec /opt/altera/13.1/quartus/linux/perl/bin/perl -I /opt/altera/13.1/quartus/linux/perl/lib -I /opt/altera/13.1/quartus/sopc_builder/bin/europa -I /opt/altera/13.1/quartus/sopc_builder/bin/perl_lib -I /opt/altera/13.1/quartus/sopc_builder/bin -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/common -I /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- /opt/altera/13.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=displaydriver_sdram --dir=/tmp/alt6423_8157919252655854207.dir/0008_sdram_gen/ --quartus_dir=/opt/altera/13.1/quartus --verilog --config=/tmp/alt6423_8157919252655854207.dir/0008_sdram_gen//displaydriver_sdram_component_configuration.pl  --do_build_sim=0  ]
+2014.12.19.15:19:10 Info: sdram: Done RTL generation for module 'displaydriver_sdram'
+2014.12.19.15:19:10 Info: sdram: "displaydriver" instantiated altera_avalon_new_sdram_controller "sdram"
+2014.12.19.15:19:42 Info: framereader: "displaydriver" instantiated alt_vip_vfr "framereader"
+2014.12.19.15:20:14 Info: ltm: "displaydriver" instantiated alt_vip_itc "ltm"
+2014.12.19.15:20:14 Info: audio_config: Starting Generation of Audio and Video Config
+2014.12.19.15:20:14 Info: audio_config: "displaydriver" instantiated altera_up_avalon_audio_and_video_config "audio_config"
+2014.12.19.15:20:15 Info: audio_chip: Starting Generation of Audio Controller
+2014.12.19.15:20:15 Info: audio_chip: "displaydriver" instantiated altera_up_avalon_audio "audio_chip"
+2014.12.19.15:20:15 Info: sd_card_interface: "displaydriver" instantiated Altera_UP_SD_Card_Avalon_Interface "sd_card_interface"
+2014.12.19.15:20:15 Info: pipeline_bridge_swap_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: No custom instruction connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:15 Info: merlin_initial_interconnect_transform: After transform: 0 modules, 0 connections
+2014.12.19.15:20:15 Info: No Avalon connections, skipping transform 
+2014.12.19.15:20:15 Info: merlin_hierarchy_transform: After transform: 84 modules, 275 connections
+2014.12.19.15:20:16 Info: mm_interconnect_0: "displaydriver" instantiated altera_merlin_interconnect_wrapper "mm_interconnect_0"
+2014.12.19.15:20:16 Info: irq_mapper: "displaydriver" instantiated altera_irq_mapper "irq_mapper"
+2014.12.19.15:20:16 Info: irq_synchronizer: "displaydriver" instantiated altera_irq_clock_crosser "irq_synchronizer"
+2014.12.19.15:20:16 Info: rst_controller: "displaydriver" instantiated altera_reset_controller "rst_controller"
+2014.12.19.15:20:16 Info: cpu_instruction_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "cpu_instruction_master_translator"
+2014.12.19.15:20:16 Info: cpu_jtag_debug_module_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "cpu_jtag_debug_module_translator"
+2014.12.19.15:20:16 Info: cpu_instruction_master_translator_avalon_universal_master_0_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "cpu_instruction_master_translator_avalon_universal_master_0_agent"
+2014.12.19.15:20:16 Info: cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent"
+2014.12.19.15:20:16 Info: cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "cpu_jtag_debug_module_translator_avalon_universal_slave_0_agent_rsp_fifo"
+2014.12.19.15:20:16 Info: addr_router: "mm_interconnect_0" instantiated altera_merlin_router "addr_router"
+2014.12.19.15:20:16 Info: addr_router_001: "mm_interconnect_0" instantiated altera_merlin_router "addr_router_001"
+2014.12.19.15:20:16 Info: addr_router_002: "mm_interconnect_0" instantiated altera_merlin_router "addr_router_002"
+2014.12.19.15:20:16 Info: id_router: "mm_interconnect_0" instantiated altera_merlin_router "id_router"
+2014.12.19.15:20:16 Info: id_router_001: "mm_interconnect_0" instantiated altera_merlin_router "id_router_001"
+2014.12.19.15:20:16 Info: id_router_002: "mm_interconnect_0" instantiated altera_merlin_router "id_router_002"
+2014.12.19.15:20:16 Info: id_router_003: "mm_interconnect_0" instantiated altera_merlin_router "id_router_003"
+2014.12.19.15:20:16 Info: id_router_004: "mm_interconnect_0" instantiated altera_merlin_router "id_router_004"
+2014.12.19.15:20:16 Info: id_router_005: "mm_interconnect_0" instantiated altera_merlin_router "id_router_005"
+2014.12.19.15:20:16 Info: limiter: "mm_interconnect_0" instantiated altera_merlin_traffic_limiter "limiter"
+2014.12.19.15:20:16 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_avalon_sc_fifo.v
+2014.12.19.15:20:16 Info: burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "burst_adapter"
+2014.12.19.15:20:16 Info: cmd_xbar_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_xbar_demux"
+2014.12.19.15:20:16 Info: cmd_xbar_demux_001: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_001"
+2014.12.19.15:20:16 Info: cmd_xbar_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_xbar_demux_002"
+2014.12.19.15:20:16 Info: cmd_xbar_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_xbar_mux"
+2014.12.19.15:20:16 Info: cmd_xbar_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_xbar_mux_001"
+2014.12.19.15:20:16 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: cmd_xbar_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_xbar_mux_002"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: cmd_xbar_mux_004: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_xbar_mux_004"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: cmd_xbar_mux_005: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_xbar_mux_005"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: rsp_xbar_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_xbar_demux"
+2014.12.19.15:20:17 Info: rsp_xbar_demux_002: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_002"
+2014.12.19.15:20:17 Info: rsp_xbar_demux_004: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_004"
+2014.12.19.15:20:17 Info: rsp_xbar_demux_005: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_xbar_demux_005"
+2014.12.19.15:20:17 Info: rsp_xbar_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_xbar_mux"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: rsp_xbar_mux_001: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_xbar_mux_001"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: rsp_xbar_mux_002: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_xbar_mux_002"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_merlin_arbitrator.sv
+2014.12.19.15:20:17 Info: crosser: "mm_interconnect_0" instantiated altera_avalon_st_handshake_clock_crosser "crosser"
+2014.12.19.15:20:17 Info: Reusing file /homes/w1029376/hscodesign/quartus/displaydriver/synthesis/submodules/altera_avalon_st_pipeline_base.v
+2014.12.19.15:20:17 Info: displaydriver: Done "displaydriver" with 47 modules, 133 files, 2239728 bytes

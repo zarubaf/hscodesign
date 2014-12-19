@@ -1,5 +1,5 @@
 #include <alt_types.h>
-//#include "sys/alt_stdio.h"
+#include "sys/alt_stdio.h"
 //#include "sys/alt_irq.h"
 #include "sys/alt_flash.h"
 #include <io.h>
@@ -12,7 +12,7 @@
 //#define printf printf
 #define fprintf(shit, fmt, ...) printf(fmt, ##__VA_ARGS__)
 
-#include <stdio.h>
+//#include <stdio.h>
 //#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
