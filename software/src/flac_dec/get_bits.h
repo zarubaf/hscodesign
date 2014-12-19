@@ -2,7 +2,6 @@
 #define GET_BITS_H
 
 #include <stdio.h>
-#include <assert.h>
 
 #include "utils.h"
 
@@ -13,27 +12,14 @@ typedef struct GetBitContext_s {
     int pos;
 } GetBitContext;
 
-/*
-static inline void read_block(GetBitContext *gb)
-{
-    int i;
-
-    if (fread(gb->buf, 1, 512, gb->file) != 512)
-        fprintf(stderr, "warning: reading file block failed\n");
-
-    // swap bytes
-    for (i = 0; i < 128; i++)
-        gb->buf[i] = (gb->buf[i]<<24) | (gb->buf[i]<<8&0x00FF0000) | (gb->buf[i]>>8&0x0000FF00) | (gb->buf[i]>>24);
-
-    gb->pos -= 4096;
-}
-*/
-
 static inline unsigned int get_bits(GetBitContext *gb, int n)
 {
     uint64_t ret, cache;
 
-    assert(n <= 32);
+    if(n > 32){
+		printf("get bits assertion failed\n");
+		exit(1);
+	}
 
     while (gb->pos >= 4096)
         gb->read_block(gb);

@@ -117,7 +117,11 @@ Catapult SL/LP (Calypto) - nimmt C/C++ oder SystemC als input und generiert Regi
 
 Cyntesizer (Forte Design Systems/ teil von cadence) - SystemC IDE,Methodology und Design Flow, IP cores, NG algorithmen
 
- 
+Bambu - (Politecnico di Milano) C to Verilog -> zielt auf FPGAs und ASICS ab
+aufteilung in parallelisierte und FSM teile (zusammenarbeit Parcific Northwest Nat. Lab. Richland USA)
+
+Cadence C-to-silicon - nimmt C/C++/SystemC als input und generiert RTL.
+Man kann SystemC sehr schnell 80-90% Fast hardware models simulieren. 
 ### 17
 Derzeit jobs in österreich betreffend SystemC (NXP, Infineon) von gestern
 
@@ -128,4 +132,11 @@ ARM hat Softcores welche in SystemC code verfügbar sind und auch simuliert werd
 Auf Accerella gibt es auch ein paar (ältere) success stories.
 
 Kompilieren von systemC kann man kostenlos (open source), tools für die verwendung (Catapult, Cadence, Synopsis ...) kostenpflichtig, sind ja für die verschiedenen FPGAs
+
+
+
+
+
+
+
 

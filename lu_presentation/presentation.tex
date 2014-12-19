@@ -42,17 +42,14 @@ Ideas for the Implementation
 \begin{itemize}
 	\item SD-Card read in HW
 	\item Display and FFT in HW
-	\item ... TBA
+	\item Decode in Software
 	\item Optimizations in C code (loop unrolling,..)
 \end{itemize}
 \end{frame}
 
 \section{SDCard}
-\begin{frame}\frametitle{SDCard}
-	
-\end{frame}
-\begin{frame}\frametitle{RA - Overview}
-    \begin{figure}[hp]
+\begin{frame}\frametitle{SDCard - Overview}
+\begin{figure}[hp]
       \centering
       \includegraphics[width=0.6\textwidth]{pictures/read_ahead_overview}
       \caption{Read-ahead overview}
@@ -121,7 +118,7 @@ unsigned int get_bits(int n)
 \begin{frame}[fragile]\frametitle{Software - LPC decoding}
     Decode LPC coded samples:\\
     $s_i$ : sample, $r_i$ : residual, $c_i$ : LPC coefficient, $p$ : predictor order
-    $$ s_n = r_n + \prod_{i=0}^p s_{n-i} \cdot c_i $$
+    $$ s_n = r_n + \sum_{i=0}^p s_{n-i} \cdot c_i $$
     Naive code with nested loops:
     \begin{lstlisting}[language=C]
     for (i = pred_order; i < len; i++, decoded++) {
@@ -134,27 +131,5 @@ unsigned int get_bits(int n)
     \end{lstlisting}
     Optimize to reduce branches and memory accesses
 \end{frame}
-
-\section{Problems}
-\begin{frame}\frametitle{Problems}
-\begin{itemize}
-	\item {TBA} 
-	\item {TBA}
-	\item {TBA}
-	\item {TBA}
-\end{itemize}
-\end{frame}
-      
-\section{Bibliography}
-%\nocite{haubelt2010digitale}
-%\nocite{canis2011legup}
-%\nocite{liao2002system}
-%\nocite{initiative2014functional}
-\begin{frame}[allowframebreaks] \frametitle{Literature} 
-\bibliographystyle{plain}
-\bibliography{references}
-\end{frame}
-
-
 
 \end{document}

@@ -6,6 +6,8 @@
 #include <system.h>
 #include <malloc.h>
 #include <ctype.h>
+#include "flac_dec.h"
+#include "flac_dsp.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,6 +31,7 @@ static int32_t decoded_l[4608], decoded_r[4608];
 
 static uint32_t sdcard_buf[512 / 4];
 
+alt_up_sd_card_dev *sd_card_dev;
 static int *sdcard_com_arg_reg;
 static short int *sdcard_com_reg;
 static short int *sdcard_aux_stat_reg;
@@ -50,7 +53,7 @@ static void read_block(GetBitContext *gb)
         gb->buf[i] = (gb->buf[i]<<24) | (gb->buf[i]<<8&0x00FF0000) | (gb->buf[i]>>8&0x0000FF00) | (gb->buf[i]>>24);
     }
     
-    *sdcard_com_arg_reg = ++blk_cnt * 512;
+    *sdcard_com_arg_reg = ++gb->blk_cnt * 512;
 	*sdcard_com_reg = READ_BLOCK;
 
     gb->pos -= 4096;
@@ -58,16 +61,15 @@ static void read_block(GetBitContext *gb)
 
 int main()
 {
-	alt_up_sd_card_dev *sd_card_dev = alt_up_sd_card_open_dev(ALTERA_UP_SD_CARD_AVALON_INTERFACE_0_NAME);
+	sd_card_dev = alt_up_sd_card_open_dev(SD_CARD_INTERFACE_NAME);
 	
 	sdcard_com_arg_reg = ((int *)(sd_card_dev->base + SD_CARD_ARGUMENT));
 	sdcard_com_reg = ((short int *)(sd_card_dev->base + SD_CARD_COMMAND));
-	short int *aux_status_register = ((short int *)(sd_card_dev->base + SD_CARD_STATUS));
-	short int status;
+	sdcard_aux_stat_reg = ((short int *)(sd_card_dev->base + SD_CARD_STATUS));
 	
-	audio_dev = alt_up_audio_open_dev(AUDIO_0_NAME);
+	audio_dev = alt_up_audio_open_dev(AUDIO_CHIP_NAME);
 	
-	if (audio_dev == NULL)
+	if (audio_dev == NULL) {
 	    printf("audio dev could not be opened\n");
 	    return 1;
 	}
@@ -113,14 +115,14 @@ static int decode_main()
     }
     while (!buf);
 
-    while (decode_frame(&gb, out) == 0);
+    while (decode_frame(&gb) == 0);
 
     return 0;
 }
 
 static int decode_frame(GetBitContext *gb)
 {
-    int i, ret, l_cnt, r_cnt;
+    int ret, l_cnt, r_cnt;
     FLACFrameInfo fi;
 
     if ((ret = ff_flac_decode_frame_header(gb, &fi)) < 0) {
@@ -145,21 +147,6 @@ static int decode_frame(GetBitContext *gb)
     	if ((ret = decode_subframe(gb, &fi, decoded_r, 1)) < 0)
     		return ret;
 
-    /*
-    if (fi.blocksize != last_blocksize)
-        for (i = 0; i < fi.channels; i++) {
-            decoded[i] = realloc(decoded[i], fi.blocksize * 4);
-            out_data[i] = realloc(out_data[i], fi.blocksize * 2);
-        }
-
-    last_blocksize = fi.blocksize;
-    last_channels = fi.channels;
-
-    for (i = 0; i < fi.channels; i++)
-        if ((ret = decode_subframe(gb, &fi, decoded[i], i)) < 0)
-            return ret;
-    */
-
     align_get_bits(gb);
 
     /* frame footer */
@@ -172,20 +159,14 @@ static int decode_frame(GetBitContext *gb)
         case FLAC_CHMODE_MID_SIDE:    flac_decorrelate_ms_c(decoded_l, decoded_r, fi.channels, fi.blocksize); break;
     }
 
-    /*
-    for (i = 0; i < fi.blocksize; i++) {
-        fwrite(&out_data[0][i], 2, 1, out);
-        fwrite(&out_data[1][i], 2, 1, out);
-    }
-    */
     l_cnt = r_cnt = 0;
   			
 	while (l_cnt < fi.blocksize || r_cnt < fi.blocksize) {
 		if (l_cnt < fi.blocksize)
-			l_cnt += alt_up_audio_write_fifo(audio_dev, &decoded_l[l_cnt], fi.blocksize - l_cnt, ALT_UP_AUDIO_LEFT);
+			l_cnt += alt_up_audio_write_fifo(audio_dev, (unsigned int *)(&decoded_l[l_cnt]), fi.blocksize - l_cnt, ALT_UP_AUDIO_LEFT);
 		
 		if (r_cnt < fi.blocksize)
-			r_cnt += alt_up_audio_write_fifo(audio_dev, &decoded_r[r_cnt], fi.blocksize - r_cnt, ALT_UP_AUDIO_RIGHT);
+			r_cnt += alt_up_audio_write_fifo(audio_dev, (unsigned int *)(&decoded_r[r_cnt]), fi.blocksize - r_cnt, ALT_UP_AUDIO_RIGHT);
 	}
 
     return 0;
