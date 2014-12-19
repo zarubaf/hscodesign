@@ -23,28 +23,28 @@ static inline int fast_log2(unsigned int v)
     return n + fast_log2_tab[v];
 }
 
-/*
-static inline int fast_sqrt(unsigned int v)
+static inline uint32_t fast_sqrt(uint32_t v)
 {
-    int n = 1;
+    register uint32_t root, remain, place;
 
-    if (v & 0xffff0000) {
-        v >>= 16;
-        n = 256;
+    root = 0;
+    remain = v;
+    place = 1 << 30;
+
+    while (place > remain)
+        place >>= 2;
+
+    while (place) {
+        if (remain >= root + place) {
+            remain -= root + place;
+            root += place << 1;
+        }
+
+        root >>= 1;
+        place >>= 2;
     }
 
-    if (v & 0xff000) {
-        v >>= 8;
-        n *= 16;
-    }
-    
-    if (v & 0xf00) {
-        v >>= 4;
-        n *= 4;
-    }
-
-    return n * fast_sqrt_tab[v];
+    return root;
 }
-*/
 
 #endif // UTILS_H
