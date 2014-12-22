@@ -54,9 +54,9 @@ signal sink_real_reorder : STD_LOGIC_VECTOR(15 DOWNTO 0);
 signal source_real_reorder : STD_LOGIC_VECTOR(15 DOWNTO 0);
 signal source_imag_reorder : STD_LOGIC_VECTOR(15 DOWNTO 0);
 
-signal source_real_sqare : STD_LOGIC_VECTOR(15 DOWNTO 0);
-signal source_imag_sqare : STD_LOGIC_VECTOR(15 DOWNTO 0);
-signal source_squared : STD_LOGIC_VECTOR(15 DOWNTO 0);
+signal source_real_sqare : STD_LOGIC_VECTOR(31 DOWNTO 0);
+signal source_imag_sqare : STD_LOGIC_VECTOR(31 DOWNTO 0);
+signal source_squared : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 begin
 	fft_inst : fft

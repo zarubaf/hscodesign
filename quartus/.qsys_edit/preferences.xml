@@ -6,8 +6,10 @@
    <connections preferredWidth="383" />
    <irq preferredWidth="34" />
    <name preferredWidth="201" />
+   <export preferredWidth="236" />
   </columns>
  </systemtable>
  <library expandedCategories="Project,Library" />
  <window width="1940" height="1037" x="-10" y="20" />
+ <hdlexample language="VERILOG" />
 </preferences>
