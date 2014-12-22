@@ -16,7 +16,7 @@
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "1";
          type = "int";
       }
    }
@@ -24,7 +24,7 @@
    {
       datum _sortIndex
       {
-         value = "12";
+         value = "10";
          type = "int";
       }
    }
@@ -32,7 +32,7 @@
    {
       datum _sortIndex
       {
-         value = "11";
+         value = "9";
          type = "int";
       }
    }
@@ -91,27 +91,11 @@
          type = "String";
       }
    }
-   element c0
-   {
-      datum _sortIndex
-      {
-         value = "0";
-         type = "int";
-      }
-   }
-   element c2
-   {
-      datum _sortIndex
-      {
-         value = "1";
-         type = "int";
-      }
-   }
    element clock_bridge
    {
       datum _sortIndex
       {
-         value = "10";
+         value = "8";
          type = "int";
       }
    }
@@ -127,7 +111,7 @@
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "2";
          type = "int";
       }
    }
@@ -155,7 +139,7 @@
          type = "String";
       }
    }
-   element sgdma_display.descriptor_write
+   element sgdma_fft.descriptor_write
    {
       datum _tags
       {
@@ -163,7 +147,7 @@
          type = "String";
       }
    }
-   element sgdma_fft.descriptor_write
+   element sgdma_display.descriptor_write
    {
       datum _tags
       {
@@ -175,7 +159,7 @@
    {
       datum _sortIndex
       {
-         value = "16";
+         value = "14";
          type = "int";
       }
    }
@@ -183,7 +167,7 @@
    {
       datum _sortIndex
       {
-         value = "8";
+         value = "6";
          type = "int";
       }
    }
@@ -191,7 +175,7 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "0";
          type = "int";
       }
    }
@@ -212,7 +196,7 @@
    {
       datum _sortIndex
       {
-         value = "7";
+         value = "5";
          type = "int";
       }
    }
@@ -220,7 +204,7 @@
    {
       datum _sortIndex
       {
-         value = "9";
+         value = "7";
          type = "int";
       }
    }
@@ -228,7 +212,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "3";
          type = "int";
       }
    }
@@ -275,7 +259,7 @@
    {
       datum _sortIndex
       {
-         value = "13";
+         value = "11";
          type = "int";
       }
    }
@@ -283,7 +267,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "4";
          type = "int";
       }
       datum megawizard_uipreferences
@@ -296,7 +280,7 @@
    {
       datum _sortIndex
       {
-         value = "15";
+         value = "13";
          type = "int";
       }
    }
@@ -304,7 +288,7 @@
    {
       datum _sortIndex
       {
-         value = "14";
+         value = "12";
          type = "int";
       }
    }
@@ -326,116 +310,47 @@
  <parameter name="timeStamp" value="0" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
- <interface
-   name="inclk50_clk_in"
-   internal="inclk50.clk_in"
-   type="clock"
-   dir="end">
-  <port name="inclk50" internal="in_clk" />
- </interface>
- <interface
-   name="inclk50_clk_in_reset"
-   internal="inclk50.clk_in_reset"
-   type="reset"
-   dir="end">
-  <port name="reset_n" internal="reset_n" />
- </interface>
+ <interface name="clk" internal="inclk50.clk_in" type="clock" dir="end" />
+ <interface name="reset" internal="inclk50.clk_in_reset" type="reset" dir="end" />
  <interface
    name="altpll_phasedone_conduit"
    internal="altpll.phasedone_conduit"
    type="conduit"
-   dir="end">
-  <port name="phasedone_from_the_altpll" internal="phasedone" />
- </interface>
+   dir="end" />
  <interface
    name="altpll_locked_conduit"
    internal="altpll.locked_conduit"
    type="conduit"
-   dir="end">
-  <port name="locked_from_the_altpll" internal="locked" />
- </interface>
+   dir="end" />
  <interface
    name="altpll_areset_conduit"
    internal="altpll.areset_conduit"
    type="conduit"
-   dir="end">
-  <port name="areset_to_the_altpll" internal="areset" />
- </interface>
- <interface name="sdram_wire" internal="sdram.wire" type="conduit" dir="end">
-  <port name="zs_addr_from_the_sdram" internal="zs_addr" />
-  <port name="zs_ba_from_the_sdram" internal="zs_ba" />
-  <port name="zs_cas_n_from_the_sdram" internal="zs_cas_n" />
-  <port name="zs_cke_from_the_sdram" internal="zs_cke" />
-  <port name="zs_cs_n_from_the_sdram" internal="zs_cs_n" />
-  <port name="zs_dq_to_and_from_the_sdram" internal="zs_dq" />
-  <port name="zs_dqm_from_the_sdram" internal="zs_dqm" />
-  <port name="zs_ras_n_from_the_sdram" internal="zs_ras_n" />
-  <port name="zs_we_n_from_the_sdram" internal="zs_we_n" />
- </interface>
- <interface name="altpll_c1" internal="altpll.c1" type="clock" dir="start">
-  <port name="altpll_c1_out" internal="c1" />
- </interface>
+   dir="end" />
+ <interface name="sdram" internal="sdram.wire" type="conduit" dir="end" />
+ <interface name="sdram_clk" internal="altpll.c1" type="clock" dir="start" />
+ <interface name="ltm" internal="ltm.clocked_video" type="conduit" dir="end" />
+ <interface name="audio_mclk" internal="altpll.c3" type="clock" dir="start" />
  <interface
-   name="clock_bridge_out_clk"
-   internal="clock_bridge.out_clk"
-   type="clock"
-   dir="start">
-  <port name="clock_bridge_out_clk_out" internal="out_clk" />
- </interface>
- <interface
-   name="ltm_clocked_video"
-   internal="ltm.clocked_video"
-   type="conduit"
-   dir="end">
-  <port name="vid_data_from_the_ltm" internal="vid_data" />
-  <port name="underflow_from_the_ltm" internal="underflow" />
-  <port name="vid_datavalid_from_the_ltm" internal="vid_datavalid" />
-  <port name="vid_v_sync_from_the_ltm" internal="vid_v_sync" />
-  <port name="vid_h_sync_from_the_ltm" internal="vid_h_sync" />
-  <port name="vid_f_from_the_ltm" internal="vid_f" />
-  <port name="vid_h_from_the_ltm" internal="vid_h" />
-  <port name="vid_v_from_the_ltm" internal="vid_v" />
- </interface>
- <interface name="altpll_c3" internal="altpll.c3" type="clock" dir="start">
-  <port name="altpll_c3_out" internal="c3" />
- </interface>
- <interface
-   name="audio_config_external_interface"
+   name="audio_config"
    internal="audio_config.external_interface"
    type="conduit"
-   dir="end">
-  <port name="I2C_SDAT_to_and_from_the_audio_config" internal="I2C_SDAT" />
-  <port name="I2C_SCLK_from_the_audio_config" internal="I2C_SCLK" />
- </interface>
+   dir="end" />
  <interface
-   name="audio_chip_external_interface"
+   name="audio_ext_interface"
    internal="audio_chip.external_interface"
    type="conduit"
-   dir="end">
-  <port name="AUD_ADCDAT_to_the_audio_chip" internal="AUD_ADCDAT" />
-  <port name="AUD_ADCLRCK_to_the_audio_chip" internal="AUD_ADCLRCK" />
-  <port name="AUD_BCLK_to_the_audio_chip" internal="AUD_BCLK" />
-  <port name="AUD_DACDAT_from_the_audio_chip" internal="AUD_DACDAT" />
-  <port name="AUD_DACLRCK_to_the_audio_chip" internal="AUD_DACLRCK" />
- </interface>
+   dir="end" />
  <interface
-   name="sd_card_interface_conduit_end"
+   name="sd_pins"
    internal="sd_card_interface.conduit_end"
    type="conduit"
-   dir="end">
-  <port name="b_SD_cmd_to_and_from_the_sd_card_interface" internal="b_SD_cmd" />
-  <port name="b_SD_dat_to_and_from_the_sd_card_interface" internal="b_SD_dat" />
-  <port
-     name="b_SD_dat3_to_and_from_the_sd_card_interface"
-     internal="b_SD_dat3" />
-  <port name="o_SD_clock_from_the_sd_card_interface" internal="o_SD_clock" />
- </interface>
- <interface name="c0_out_clk" internal="c0.out_clk" type="clock" dir="start">
-  <port name="altpll_c0_out" internal="out_clk" />
- </interface>
- <interface name="c2_out_clk" internal="c2.out_clk" type="clock" dir="start">
-  <port name="altpll_c2_out" internal="out_clk" />
- </interface>
+   dir="end" />
+ <interface
+   name="display"
+   internal="clock_bridge.out_clk"
+   type="clock"
+   dir="start" />
  <module kind="clock_source" version="13.1" enabled="1" name="inclk50">
   <parameter name="clockFrequency" value="50000000" />
   <parameter name="clockFrequencyKnown" value="true" />
@@ -956,16 +871,6 @@
  <module kind="fft_wrapper" version="1.0" enabled="1" name="fft_wrapper">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="100000000" />
  </module>
- <module kind="altera_clock_bridge" version="13.1" enabled="1" name="c0">
-  <parameter name="DERIVED_CLOCK_RATE" value="100000000" />
-  <parameter name="EXPLICIT_CLOCK_RATE" value="0" />
-  <parameter name="NUM_CLOCK_OUTPUTS" value="1" />
- </module>
- <module kind="altera_clock_bridge" version="13.1" enabled="1" name="c2">
-  <parameter name="DERIVED_CLOCK_RATE" value="25000000" />
-  <parameter name="EXPLICIT_CLOCK_RATE" value="0" />
-  <parameter name="NUM_CLOCK_OUTPUTS" value="1" />
- </module>
  <connection
    kind="avalon"
    version="13.1"
@@ -1267,7 +1172,6 @@
    start="altpll.c0"
    end="sd_card_interface.clock_sink" />
  <connection kind="clock" version="13.1" start="altpll.c0" end="sgdma_fft.clk" />
- <connection kind="clock" version="13.1" start="altpll.c0" end="sgdma_display.clk" />
  <connection
    kind="reset"
    version="13.1"
@@ -1349,8 +1253,7 @@
    version="13.1"
    start="cpu.jtag_debug_module_reset"
    end="fft_wrapper.reset" />
- <connection kind="clock" version="13.1" start="altpll.c0" end="c0.in_clk" />
- <connection kind="clock" version="13.1" start="altpll.c2" end="c2.in_clk" />
+ <connection kind="clock" version="13.1" start="altpll.c0" end="sgdma_display.clk" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="0" />
 </system>
