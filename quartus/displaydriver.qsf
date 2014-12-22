@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
-set_global_assignment -name TOP_LEVEL_ENTITY extr_bits_2
+set_global_assignment -name TOP_LEVEL_ENTITY top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 12.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:40:31  OCTOBER 18, 2013"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.1
@@ -170,13 +170,6 @@ set_location_assignment PIN_C2 -to AUD_ADCLRCK
 set_location_assignment PIN_F2 -to AUD_BCLK
 set_location_assignment PIN_D1 -to AUD_DACDAT
 set_location_assignment PIN_E3 -to AUD_DACLRCK
-set_global_assignment -name VHDL_FILE fft_wrapper.vhd
-set_global_assignment -name QIP_FILE displaydriver/synthesis/displaydriver.qip
-set_global_assignment -name VHDL_FILE top.vhd
-set_global_assignment -name SDC_FILE displaydriver.sdc
-set_global_assignment -name QIP_FILE fft.qip
-set_global_assignment -name VHDL_FILE extr_bits_1.vhd
-set_global_assignment -name VHDL_FILE extr_bits_2.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -310,3 +303,11 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_DACDAT
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_DACLRCK
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_ADCLRCK
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name QSYS_FILE displaydriver.qsys
+set_global_assignment -name VHDL_FILE fft_wrapper.vhd
+set_global_assignment -name QIP_FILE displaydriver/synthesis/displaydriver.qip
+set_global_assignment -name VHDL_FILE top.vhd
+set_global_assignment -name SDC_FILE displaydriver.sdc
+set_global_assignment -name QIP_FILE fft.qip
+set_global_assignment -name VHDL_FILE extr_bits_1.vhd
+set_global_assignment -name VHDL_FILE extr_bits_2.vhd

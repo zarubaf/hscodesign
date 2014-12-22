@@ -3,13 +3,20 @@
  <debug showDebugMenu="0" />
  <systemtable filter="All Interfaces">
   <columns>
-   <connections preferredWidth="383" />
+   <connections preferredWidth="30" />
    <irq preferredWidth="34" />
    <name preferredWidth="201" />
    <export preferredWidth="236" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
+ <library expandedCategories="Library,Project" />
  <window width="1940" height="1037" x="-10" y="20" />
  <hdlexample language="VERILOG" />
+ <clocktable>
+  <columns>
+   <clockname preferredWidth="359" />
+   <clocksource preferredWidth="358" />
+   <frequency preferredWidth="339" />
+  </columns>
+ </clocktable>
 </preferences>
