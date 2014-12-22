@@ -13,14 +13,19 @@
 *.fls
 *.vrb
 
-# Makefile ignorse
+# Makefile ignores
 *.make
+
+# Quartus related ignores
+quartus/db/*
+quartus/incremental_db/*
 
 # Mac related ignores
 *.DS_Store
 
 # Linux related ignores
 *.backup
+*.bak
 
 # Matlab related ignores
 *.asv
@@ -36,3 +41,12 @@
 *out*
 *.temp
 ff_flac
+
+# Modelsim related ignores
+modelsim/extract_bits/work/*
+*.wlf
+*.nfs*
+*.mti
+
+# others
+transcript
