@@ -1,4 +1,3 @@
-
 # Editor related ignores
 *~
 
@@ -7,18 +6,14 @@
 *.log
 *.nav
 *.out
+presentation.pdf
 *.snm
 *.toc
 *.d
 *.fls
-*.vrb
 
-# Makefile ignores
+# Makefile ignorse
 *.make
-
-# Quartus related ignores
-quartus/db/*
-quartus/incremental_db/*
 
 # Mac related ignores
 *.DS_Store
@@ -35,18 +30,46 @@ quartus/incremental_db/*
 *.blg
 *.bbl
 *.gz(busy)
+*.db_info
+*.sci
+*.qsf
+*.qws
+*.qdf
+*.qsf
 
-# C related ignores
-*.o
-*out*
-*.temp
-ff_flac
+# Quartus related ignores
 
-# Modelsim related ignores
-modelsim/extract_bits/work/*
-*.wlf
-*.nfs*
+quartus/output_files/*
+quartus/incremental_db/*
+quartus/db/*
+*.sopcinfo
+*.qsf
+# modelsim related ignores
+vhdl/sdcard/modelsim/*
+*.mtf
 *.mti
+*.rpt
+*.summary
+*.sof
+*.cdf
+*.smsg
+*.qsys_edit
+*.project
+*.cproject
+*.pin
+*.jdi
+*.done
+*.bsf
+*.cmp
+*.v
+quartus/de0_nano_system.sdc
 
-# others
-transcript
+#
+software/bsp/*
+*.o
+*.elf
+*.map
+*.objdump
+
+software/de0_nano_nios2/de0_nano_nios2.objdump
+software/settings.bsp

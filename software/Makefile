@@ -8,8 +8,8 @@ endif
 
 
 
-PROJECT_NAME=displaydriver
-SOPC_FILE=../quartus/displaydriver.sopcinfo
+PROJECT_NAME=de0_nano_system
+SOPC_FILE=../quartus/de0_nano_nios2.sopcinfo
 BSP_DIR=./$(PROJECT_NAME)_bsp
 QUARTUS_PROJECT_DIR=../quartus
 
@@ -29,11 +29,11 @@ run:
 	
 
 $(ELF_FILE): app-makefile
-	make -C displaydriver
+	make -C $(PROJECT_NAME)
 
-app-makefile: displaydriver/Makefile 
+app-makefile: $(PROJECT_NAME)/Makefile 
 
-displaydriver/Makefile: $(BSP_DIR) 
+$(PROJECT_NAME)/Makefile: $(BSP_DIR) 
 	./create-app-makefile
 
 
