@@ -156,14 +156,14 @@ static int decode_main()
     while ((len = decode_frame(&gb, decoded_l[decoded_idx ^ 1], decoded_r[decoded_idx ^ 1])) >= 0) {
         printf("decoded %d samples\n", len);
 
-        while ((IORD_ALT_UP_AUDIO_CONTROL(audio_dev->base) & ALT_UP_AUDIO_CONTROL_WE_MSK) == 0);
+        while (IORD_ALT_UP_AUDIO_CONTROL(audio_dev->base) & ALT_UP_AUDIO_CONTROL_WE_MSK);
 
         decoded_idx ^= 1;
         decoded_pos = 0;
         decoded_len = len;
 
-        alt_up_audio_enable_write_interrupt(audio_dev);
         printf("interrupt enabled\n");
+        alt_up_audio_enable_write_interrupt(audio_dev);
     }
 
     return 0;
