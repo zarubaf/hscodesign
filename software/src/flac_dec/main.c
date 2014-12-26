@@ -31,9 +31,9 @@
 #define SD_CARD_ARGUMENT    0x022C
 #define SD_CARD_COMMAND     0x0230
 
-static int32_t decoded_l1[4608], decoded_l2[4608], decoded_r1[4608], decoded_r2[4608];
-static int32_t *decoded_l[2] = { decoded_l1, decoded_l2 };
-static int32_t *decoded_r[2] = { decoded_r1, decoded_r2 };
+//static int32_t decoded_l1[4608], decoded_l2[4608], decoded_r1[4608], decoded_r2[4608];
+static int32_t *decoded_l[2]; // = { decoded_l1, decoded_l2 };
+static int32_t *decoded_r[2]; // = { decoded_r1, decoded_r2 };
 static int decoded_idx, decoded_pos, decoded_len;
 
 static uint32_t sdcard_buf[512 / 4];
@@ -151,6 +151,11 @@ static int decode_main()
     }
     while (!buf);
 
+    decoded_l[0] = malloc(4608 * 4);
+    decoded_l[1] = malloc(4608 * 4);
+    decoded_r[0] = malloc(4608 * 4);
+    decoded_r[1] = malloc(4608 * 4);
+
     decoded_idx = 1;
 
     while ((len = decode_frame(&gb, decoded_l[decoded_idx ^ 1], decoded_r[decoded_idx ^ 1])) >= 0) {
@@ -265,5 +270,3 @@ static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r)
 
     return fi.blocksize;
 }
-
-
