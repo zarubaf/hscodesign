@@ -1,6 +1,6 @@
 #include <alt_types.h>
 //#include "sys/alt_stdio.h"
-//#include "sys/alt_irq.h"
+#include "sys/alt_irq.h"
 #include "sys/alt_flash.h"
 #include <io.h>
 #include <system.h>
@@ -22,6 +22,7 @@
 
 #include "Altera_UP_SD_Card_Avalon_Interface.h"
 #include "altera_up_avalon_audio.h"
+#include "altera_up_avalon_audio_regs.h"
 #include "altera_up_avalon_audio_and_video_config.h"
 
 #define READ_BLOCK 17
@@ -31,8 +32,8 @@
 #define SD_CARD_COMMAND     0x0230
 
 static int32_t decoded_l1[4608], decoded_l2[4608], decoded_r1[4608], decoded_r2[4608];
-static int32_t *decoded_l[2] = { decoded_l1, decoded_l2; };
-static int32_t *decoded_r[2] = { decoded_r1, decoded_r2; };
+static int32_t *decoded_l[2] = { decoded_l1, decoded_l2 };
+static int32_t *decoded_r[2] = { decoded_r1, decoded_r2 };
 static int decoded_idx, decoded_pos, decoded_len;
 
 static uint32_t sdcard_buf[512 / 4];
@@ -45,7 +46,7 @@ static short int *sdcard_aux_stat_reg;
 alt_up_audio_dev *audio_dev;
 
 static int decode_main();
-static int decode_frame(GetBitContext *);
+static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r);
 
 static void read_block(GetBitContext *gb)
 {
@@ -88,6 +89,7 @@ static void audio_write_isr(void *ctx, alt_u32 id)
     }
 
     alt_up_audio_disable_write_interrupt(audio_dev);
+    printf("interrupt disabled\n");
 }
 
 int main()
@@ -107,7 +109,8 @@ int main()
 
     //while ((IORD_16DIRECT(sdcard_aux_stat_reg, 0) & 0x02) == 0);
 
-    alt_irq_register(AUDIO_IRQ, NULL, audio_write_isr);
+    alt_up_audio_disable_write_interrupt(audio_dev);
+    alt_irq_register(AUDIO_CHIP_IRQ, NULL, audio_write_isr);
 
     printf("sd card connected\n");
 
@@ -151,6 +154,8 @@ static int decode_main()
     decoded_idx = 1;
 
     while ((len = decode_frame(&gb, decoded_l[decoded_idx ^ 1], decoded_r[decoded_idx ^ 1])) >= 0) {
+        printf("decoded %d samples\n", len);
+
         while (IORD_ALT_UP_AUDIO_CONTROL(audio_dev->base) & ALT_UP_AUDIO_CONTROL_WE_MSK);
 
         decoded_idx ^= 1;
@@ -158,6 +163,7 @@ static int decode_main()
         decoded_len = len;
 
         alt_up_audio_enable_write_interrupt(audio_dev);
+        printf("interrupt enabled\n");
     }
 
     return 0;
