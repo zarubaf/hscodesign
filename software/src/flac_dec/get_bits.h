@@ -25,8 +25,8 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
     while (gb->pos >= 4096)
         gb->read_block(gb);
 
-    //cache = (uint64_t)gb->buf[ALT_CI_SHIFT_R(gb->pos,5)] << 32;
-    cache = (uint64_t)gb->buf[gb->pos >> 5] << 32;
+    cache = (uint64_t)gb->buf[ALT_CI_SHIFT_R(gb->pos,5)] << 32;
+    //cache = (uint64_t)gb->buf[gb->pos >> 5] << 32;
     //ret2 = ALT_CI_EXTR_BITS_1(gb->buf[gb->pos >> 5], (gb->pos << 6) | n);
     //ret3 = ALT_CI_EXTR_BITS_1(0xcef68400, 0x5401);
 
@@ -34,8 +34,8 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
         if (gb->pos + 32 >= 4096)
             gb->read_block(gb);
 
-        //cache |= (uint64_t)gb->buf[(ALT_CI_SHIFT_R(gb->pos,5)) + 1];
-        cache |= (uint64_t)gb->buf[(gb->pos >> 5) + 1];
+        cache |= (uint64_t)gb->buf[(ALT_CI_SHIFT_R(gb->pos,5)) + 1];
+        //cache |= (uint64_t)gb->buf[(gb->pos >> 5) + 1];
         //ret2 |= ALT_CI_EXTR_BITS_2(gb->buf[(gb->pos >> 5) + 1], (gb->pos << 6) | n);
     }
 
@@ -60,8 +60,8 @@ static inline int get_unary1(GetBitContext *gb, int len)
         while (gb->pos >= 4096)
             gb->read_block(gb);
 
-        //cache = ALT_CI_SHIFT_L(gb->buf[ALT_CI_SHIFT_R(gb->pos,5)], (gb->pos & 0x1f));
-        cache = gb->buf[gb->pos >> 5] << (gb->pos & 0x1f);
+        cache = ALT_CI_SHIFT_L(gb->buf[ALT_CI_SHIFT_R(gb->pos,5)], (gb->pos & 0x1f));
+        //cache = gb->buf[gb->pos >> 5] << (gb->pos & 0x1f);
 
         if (cache) {
             i = 31 - fast_log2(cache);
@@ -88,8 +88,8 @@ static inline int get_unary1(GetBitContext *gb, int len)
 static inline int sign_extend(int val, unsigned bits)
 {
     unsigned shift = 8 * sizeof(int) - bits;
-    //union { unsigned u; int s; } v = { (unsigned) ALT_CI_SHIFT_L(val, shift) };
-    union { unsigned u; int s; } v = { (unsigned) val << shift };
+    union { unsigned u; int s; } v = { (unsigned) ALT_CI_SHIFT_L(val, shift) };
+    //union { unsigned u; int s; } v = { (unsigned) val << shift };
     return v.s >> shift;    /* custom instruction mogned */
 }
 
@@ -125,18 +125,18 @@ static inline int64_t get_utf8(GetBitContext *gb)
     if (ones == 1)
         return -1;
 
-    //val &= ALT_CI_SHIFT_R(127, ones);
-    val &= 127 >> ones;
+    val &= ALT_CI_SHIFT_R(127, ones);
+    //val &= 127 >> ones;
 
     while(--ones > 0){
         int tmp = get_bits(gb, 8) - 128;
 
-        //if (ALT_CI_SHIFT_R(tmp, 6))
-        if (tmp >> 6)
+        if (ALT_CI_SHIFT_R(tmp, 6))
+        //if (tmp >> 6)
             return -1;
 
-        //val = (ALT_CI_SHIFT_L(val, 6)) + tmp;
-        val = (val << 6) + tmp;
+        val = (ALT_CI_SHIFT_L(val, 6)) + tmp;
+        //val = (val << 6) + tmp;
     }
 
     return val;

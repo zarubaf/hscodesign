@@ -14,6 +14,6 @@ END shift_l;
 architecture rtl of shift_l is
 
 begin
-	r <= std_logic_vector(shift_left(unsigned(b), to_integer(unsigned(a(31 downto 0)))));
+	r <= std_logic_vector(shift_left(unsigned(a), to_integer(unsigned(b(31 downto 0)))));
 
 end rtl;

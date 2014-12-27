@@ -4,7 +4,7 @@
 
 SRC_DIR=./src
 
-NIOS2_APP_GEN_ARGS="--elf-name ${PROJECT_NAME}.elf --set APP_CFLAGS_OPTIMIZATION -Os --set OBJDUMP_INCLUDE_SOURCE 1 --src-rdir ${SRC_DIR}"
+NIOS2_APP_GEN_ARGS="--elf-name ${PROJECT_NAME}.elf --set APP_CFLAGS_OPTIMIZATION -O3 --set OBJDUMP_INCLUDE_SOURCE 1 --src-rdir ${SRC_DIR}"
 
 
 # First, check to see if $SOPC_KIT_NIOS2 environmental variable is set.
