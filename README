@@ -1,0 +1,77 @@
+
+HW/SW Codesign - build environment
+----------------------------------
+
+This is the demo project of the HW/SW build environment. It should contain the 
+following files and directories.
+
+de2_115_nios2_template
+  |- quartus
+     |- Makefile
+     |- .qpf .qsf
+     |- .qsys
+     |- .sdc
+     |- qsyscores
+       |- .tcl                   your QSYS TCL scripts (custom cores) go here
+  |- software
+     |- Makefile
+     |- create-app-makefile
+     |- settings.bsp
+     |- src                       your C code goes here
+  |- vhdl                         your VHDL code goes here
+  |- Makefile                     master Makefile
+  |- README
+
+The hardware project is located in the ./quartus directory. The Makefile in this
+directory provides the following targets:
+
+make              runs quartus synthesis (this includes the qsys system 
+                  generation) 
+make download     downloads the sof file to the board
+make quartus_gui  starts the quartus GUI and loads the quartus project
+make qsys_gui     starts the qsys GUI and loads the qsys project
+make clean        deletes all files, which are generated during the build
+                  process. REMEMBER to clean your project before submission!!
+
+Note that you can also start the synthesis and download process using the 
+quartus GUI.
+
+
+The software project is located in the ./software directory. The makefile and 
+shell-script in this folder build the bsp- and application project. The makefile 
+provides the following targets:
+
+make            creates bsp and app makefile (if necessary) and creates the elf 
+                file. No download is performed.
+make download   downloads the elf file to the nios2 processor
+make term       starts the nios2-terminal (jtag uart) and connects to the nios2
+                processor
+make edit_bsp   opens the bsp settings GUI editor (settings.bsp)
+make run        builds and downloads elf file and starts nios2-terminal 
+                (jtag uart)
+make clean      deletes all files, which are generated during the build
+                process. REMEMBER to clean your project before submission!!
+
+All your C source/header files MUST be placed in the ./software/src directory.
+
+IMPORTANT:
+You have to run "make" in the software folder from the nios2_command_shell, 
+otherwise an error will be raised. To execute the nios2_command_shell run 
+/path/to/altera_dir/nios2eds/nios2_command_shell.sh.
+To find the path to the nios2_command_shell you can run the command 
+"which quartus". This should give you "/path/to/altera_dir/quartus/bin/quartus"
+
+
+The vhdl code of your submission MUST be placed in the ./vhdl directory. 
+
+
+The master Makefile starts the whole build process. This includes the quartus
+synthesis and download of the sof file to the board as well as the software 
+build and download of the ELF file to the nios2 processor. When successful the 
+nios2-terminal is started. 
+We will ONLY use this Makefile when we check your submission. This means that a
+simple make in the project directory must successfully run the aforementioned 
+process. So keep in mind that if you change the build environment, this 
+"feature" must still be functioning! If you are working on your own computer 
+make sure that the build works on the TI lab computers! 
+

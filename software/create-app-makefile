@@ -1,12 +1,10 @@
 #!/bin/bash
-#
 
-# the environment variables  PROJECT_NAME, BSP_DIR and SOPC_FILE are set by the makefile which calls this script
-
+# the environment variables  PROJECT_NAME, QUARTUS_PROJECT_DIR and BSP_DIR  are set by the makefile which calls this script
 
 SRC_DIR=./src
 
-NIOS2_APP_GEN_ARGS="--elf-name ${PROJECT_NAME}.elf --set APP_CFLAGS_OPTIMIZATION -O2 --set OBJDUMP_INCLUDE_SOURCE 1 --src-rdir ${SRC_DIR}"
+NIOS2_APP_GEN_ARGS="--elf-name ${PROJECT_NAME}.elf --set APP_CFLAGS_OPTIMIZATION -Os --set OBJDUMP_INCLUDE_SOURCE 1 --src-rdir ${SRC_DIR}"
 
 
 # First, check to see if $SOPC_KIT_NIOS2 environmental variable is set.
@@ -39,17 +37,5 @@ $cmd || {
     echo "nios2-app-generate-makefile failed"
     exit 1
 }
-
-if [ -z "$SKIP_MAKE" ]; then
-        cmd="make -C ${PROJECT_NAME}"
-
-        echo "create-this-app: Running \"$cmd\""
-        $cmd || {
-        echo "make failed"
-            exit 1
-        }
-
-fi
-
 
 exit 0
