@@ -2,7 +2,7 @@
 #define GET_BITS_H
 
 #include <stdio.h>
-
+#include <system.h>
 #include "utils.h"
 
 typedef struct GetBitContext_s {
@@ -24,13 +24,13 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
     while (gb->pos >= 4096)
         gb->read_block(gb);
 
-    cache = (uint64_t)gb->buf[gb->pos >> 5] << 32;
+    cache = (uint64_t)gb->buf[ALT_CI_SHIFT_R(gb->pos,5)] << 32;
 
     if ((gb->pos & 0x1f) + n > 32) {
         if (gb->pos + 32 >= 4096)
             gb->read_block(gb);
 
-        cache |= (uint64_t)gb->buf[(gb->pos >> 5) + 1];
+        cache |= (uint64_t)gb->buf[(ALT_CI_SHIFT_R(gb->pos,5)) + 1];
     }
 
     ret = (cache << (gb->pos & 0x1f)) >> (64 - n);
@@ -50,7 +50,7 @@ static inline int get_unary1(GetBitContext *gb, int len)
         while (gb->pos >= 4096)
             gb->read_block(gb);
 
-        cache = gb->buf[gb->pos >> 5] << (gb->pos & 0x1f);
+        cache = ALT_CI_SHIFT_L(gb->buf[ALT_CI_SHIFT_R(gb->pos,5)], (gb->pos & 0x1f));
 
         if (cache) {
             i = 31 - fast_log2(cache);
@@ -77,8 +77,8 @@ static inline int get_unary1(GetBitContext *gb, int len)
 static inline int sign_extend(int val, unsigned bits)
 {
     unsigned shift = 8 * sizeof(int) - bits;
-    union { unsigned u; int s; } v = { (unsigned) val << shift };
-    return v.s >> shift;
+    union { unsigned u; int s; } v = { (unsigned) ALT_CI_SHIFT_L(val, shift) };
+    return v.s >> shift;	/* custom instruction mogned */
 }
 
 static inline int get_sbits(GetBitContext *gb, int n)
@@ -113,15 +113,15 @@ static inline int64_t get_utf8(GetBitContext *gb)
     if (ones == 1)
         return -1;
 
-    val &= 127 >> ones;
+    val &= ALT_CI_SHIFT_R(127, ones);
 
     while(--ones > 0){
         int tmp = get_bits(gb, 8) - 128;
 
-        if (tmp >> 6)
+        if (ALT_CI_SHIFT_R(tmp, 6))
             return -1;
 
-        val = (val << 6) + tmp;
+        val = (ALT_CI_SHIFT_L(val, 6)) + tmp;
     }
 
     return val;
