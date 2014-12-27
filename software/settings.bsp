@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>27.12.2014 02:26:22</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1419643582048</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 27, 2014 3:50:26 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1419691826719</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -725,7 +725,7 @@
                 <Value>0</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
-                <Description>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -fstack-limit-register=et to ALT_CPPFLAGS in public.mk.</Description>
+                <Description>Turns on HAL runtime stack checking feature. Enabling this setting causes additional code to be placed into each subroutine call to generate an exception if a stack collision occurs with the heap or statically allocated data. If true, adds -DALT_STACK_CHECK and -fstack-check to ALT_CPPFLAGS in public.mk.</Description>
                 <Restrictions>none</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
@@ -822,7 +822,7 @@
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>public_mk_define</DestinationFile>
                 <Description>Build a custom version of newlib with the specified space-separated compiler flags.</Description>
-                <Restrictions>The custom newlib build will be placed in the &lt;bsp root>/newlib directory, and will be used only for applications that utilize this BSP.</Restrictions>
+                <Restrictions>The custom newlib build will be placed in the &amp;lt;bsp root>/newlib directory, and will be used only for applications that utilize this BSP.</Restrictions>
                 <Enabled>false</Enabled>
                 <Group>none</Group>
         </Setting>
@@ -875,26 +875,32 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>performance_counter</slaveDescriptor>
+                <addressRange>0x00010400 - 0x0001043F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>altpll</slaveDescriptor>
-                <addressRange>0x00010400 - 0x0001040F</addressRange>
+                <addressRange>0x00010440 - 0x0001044F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio_config</slaveDescriptor>
-                <addressRange>0x00010410 - 0x0001041F</addressRange>
+                <addressRange>0x00010450 - 0x0001045F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio</slaveDescriptor>
-                <addressRange>0x00010420 - 0x0001042F</addressRange>
+                <addressRange>0x00010460 - 0x0001046F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00010430 - 0x00010437</addressRange>
+                <addressRange>0x00010470 - 0x00010477</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>

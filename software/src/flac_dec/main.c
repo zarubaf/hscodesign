@@ -9,6 +9,8 @@
 #include "flac_dec.h"
 #include "flac_dsp.h"
 
+#include <sys/alt_alarm.h>
+
 //#define printf printf
 #define fprintf(shit, fmt, ...) printf(fmt, ##__VA_ARGS__)
 
@@ -24,6 +26,7 @@
 #include "altera_up_avalon_audio.h"
 #include "altera_up_avalon_audio_regs.h"
 #include "altera_up_avalon_audio_and_video_config.h"
+#include "altera_avalon_performance_counter.h"
 
 #define READ_BLOCK 17
 
@@ -31,10 +34,9 @@
 #define SD_CARD_ARGUMENT    0x022C
 #define SD_CARD_COMMAND     0x0230
 
-//static int32_t decoded_l1[4608], decoded_l2[4608], decoded_r1[4608], decoded_r2[4608];
-static int32_t *decoded_l[2]; // = { decoded_l1, decoded_l2 };
-static int32_t *decoded_r[2]; // = { decoded_r1, decoded_r2 };
-static int decoded_idx, decoded_pos, decoded_len;
+static int32_t *decoded_l[2];
+static int32_t *decoded_r[2];
+static int decoded_idx, decoded_pos, decoded_len, decoded_chmod;
 
 static uint32_t sdcard_buf[512 / 4];
 
@@ -46,13 +48,17 @@ static short int *sdcard_aux_stat_reg;
 alt_up_audio_dev *audio_dev;
 
 static int decode_main();
-static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r);
+static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r, int *ch_mode);
 
 static void read_block(GetBitContext *gb)
 {
-    int i;
+    int status, i;
 
-    while (IORD_16DIRECT(sdcard_aux_stat_reg, 0) & 0x04);
+    while ((status = IORD_16DIRECT(sdcard_aux_stat_reg, 0)) & 0x04)
+        if ((status & 0x02) == 0) {
+            printf("sd card was removed\n");
+            exit(1);
+        }
 
     // swap bytes
     for (i = 0; i < 128; i++) {
@@ -68,19 +74,17 @@ static void read_block(GetBitContext *gb)
 
 static void audio_write_isr(void *ctx, alt_u32 id)
 {
-    int32_t left, right;
-    unsigned int fifo_base, space_l, space_r;
+    register int32_t left, right;
+    register unsigned int fifo_space;
 
     while (decoded_pos < decoded_len) {
         left = decoded_l[decoded_idx][decoded_pos];
         right = decoded_r[decoded_idx][decoded_pos];
 
-        fifo_base = IORD_ALT_UP_AUDIO_FIFOSPACE(audio_dev->base);
+        fifo_space = IORD_ALT_UP_AUDIO_FIFOSPACE(audio_dev->base);
+        fifo_space &= ALT_UP_AUDIO_FIFOSPACE_WSLC_MSK | ALT_UP_AUDIO_FIFOSPACE_WSRC_MSK;
 
-        space_l = (fifo_base & ALT_UP_AUDIO_FIFOSPACE_WSLC_MSK); // >> ALT_UP_AUDIO_FIFOSPACE_WSLC_OFST;
-        space_r = (fifo_base & ALT_UP_AUDIO_FIFOSPACE_WSRC_MSK); // >> ALT_UP_AUDIO_FIFOSPACE_WSRC_OFST;
-
-        if (space_l > 0 && space_r > 0) {
+        if (fifo_space) {
             IOWR_ALT_UP_AUDIO_LEFTDATA(audio_dev->base, left);
             IOWR_ALT_UP_AUDIO_RIGHTDATA(audio_dev->base, right);
             decoded_pos++;
@@ -89,7 +93,6 @@ static void audio_write_isr(void *ctx, alt_u32 id)
     }
 
     alt_up_audio_disable_write_interrupt(audio_dev);
- //   printf("interrupt disabled\n");
 }
 
 int main()
@@ -107,17 +110,23 @@ int main()
         return 1;
     }
 
-    //while ((IORD_16DIRECT(sdcard_aux_stat_reg, 0) & 0x02) == 0);
+    printf("waiting for sd card\n");
+    while ((IORD_16DIRECT(sdcard_aux_stat_reg, 0) & 0x02) == 0);
+    printf("sd card connected\n");
 
     alt_up_audio_disable_write_interrupt(audio_dev);
     alt_irq_register(AUDIO_IRQ, NULL, audio_write_isr);
 
-    printf("sd card connected\n");
+    PERF_RESET (PERFORMANCE_COUNTER_BASE);
 
     *sdcard_com_arg_reg = 0;
     *sdcard_com_reg = READ_BLOCK;
 
+    PERF_START_MEASURING (PERFORMANCE_COUNTER_BASE);
     decode_main();
+    PERF_STOP_MEASURING (PERFORMANCE_COUNTER_BASE);
+
+    perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 100000000, 1, "heidi");
 
     return 0;
 }
@@ -125,7 +134,7 @@ int main()
 static int decode_main()
 {
     uint32_t buf;
-    int len;
+    int len, chmod;
 
     GetBitContext gb;
     gb.read_block = read_block;
@@ -158,23 +167,32 @@ static int decode_main()
 
     decoded_idx = 1;
 
-    while ((len = decode_frame(&gb, decoded_l[decoded_idx ^ 1], decoded_r[decoded_idx ^ 1])) >= 0) {
-//        printf("decoded %d samples\n", len);
+    if (alt_sysclk_init(100) < 0)
+        printf("no system clock available\n");
 
+    while ((len = decode_frame(&gb, decoded_l[decoded_idx ^ 1], decoded_r[decoded_idx ^ 1], &chmod)) >= 0) {
+        //int tick1 = alt_nticks();
+
+        PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 1);
         while (IORD_ALT_UP_AUDIO_CONTROL(audio_dev->base) & ALT_UP_AUDIO_CONTROL_WE_MSK);
+        PERF_END (PERFORMANCE_COUNTER_BASE, 1);
+
+        //int tick2 = alt_nticks();
 
         decoded_idx ^= 1;
         decoded_pos = 0;
         decoded_len = len;
+        decoded_chmod = chmod;
 
-//        printf("interrupt enabled\n");
         alt_up_audio_enable_write_interrupt(audio_dev);
+
+        //printf("system waited from %d to %d\n", tick1, tick2);
     }
 
     return 0;
 }
 
-static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r)
+static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r, int *ch_mode)
 {
     int ret, l_cnt, r_cnt;
     FLACFrameInfo fi;
@@ -212,6 +230,7 @@ static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r)
         case FLAC_CHMODE_RIGHT_SIDE:  flac_decorrelate_rs_c(out_l, out_r, fi.channels, fi.blocksize); break;
         case FLAC_CHMODE_MID_SIDE:    flac_decorrelate_ms_c(out_l, out_r, fi.channels, fi.blocksize); break;
     }
+    *ch_mode = fi.ch_mode;
 
     /*
     l_cnt = r_cnt = 0;

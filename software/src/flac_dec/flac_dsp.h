@@ -15,9 +15,9 @@ static inline int get_sr_golomb_flac(GetBitContext *gb, int k, int limit, int es
     int v, i = get_unary1(gb, limit);
 
     if(!(i < limit - 1)){
-		printf("get sr golomb flac assertion failed\n");
-		exit(1);
-	}
+        printf("get sr golomb flac assertion failed\n");
+        exit(1);
+    }
 
     if (k)
         v = get_bits(gb, k);
@@ -31,15 +31,15 @@ static inline int get_sr_golomb_flac(GetBitContext *gb, int k, int limit, int es
 static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const int pred_order, const int qlevel, const int len)
 {
     int i;
-    
+
     if(!(pred_order > 0 && pred_order <= 32)){
-		printf("flac lpc 16 pred order assertion failed\n");
-		exit(1);
-	}
-    
+        printf("flac lpc 16 pred order assertion failed\n");
+        exit(1);
+    }
+
     for (i = pred_order; i < len - 3; i += 4, decoded += 4) {
         int c, d0 = 0, d1 = 0, d2 = 0, d3 = 0, s0 = 0, s1 = 0, s2 = 0, s3 = 0;
-        
+
         switch (pred_order) {
             case 32: s3 += (c = coeffs[31]) * d2;
                      s2 += c * d1;
@@ -171,10 +171,10 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
                      s0 += c * (d0 = decoded[0]);
         }
         d0 = decoded[pred_order] += s0 >> qlevel;
-        
-        s1 += d0 * coeffs[pred_order - 1]; 
+
+        s1 += d0 * coeffs[pred_order - 1];
         d1 = decoded[pred_order + 1] += s1 >> qlevel;
-        
+
         if (pred_order > 1) {
             s2 += d0 * coeffs[pred_order - 2];
             s3 += d1 * coeffs[pred_order - 2];
@@ -182,7 +182,7 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
         }
         s2 += d1 * coeffs[pred_order - 1];
         d2 = decoded[pred_order + 2] += s2 >> qlevel;
-        
+
         s3 += d2 * coeffs[pred_order - 1];
         decoded[pred_order + 3] += s3 >> qlevel;
     }
