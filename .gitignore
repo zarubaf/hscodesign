@@ -71,4 +71,3 @@ software/bsp/*
 *.objdump
 
 software/de0_nano_nios2/de0_nano_nios2.objdump
-software/settings.bsp
