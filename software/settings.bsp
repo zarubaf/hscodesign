@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 27, 2014 4:23:41 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1419693821887</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 28, 2014 8:32:40 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1419795160279</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -386,7 +386,7 @@
                 <SettingName>hal.make.bsp_cflags_optimization</SettingName>
                 <Identifier>BSP_CFLAGS_OPTIMIZATION</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>-Os</Value>
+                <Value>-O2</Value>
                 <DefaultValue>-O0</DefaultValue>
                 <DestinationFile>makefile_variable</DestinationFile>
                 <Description>C/C++ compiler optimization level. "-O0" = no optimization,"-O2" = "normal" optimization, etc. "-O0" is recommended for code that you want to debug since compiler optimization can remove variables and produce non-sequential execution of code while debugging. This setting defines the value of BSP_CFLAGS_OPTIMIZATION in Makefile.</Description>
@@ -875,32 +875,38 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>framereader</slaveDescriptor>
+                <addressRange>0x00010400 - 0x0001047F</addressRange>
+                <addressSpan>128</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>performance_counter</slaveDescriptor>
-                <addressRange>0x00010400 - 0x0001043F</addressRange>
+                <addressRange>0x00010480 - 0x000104BF</addressRange>
                 <addressSpan>64</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>altpll</slaveDescriptor>
-                <addressRange>0x00010440 - 0x0001044F</addressRange>
+                <addressRange>0x000104C0 - 0x000104CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio_config</slaveDescriptor>
-                <addressRange>0x00010450 - 0x0001045F</addressRange>
+                <addressRange>0x000104D0 - 0x000104DF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio</slaveDescriptor>
-                <addressRange>0x00010460 - 0x0001046F</addressRange>
+                <addressRange>0x000104E0 - 0x000104EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x00010470 - 0x00010477</addressRange>
+                <addressRange>0x000104F0 - 0x000104F7</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
