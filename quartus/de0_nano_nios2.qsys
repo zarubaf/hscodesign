@@ -213,6 +213,14 @@
          type = "String";
       }
    }
+   element sdram.s1
+   {
+      datum baseAddress
+      {
+         value = "67108864";
+         type = "String";
+      }
+   }
    element onchip_mem.s1
    {
       datum _lockedAddress
@@ -223,14 +231,6 @@
       datum baseAddress
       {
          value = "0";
-         type = "String";
-      }
-   }
-   element sdram.s1
-   {
-      datum baseAddress
-      {
-         value = "67108864";
          type = "String";
       }
    }
@@ -1016,20 +1016,10 @@
    start="altpll.c3"
    end="clock_bridge.in_clk" />
  <connection
-   kind="clock"
-   version="13.1"
-   start="altpll.c3"
-   end="framereader.clock_reset" />
- <connection
    kind="reset"
    version="13.1"
    start="clk.clk_reset"
    end="framereader.clock_reset_reset" />
- <connection
-   kind="clock"
-   version="13.1"
-   start="altpll.c0"
-   end="framereader.clock_master" />
  <connection
    kind="reset"
    version="13.1"
@@ -1072,6 +1062,16 @@
   <parameter name="irqNumber" value="2" />
  </connection>
  <connection kind="clock" version="13.1" start="altpll.c4" end="sdcard.clock_sink" />
+ <connection
+   kind="clock"
+   version="13.1"
+   start="altpll.c3"
+   end="framereader.clock_reset" />
+ <connection
+   kind="clock"
+   version="13.1"
+   start="altpll.c0"
+   end="framereader.clock_master" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>

@@ -20,7 +20,20 @@ static const int32_t ff_flac_blocksize_table[16] = {
     256<<0, 256<<1, 256<<2, 256<<3, 256<<4, 256<<5, 256<<6, 256<<7
 };
 
-int ff_flac_decode_frame_header(GetBitContext *gb, FLACFrameInfo *fi)
+#define FLACCOMMONINFO \
+    int samplerate; /**< sample rate */\
+    int channels; /**< number of channels */\
+    int bps; /**< bits-per-sample */\
+
+typedef struct FLACFrameInfo {
+    FLACCOMMONINFO
+    int blocksize; /**< block size of the frame */
+    int ch_mode; /**< channel decorrelation mode */
+    int64_t frame_or_sample_num; /**< frame number or sample number */
+    int is_var_size; /**< specifies if the stream uses variable block sizes or a fixed block size; also determines the meaning of frame_or_sample_num */
+} FLACFrameInfo;
+
+static int ff_flac_decode_frame_header(GetBitContext *gb, FLACFrameInfo *fi)
 {
     int bs_code, sr_code, bps_code;
 
@@ -236,7 +249,7 @@ static int decode_subframe_lpc(GetBitContext *gb, int blocksize, int32_t *decode
     return 0;
 }
 
-int decode_subframe(GetBitContext *gb, FLACFrameInfo *fi, int32_t *decoded, int channel)
+static int decode_subframe(GetBitContext *gb, FLACFrameInfo *fi, int32_t *decoded, int channel)
 {
     int type, wasted = 0;
     int bps = fi->bps;
@@ -291,4 +304,40 @@ int decode_subframe(GetBitContext *gb, FLACFrameInfo *fi, int32_t *decoded, int 
     }
 
     return 0;
+}
+
+int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r, int *ch_mode)
+{
+    FLACFrameInfo fi;
+    int ret;
+
+    if ((ret = ff_flac_decode_frame_header(gb, &fi)) < 0) {
+        fprintf(stderr, "invalid frame header\n");
+        return ret;
+    }
+
+    if (fi.blocksize > 4608) {
+        fprintf(stderr, "invalid block size (must be <= 4608, current is: %d)\n", fi.blocksize);
+        return -1;
+    }
+
+    if (fi.channels == 0 || fi.channels > 2) {
+        fprintf(stderr, "error: invalid channel count (must be 1 or 2, current is %d)\n", fi.channels);
+        return -1;
+    }
+
+    if ((ret = decode_subframe(gb, &fi, out_l, 0)) < 0)
+        return ret;
+
+    if (fi.channels == 2)
+        if ((ret = decode_subframe(gb, &fi, out_r, 1)) < 0)
+            return ret;
+
+    align_get_bits(gb);
+
+    /* frame footer */
+    skip_bits(gb, 16); /* data crc */
+
+    *ch_mode = fi.ch_mode;
+    return fi.blocksize;
 }

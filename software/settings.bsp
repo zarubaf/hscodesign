@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 28, 2014 8:32:40 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1419795160279</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 28, 2014 11:17:16 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1419805036781</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>

@@ -35,8 +35,6 @@
 #define SD_CARD_ARGUMENT    0x022C
 #define SD_CARD_COMMAND     0x0230
 
-volatile uint32_t display_base;
-
 typedef struct {
     int32_t *fft;
     int32_t *data_l, *data_r;
@@ -58,8 +56,9 @@ static short int *sdcard_aux_stat_reg;
 
 alt_up_audio_dev *audio_dev;
 
+volatile uint32_t *display_base;
+
 static int decode_main();
-static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r, int *ch_mode);
 
 static void read_block(GetBitContext *gb)
 {
@@ -110,7 +109,7 @@ static void audio_write_isr(void *ctx, alt_u32 id)
             break;
 
         audio_buf_read++;
-        display_base = shift_display_left(display_base);
+        shift_display_left(&display_base);
         draw_fft(display_base, audio_buf[audio_buf_read & AUDIO_BUF_MSK].fft);
     }
 
@@ -133,10 +132,7 @@ int main()
         return 1;
     }
 
-    void *fb = malloc(480 * 800 * 4 * 2);
-    display_init((uint32_t)fb, (uint32_t)(fb + 480 * 800 * 4));
-    display_base = (uint32_t)fb;
-    show_framebuffer(0);
+    display_base = display_init();
     clear(display_base, rgb(0, 0, 0));
 
     printf("waiting for sd card\n");
@@ -257,40 +253,4 @@ static int decode_main()
     }
 
     return 0;
-}
-
-static int decode_frame(GetBitContext *gb, int32_t *out_l, int32_t *out_r, int *ch_mode)
-{
-    int ret, l_cnt, r_cnt;
-    FLACFrameInfo fi;
-
-    if ((ret = ff_flac_decode_frame_header(gb, &fi)) < 0) {
-        fprintf(stderr, "invalid frame header\n");
-        return ret;
-    }
-
-    if (fi.blocksize > 4608) {
-        fprintf(stderr, "invalid block size (must be <= 4608, current is: %d)\n", fi.blocksize);
-        return -1;
-    }
-
-    if (fi.channels == 0 || fi.channels > 2) {
-        fprintf(stderr, "error: invalid channel count (must be 1 or 2, current is %d)\n", fi.channels);
-        return -1;
-    }
-
-    if ((ret = decode_subframe(gb, &fi, out_l, 0)) < 0)
-        return ret;
-
-    if (fi.channels == 2)
-        if ((ret = decode_subframe(gb, &fi, out_r, 1)) < 0)
-            return ret;
-
-    align_get_bits(gb);
-
-    /* frame footer */
-    skip_bits(gb, 16); /* data crc */
-
-    *ch_mode = fi.ch_mode;
-    return fi.blocksize;
 }
