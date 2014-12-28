@@ -194,51 +194,50 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
     }
 }
 
-static inline void flac_decorrelate_indep_c(int32_t *dec_l, int32_t *dec_r, int channels, int len)
-{
-    /*
-    int i, j;
-
-    for (j = 0; j < len; j++)
-        for (i = 0; i < channels; i++)
-            out[i][j] = in[i][j];
-    */
-}
-
-static inline void flac_decorrelate_ls_c(int32_t *dec_l, int32_t *dec_r, int channels, int len)
+static inline void flac_decorrelate_indep_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
 {
     int i;
 
     for (i = 0; i < len; i++) {
-        int a = dec_l[i];
-        int b = dec_r[i];
-        dec_l[i] =  a;
-        dec_r[i] = (a - b);
+        out_l[i] = in_l[i];
+        out_r[i] = in_r[i];
     }
 }
 
-static inline void flac_decorrelate_rs_c(int32_t *dec_l, int32_t *dec_r, int channels, int len)
+static inline void flac_decorrelate_ls_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
 {
     int i;
 
     for (i = 0; i < len; i++) {
-        int a = dec_l[i];
-        int b = dec_r[i];
-        dec_l[i] = (a + b);
-        dec_r[i] =  b;
+        int a = in_l[i];
+        int b = in_r[i];
+        out_l[i] =  a;
+        out_r[i] = (a - b);
     }
 }
 
-static inline void flac_decorrelate_ms_c(int32_t *dec_l, int32_t *dec_r, int channels, int len)
+static inline void flac_decorrelate_rs_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
 {
     int i;
 
     for (i = 0; i < len; i++) {
-        int a = dec_l[i];
-        int b = dec_r[i];
+        int a = in_l[i];
+        int b = in_r[i];
+        out_l[i] = (a + b);
+        out_r[i] =  b;
+    }
+}
+
+static inline void flac_decorrelate_ms_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
+{
+    int i;
+
+    for (i = 0; i < len; i++) {
+        int a = in_l[i];
+        int b = in_r[i];
         a -= b >> 1;
-        dec_l[i] = (a + b);
-        dec_r[i] =  a;
+        out_l[i] = (a + b);
+        out_r[i] =  a;
     }
 }
 
