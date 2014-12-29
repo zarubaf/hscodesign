@@ -1,10 +1,19 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-//#include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-const uint8_t fast_log2_tab[256];
+#define DEBUG
+
+#ifdef DEBUG
+#define ASSERT(cond) if (!(cond)) { printf("error: " __FILE__ ", line " __LINE__ ": assertion (" #cond ") in line failed\n"); exit(1); }
+#else
+#define ASSERT(cond)
+#endif
+
+extern const uint8_t fast_log2_tab[256];
 
 static inline int fast_log2(unsigned int v)
 {

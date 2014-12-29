@@ -1,7 +1,6 @@
 #ifndef GET_BITS_H
 #define GET_BITS_H
 
-#include <stdio.h>
 #include <system.h>
 #include "utils.h"
 
@@ -17,10 +16,7 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
     uint64_t ret, cache;
     //uint32_t ret2, ret3;
 
-    if(n > 32){
-        printf("get bits assertion failed\n");
-        exit(1);
-    }
+    ASSERT(n <= 32);
 
     while (gb->pos >= 4096)
         gb->read_block(gb);

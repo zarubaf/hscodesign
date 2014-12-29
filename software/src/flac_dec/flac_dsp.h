@@ -1,7 +1,6 @@
 #ifndef FLAC_DSP_H
 #define FLAC_DSP_H
 
-#include <stdio.h>
 #include <stdint.h>
 
 #include "utils.h"
@@ -14,10 +13,7 @@ static inline int get_sr_golomb_flac(GetBitContext *gb, int k, int limit, int es
 {
     int v, i = get_unary1(gb, limit);
 
-    if(!(i < limit - 1)){
-        printf("get sr golomb flac assertion failed\n");
-        exit(1);
-    }
+    ASSERT(i < limit - 1);
 
     if (k)
         v = get_bits(gb, k);
@@ -32,10 +28,7 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
 {
     int i;
 
-    if(!(pred_order > 0 && pred_order <= 32)){
-        printf("flac lpc 16 pred order assertion failed\n");
-        exit(1);
-    }
+    ASSERT(0 < pred_order && pred_order <= 32);
 
     for (i = pred_order; i < len - 3; i += 4, decoded += 4) {
         int c, d0 = 0, d1 = 0, d2 = 0, d3 = 0, s0 = 0, s1 = 0, s2 = 0, s3 = 0;
