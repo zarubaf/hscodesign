@@ -78,11 +78,10 @@ static inline int get_unary1(GetBitContext *gb, int len)
 static inline int sign_extend(int val, unsigned bits)
 {
     unsigned shift = 8 * sizeof(int) - bits;
-    union { unsigned u; int s; } v = { (unsigned) ALT_CI_SHIFT_L(val, shift) };
+    union { unsigned u; int s; } v = { (unsigned)ALT_CI_SHIFT_L(val, shift) };
     //union { unsigned u; int s; } v = { (unsigned) val << shift };
-    //int ret = ALT_CI_SHIFT_R(v.s, shift);
-    //return ret;
-    return v.s >> shift;    /* custom instruction mogned */
+    return ALT_CI_ASHIFT_R(v.s, shift);
+    //return v.s >> shift;
 }
 
 static inline int get_sbits(GetBitContext *gb, int n)

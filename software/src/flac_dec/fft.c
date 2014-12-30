@@ -19,14 +19,8 @@
 */
 
 #define CMUL(dre, dim, are, aim, bre, bim) {\
-    asm("nop"); \
-    asm("nop"); \
-    dre = ALT_CI_SHIFT_R(are * bre - aim * bim, 15);    \
-    asm("nop"); \
-    asm("nop"); \
-    dim = ALT_CI_SHIFT_R(are * bim + aim * bre, 15);    \
-    asm("nop"); \
-    asm("nop"); \
+    dre = ALT_CI_ASHIFT_R(are * bre - aim * bim, 15);    \
+    dim = ALT_CI_ASHIFT_R(are * bim + aim * bre, 15);    \
 }
 
 #define BUTTERFLIES(a0,a1,a2,a3) {\
@@ -135,14 +129,14 @@ FFT_PERM(4096)
     for (i = 0; i < 2048; i++) {
         z = &out[bit_rev_4096[i]];
         //z->re = (in_prev[i] * fft_mask_4096[i]) >> 16;
-        z->re = (in_prev[i] * i) >> 11;
+        z->re = ALT_CI_ASHIFT_R(in_prev[i] * i, 11);
         z->im = 0;
     }
 
     for (j = 0; i < 2048; i++, j++) {
         z = &out[bit_rev_4096[i]];
         //z->re = (in_post[j] * fft_mask_4096[i]) >> 16;
-        z->re = (in_post[j] * (4096 - i)) >> 11;
+        z->re = ALT_CI_ASHIFT_R(in_post[j] * (4096 - i), 11);
         z->im = 0;
     }
 }
