@@ -38,7 +38,7 @@
 
 typedef struct {
     int32_t *freq;
-    int32_t *data_l, *data_r;
+    int16_t *data_l, *data_r;
     int pos;
 } audio_buf_t;
 
@@ -152,7 +152,7 @@ int main()
     decode_main();
     PERF_STOP_MEASURING (PERFORMANCE_COUNTER_BASE);
 
-    perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 140000000, 1, "heidi");
+    perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 140000000, 3, "heidi", "permute", "fft");
 
     return 0;
 }
@@ -163,12 +163,12 @@ static void scale_frequencies(fft_complex *freq_l, fft_complex *freq_r, int32_t 
     int a, i, h;
 
     for (h = 0; h < DISPLAY_HEIGHT; h++) {
-        i = 4 * h;
+        i = h;
 
-        zl = freq_l[i];
-        zr = freq_r[i];
-        a = fast_sqrt(4 * fast_sqrt((int32_t)zl->re * (int32_t)zl->re + (int32_t)zl->im * (int32_t)zl->im));
-        a += fast_sqrt(4 * fast_sqrt((int32_t)zr->re * (int32_t)zr->re + (int32_t)zr->im * (int32_t)zr->im));
+        zl = &freq_l[i];
+        zr = &freq_r[i];
+        a = fast_sqrt(32 * fast_sqrt((int32_t)zl->re * (int32_t)zl->re + (int32_t)zl->im * (int32_t)zl->im));
+        //a += fast_sqrt(4 * fast_sqrt((int32_t)zr->re * (int32_t)zr->re + (int32_t)zr->im * (int32_t)zr->im));
 
         if (a > 255)
             a = 255;
@@ -234,11 +234,16 @@ static int decode_main()
             if (act_buf->pos == AUDIO_BUF_SMP) {
                 act_buf->pos = 0;
 
+                PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 2);
                 fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_l, act_buf->data_l, AUDIO_BUF_SMP, fft_buf_l);
-                fft_4096(fft_buf_l);
+                PERF_END (PERFORMANCE_COUNTER_BASE, 2);
 
-                fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
-                fft_4096(fft_buf_r);
+                PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 3);
+                fft_2048(fft_buf_l);
+                PERF_END (PERFORMANCE_COUNTER_BASE, 3);
+
+                //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
+                //fft_4096(fft_buf_r);
 
                 scale_frequencies(fft_buf_l, fft_buf_r, act_buf->freq);
 
@@ -286,11 +291,11 @@ static int decode_main()
 
         act_buf->pos = 0;
 
-        fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_l, act_buf->data_l, AUDIO_BUF_SMP, fft_buf_l);
-        fft_4096(fft_buf_l);
+        //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_l, act_buf->data_l, AUDIO_BUF_SMP, fft_buf_l);
+        //fft_4096(fft_buf_l);
 
-        fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
-        fft_4096(fft_buf_r);
+        //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
+        //fft_4096(fft_buf_r);
 
         scale_frequencies(fft_buf_l, fft_buf_r, act_buf->freq);
 

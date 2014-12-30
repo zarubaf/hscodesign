@@ -187,7 +187,7 @@ static inline void flac_lpc_16_c(int32_t *decoded, const int coeffs[32], const i
     }
 }
 
-static inline void flac_decorrelate_indep_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
+static inline void flac_decorrelate_indep_c(int32_t *in_l, int32_t *in_r, int16_t *out_l, int16_t *out_r, int len)
 {
     int i;
 
@@ -197,7 +197,7 @@ static inline void flac_decorrelate_indep_c(int32_t *in_l, int32_t *in_r, int32_
     }
 }
 
-static inline void flac_decorrelate_ls_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
+static inline void flac_decorrelate_ls_c(int32_t *in_l, int32_t *in_r, int16_t *out_l, int16_t *out_r, int len)
 {
     int i;
 
@@ -209,7 +209,7 @@ static inline void flac_decorrelate_ls_c(int32_t *in_l, int32_t *in_r, int32_t *
     }
 }
 
-static inline void flac_decorrelate_rs_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
+static inline void flac_decorrelate_rs_c(int32_t *in_l, int32_t *in_r, int16_t *out_l, int16_t *out_r, int len)
 {
     int i;
 
@@ -221,7 +221,7 @@ static inline void flac_decorrelate_rs_c(int32_t *in_l, int32_t *in_r, int32_t *
     }
 }
 
-static inline void flac_decorrelate_ms_c(int32_t *in_l, int32_t *in_r, int32_t *out_l, int32_t *out_r, int len)
+static inline void flac_decorrelate_ms_c(int32_t *in_l, int32_t *in_r, int16_t *out_l, int16_t *out_r, int len)
 {
     int i;
 

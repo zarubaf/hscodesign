@@ -8,7 +8,7 @@
 #define DEBUG
 
 #ifdef DEBUG
-#define ASSERT(cond) if (!(cond)) { printf("error: " __FILE__ ", line " __LINE__ ": assertion (" #cond ") in line failed\n"); exit(1); }
+#define ASSERT(cond) if (!(cond)) { printf("error: " __FILE__ ": assertion (" #cond ") in line failed\n"); exit(1); }
 #else
 #define ASSERT(cond)
 #endif

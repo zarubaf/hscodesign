@@ -23,8 +23,6 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
 
     cache = (uint64_t)gb->buf[ALT_CI_SHIFT_R(gb->pos,5)] << 32;
     //cache = (uint64_t)gb->buf[gb->pos >> 5] << 32;
-    //ret2 = ALT_CI_EXTR_BITS_1(gb->buf[gb->pos >> 5], (gb->pos << 6) | n);
-    //ret3 = ALT_CI_EXTR_BITS_1(0xcef68400, 0x5401);
 
     if ((gb->pos & 0x1f) + n > 32) {
         if (gb->pos + 32 >= 4096)
@@ -32,17 +30,13 @@ static inline unsigned int get_bits(GetBitContext *gb, int n)
 
         cache |= (uint64_t)gb->buf[(ALT_CI_SHIFT_R(gb->pos,5)) + 1];
         //cache |= (uint64_t)gb->buf[(gb->pos >> 5) + 1];
-        //ret2 |= ALT_CI_EXTR_BITS_2(gb->buf[(gb->pos >> 5) + 1], (gb->pos << 6) | n);
     }
 
     ret = (cache << (gb->pos & 0x1f)) >> (64 - n);
-    //printf("buf: %x, pn: %x, ret: %x, ", gb->buf[gb->pos >> 5], (gb->pos << 6) | n, ret);
-    //printf("ret2: %x, ret3: %x\n", ret2, ret3);
 
     gb->pos += n;
 
     return ret;
-    //return ret2;
 }
 
 static inline int get_unary1(GetBitContext *gb, int len)
@@ -86,6 +80,8 @@ static inline int sign_extend(int val, unsigned bits)
     unsigned shift = 8 * sizeof(int) - bits;
     union { unsigned u; int s; } v = { (unsigned) ALT_CI_SHIFT_L(val, shift) };
     //union { unsigned u; int s; } v = { (unsigned) val << shift };
+    //int ret = ALT_CI_SHIFT_R(v.s, shift);
+    //return ret;
     return v.s >> shift;    /* custom instruction mogned */
 }
 

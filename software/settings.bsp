@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 28, 2014 11:17:16 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1419805036781</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Dec 30, 2014 3:00:50 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1419948050460</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -881,32 +881,44 @@
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
+                <slaveDescriptor>sgdma_fft_in</slaveDescriptor>
+                <addressRange>0x00010500 - 0x0001053F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>sgdma_fft_out</slaveDescriptor>
+                <addressRange>0x00010540 - 0x0001057F</addressRange>
+                <addressSpan>64</addressSpan>
+                <attributes/>
+        </MemoryMap>
+        <MemoryMap>
                 <slaveDescriptor>performance_counter</slaveDescriptor>
-                <addressRange>0x00010480 - 0x000104BF</addressRange>
+                <addressRange>0x00010580 - 0x000105BF</addressRange>
                 <addressSpan>64</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>altpll</slaveDescriptor>
-                <addressRange>0x000104C0 - 0x000104CF</addressRange>
+                <addressRange>0x000105C0 - 0x000105CF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio_config</slaveDescriptor>
-                <addressRange>0x000104D0 - 0x000104DF</addressRange>
+                <addressRange>0x000105D0 - 0x000105DF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio</slaveDescriptor>
-                <addressRange>0x000104E0 - 0x000104EF</addressRange>
+                <addressRange>0x000105E0 - 0x000105EF</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x000104F0 - 0x000104F7</addressRange>
+                <addressRange>0x000105F0 - 0x000105F7</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
