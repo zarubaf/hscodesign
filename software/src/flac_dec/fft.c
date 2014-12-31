@@ -6,9 +6,16 @@
 
 #define SQRT1_2 23170 // (1.0 / sqrt(2)) * (1 << 15)
 
+/*
 #define BF(x, y, a, b) { \
     x = (a - b) >> 1; \
     y = (a + b) >> 1; \
+}
+*/
+
+#define BF(x, y, a, b) { \
+    x = ALT_CI_BUTTERFLY_1(a, b); \
+    y = ALT_CI_BUTTERFLY_2(a, b); \
 }
 
 /*
@@ -128,15 +135,15 @@ FFT_PERM(4096)
 
     for (i = 0; i < 2048; i++) {
         z = &out[bit_rev_4096[i]];
-        //z->re = (in_prev[i] * fft_mask_4096[i]) >> 16;
-        z->re = ALT_CI_ASHIFT_R(in_prev[i] * i, 11);
+        z->re = (in_prev[i] * fft_mask_4096[i]) >> 16;
+        //z->re = ALT_CI_ASHIFT_R(in_prev[i] * i, 11);
         z->im = 0;
     }
 
     for (j = 0; i < 2048; i++, j++) {
         z = &out[bit_rev_4096[i]];
-        //z->re = (in_post[j] * fft_mask_4096[i]) >> 16;
-        z->re = ALT_CI_ASHIFT_R(in_post[j] * (4096 - i), 11);
+        z->re = (in_post[j] * fft_mask_4096[i]) >> 16;
+        //z->re = ALT_CI_ASHIFT_R(in_post[j] * (4096 - i), 11);
         z->im = 0;
     }
 }

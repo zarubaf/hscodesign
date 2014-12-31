@@ -51,9 +51,8 @@ static void inline set_pixel(uint32_t *cur_base, uint32_t x, uint32_t y, uint32_
 static void inline draw_fft(uint32_t *cur_base, int *data)
 {
     int i;
-    for(i = 0; i < 480; i++) {
-        set_pixel(cur_base, 797, i, rgb((uint8_t) data[i], (uint8_t) data[i], (uint8_t) data[i]));
-    }
+    for(i = 0; i < 480; i++)
+        set_pixel(cur_base, 797, DISPLAY_HEIGHT - 1 - i, rgb(data[i], data[i], data[i]));
 }
 
 static void inline shift_display_left(uint32_t **cur_base)
