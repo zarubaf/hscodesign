@@ -8,7 +8,7 @@ static inline void get_freq_abs(fft_complex *freq, int idx, uint32_t *left, uint
     fft_complex zl, zr, z1, z2;
 
     z1 = freq[idx];
-    z2 = freq[4095 - idx];
+    z2 = freq[(4096 - idx) & 0xfff];
     zl.re = (z1.re + z2.re) / 2;
     zl.im = (z1.im - z2.im) / 2;
     zr.re = (z1.im + z2.im) / 2;
