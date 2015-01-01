@@ -38,21 +38,30 @@ static inline int32_t *display_init()
     return framebuffer0;
 }
 
+/*
 static uint32_t inline rgb(uint8_t r, uint8_t g, uint8_t b)
 {
     return (((uint8_t)r)<<16 | ((uint8_t)g)<<8 | ((uint8_t)b));
 }
+*/
 
+/*
 static void inline set_pixel(uint32_t *cur_base, uint32_t x, uint32_t y, uint32_t color)
 {
     IOWR(cur_base + (y*DISPLAY_WIDTH+x), 0, color);
 }
+*/
 
-static void inline draw_fft(uint32_t *cur_base, int *data)
+static void inline draw_fft(uint32_t *cur_base, uint32_t *data)
 {
     int i;
-    for(i = 0; i < 480; i++)
-        set_pixel(cur_base, 797, DISPLAY_HEIGHT - 1 - i, rgb(data[i], data[i], data[i]));
+    cur_base += 797;
+
+    for (i = 479; i >= 0; i--) {
+        IOWR(cur_base, 0, data[i]);
+        cur_base += DISPLAY_WIDTH;
+    }
+        //set_pixel(cur_base, 797, DISPLAY_HEIGHT - 1 - i, data);
 }
 
 static void inline shift_display_left(uint32_t **cur_base)

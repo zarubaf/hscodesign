@@ -1,5 +1,6 @@
 #include "fft.h"
 
+#include "fft_butterfly.h"
 #include "fft_tabs.h"
 
 #include <system.h>
@@ -7,52 +8,6 @@
 #define SQRT1_2 23170 // (1.0 / sqrt(2)) * (1 << 15)
 
 /*
-#define BF(x, y, a, b) { \
-    x = (a - b) >> 1; \
-    y = (a + b) >> 1; \
-}
-*/
-
-#define BF(x, y, a, b) { \
-    x = ALT_CI_BUTTERFLY_1(a, b); \
-    y = ALT_CI_BUTTERFLY_2(a, b); \
-}
-
-/*
-#define CMUL(dre, dim, are, aim, bre, bim) {\
-    dre = (are * bre - aim * bim) >> 15;    \
-    dim = (are * bim + aim * bre) >> 15;    \
-}
-*/
-
-#define CMUL(dre, dim, are, aim, bre, bim) {\
-    dre = ALT_CI_ASHIFT_R(are * bre - aim * bim, 15);    \
-    dim = ALT_CI_ASHIFT_R(are * bim + aim * bre, 15);    \
-}
-
-#define BUTTERFLIES(a0,a1,a2,a3) {\
-    BF(t3, t5, t5, t1);\
-    BF(a2.re, a0.re, a0.re, t5);\
-    BF(a3.im, a1.im, a1.im, t3);\
-    BF(t4, t6, t2, t6);\
-    BF(a3.re, a1.re, a1.re, t4);\
-    BF(a2.im, a0.im, a0.im, t6);\
-}
-
-#define TRANSFORM(a0,a1,a2,a3,wre,wim) {\
-    CMUL(t1, t2, a2.re, a2.im, wre, -wim);\
-    CMUL(t5, t6, a3.re, a3.im, wre, wim);\
-    BUTTERFLIES(a0,a1,a2,a3)\
-}
-
-#define TRANSFORM_ZERO(a0,a1,a2,a3) {\
-    t1 = a2.re;\
-    t2 = a2.im;\
-    t5 = a3.re;\
-    t6 = a3.im;\
-    BUTTERFLIES(a0,a1,a2,a3)\
-}
-
 static inline void pass(fft_complex *z, const int16_t *wre, unsigned int n)
 {
     int32_t t1, t2, t3, t4, t5, t6;
@@ -73,6 +28,7 @@ static inline void pass(fft_complex *z, const int16_t *wre, unsigned int n)
         TRANSFORM(z[1],z[o1+1],z[o2+1],z[o3+1],wre[1],wim[-1]);
     } while(--n);
 }
+*/
 
 static inline void fft_4(fft_complex *z)
 {
@@ -109,7 +65,7 @@ FFT_STATIC_INLINE void fft_##n(fft_complex *z)        \
     fft_##n2(z);                    \
     fft_##n4(z + n4 * 2);           \
     fft_##n4(z + n4 * 3);           \
-    pass(z, cos_##n, n4/2);         \
+    bf_pass_##n(z);                 \
 }
 
 #define FFT_STATIC_INLINE static inline
@@ -117,11 +73,11 @@ DECL_FFT(16,8,4)
 DECL_FFT(32,16,8)
 DECL_FFT(64,32,16)
 DECL_FFT(128,64,32)
-DECL_FFT(256,128,64)
-DECL_FFT(512,256,128)
 
 #undef FFT_STATIC_INLINE
 #define FFT_STATIC_INLINE
+DECL_FFT(256,128,64)
+DECL_FFT(512,256,128)
 DECL_FFT(1024,512,256)
 DECL_FFT(2048,1024,512)
 DECL_FFT(4096,2048,1024)
@@ -131,19 +87,18 @@ FFT_PERM(4096)
     fft_complex *z;
     int i, j;
 
-    in_prev += len - 2048;
+    in_prev_l += len - 2048;
+    in_prev_r += len - 2048;
 
     for (i = 0; i < 2048; i++) {
         z = &out[bit_rev_4096[i]];
-        z->re = (in_prev[i] * fft_mask_4096[i]) >> 16;
-        //z->re = ALT_CI_ASHIFT_R(in_prev[i] * i, 11);
-        z->im = 0;
+        z->re = ALT_CI_ASHIFT_R(in_prev_l[i] * fft_mask_4096[i], 16);
+        z->im = ALT_CI_ASHIFT_R(in_prev_r[i] * fft_mask_4096[i], 16);
     }
 
-    for (j = 0; i < 2048; i++, j++) {
+    for (j = 0; j < 2048; i++, j++) {
         z = &out[bit_rev_4096[i]];
-        z->re = (in_post[j] * fft_mask_4096[i]) >> 16;
-        //z->re = ALT_CI_ASHIFT_R(in_post[j] * (4096 - i), 11);
-        z->im = 0;
+        z->re = ALT_CI_ASHIFT_R(in_post_l[j] * fft_mask_4096[i], 16);
+        z->im = ALT_CI_ASHIFT_R(in_post_r[j] * fft_mask_4096[i], 16);
     }
 }
