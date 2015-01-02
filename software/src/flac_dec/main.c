@@ -12,6 +12,9 @@
 #include "fft.h"
 #include "display.h"
 
+#define SPECTRO_LOG
+#include "spectrum.h"
+
 #include <sys/alt_alarm.h>
 
 //#define printf printf
@@ -134,7 +137,7 @@ int main()
     }
 
     display_base = display_init();
-    clear(display_base, rgb(0, 0, 0));
+    clear(display_base, 0);
 
     printf("waiting for sd card\n");
     while ((IORD_16DIRECT(sdcard_aux_stat_reg, 0) & 0x02) == 0);
@@ -152,11 +155,12 @@ int main()
     decode_main();
     PERF_STOP_MEASURING (PERFORMANCE_COUNTER_BASE);
 
-    perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 140000000, 3, "idle", "permute", "fft");
+    perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 140000000, 4, "idle", "permute", "fft", "spectrum");
 
     return 0;
 }
 
+/*
 static void scale_frequencies(fft_complex *freq_l, fft_complex *freq_r, int32_t *out)
 {
     fft_complex *zl, *zr;
@@ -176,6 +180,7 @@ static void scale_frequencies(fft_complex *freq_l, fft_complex *freq_r, int32_t 
         out[h] = a;
     }
 }
+*/
 
 static int decode_main()
 {
@@ -220,11 +225,10 @@ static int decode_main()
     decoded_l = malloc(4608 * 4);
     decoded_r = malloc(4608 * 4);
 
-    fft_complex *fft_buf_l, *fft_buf_r;
-    fft_buf_l = malloc(4096 * sizeof(fft_complex));
-    fft_buf_r = malloc(4096 * sizeof(fft_complex));
+    fft_complex *fft_buf;
+    fft_buf = malloc(4096 * sizeof(fft_complex));
 
-    audio_buf_t *act_buf = &audio_buf[0];
+    audio_buf_t *prev_buf, *act_buf = &audio_buf[0];
 
     while ((len = decode_frame(&gb, decoded_l, decoded_r, &chmod)) >= 0) {
         int pos = 0;
@@ -233,19 +237,19 @@ static int decode_main()
         while (pos < len) {
             if (act_buf->pos == AUDIO_BUF_SMP) {
                 act_buf->pos = 0;
+                prev_buf = &audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK];
 
                 PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 2);
-                fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_l, act_buf->data_l, AUDIO_BUF_SMP, fft_buf_l);
+                fft_4096_permute(prev_buf->data_l, act_buf->data_l, prev_buf->data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf);
                 PERF_END (PERFORMANCE_COUNTER_BASE, 2);
 
                 PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 3);
-                fft_4096(fft_buf_l);
+                fft_4096(fft_buf);
                 PERF_END (PERFORMANCE_COUNTER_BASE, 3);
 
-                //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
-                //fft_4096(fft_buf_r);
-
-                scale_frequencies(fft_buf_l, fft_buf_r, act_buf->freq);
+                PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 4);
+                get_spectrum(fft_buf, act_buf->freq);
+                PERF_END (PERFORMANCE_COUNTER_BASE, 4);
 
                 PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 1);
                 while (audio_buf_write + 1 == audio_buf_read + AUDIO_BUF_CNT);
@@ -291,13 +295,17 @@ static int decode_main()
 
         act_buf->pos = 0;
 
-        //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_l, act_buf->data_l, AUDIO_BUF_SMP, fft_buf_l);
-        //fft_4096(fft_buf_l);
+        PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 2);
+        fft_4096_permute(prev_buf->data_l, act_buf->data_l, prev_buf->data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf);
+        PERF_END (PERFORMANCE_COUNTER_BASE, 2);
 
-        //fft_4096_permute(audio_buf[(audio_buf_write - 1) & AUDIO_BUF_MSK].data_r, act_buf->data_r, AUDIO_BUF_SMP, fft_buf_r);
-        //fft_4096(fft_buf_r);
+        PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 3);
+        fft_4096(fft_buf);
+        PERF_END (PERFORMANCE_COUNTER_BASE, 3);
 
-        scale_frequencies(fft_buf_l, fft_buf_r, act_buf->freq);
+        PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 4);
+        get_spectrum(fft_buf, act_buf->freq);
+        PERF_END (PERFORMANCE_COUNTER_BASE, 4);
 
         PERF_BEGIN (PERFORMANCE_COUNTER_BASE, 1);
         while (audio_buf_write + 1 == audio_buf_read + AUDIO_BUF_CNT);

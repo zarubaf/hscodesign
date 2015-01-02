@@ -3,6 +3,8 @@
 
 #include "fft.h"
 
+#include <system.h>
+
 static inline void get_freq_abs(fft_complex *freq, int idx, uint32_t *left, uint32_t *right)
 {
     fft_complex zl, zr, z1, z2;
@@ -26,73 +28,73 @@ static inline void get_freq_abs(fft_complex *freq, int idx, uint32_t *left, uint
 
 static void get_spectrum(fft_complex *freq, uint32_t *out)
 {
-    int l1, l2, r1, r2, a, b, i, h;
+    uint32_t l1, l2, r1, r2, a, b, i, h;
 
 #ifdef SPECTRO_LOG
     l1 = 0;
     r1 = 0;
 
     for (h = 0; h < 64; h += 4) {
-        i = h >> 2;
+        i = ALT_CI_SHIFT_R(h, 2);
         get_freq_abs(freq, i, &l2, &r2);
 
-        out[h] = (l1 << 16) | (r1 << 8) | ((l1 + r1) >> 1);
+        out[h] = l1 | ALT_CI_SHIFT_L(r1, 8) | ALT_CI_SHIFT_L((l1 + r1) & 0x1fe,15);
 
-        a = (3 * l1 + l2) >> 2;
-        b = (3 * r1 + r2) >> 2;
-        out[h + 1] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        a = ALT_CI_SHIFT_R(3 * l1 + l2, 2);
+        b = ALT_CI_SHIFT_R(3 * r1 + r2, 2);
+        out[h + 1] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
 
-        a = (l1 + l2) >> 1;
-        b = (r1 + r2) >> 1;
-        out[h + 2] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        a = ALT_CI_SHIFT_R(l1 + l2, 1);
+        b = ALT_CI_SHIFT_R(r1 + r2, 1);
+        out[h + 2] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
 
-        a = (l1 + 3 * l2) >> 2;
-        b = (r1 + 3 * r2) >> 2;
-        out[h + 3] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        a = ALT_CI_SHIFT_R(l1 + 3 * l2, 2);
+        b = ALT_CI_SHIFT_R(r1 + 3 * r2, 2);
+        out[h + 3] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
 
         l1 = l2;
         r1 = r2;
     }
 
     for (h = 64; h < 128; h += 2) {
-        i = (h >> 1) - 16;
+        i = ALT_CI_SHIFT_R(h, 1) - 16;
         get_freq_abs(freq, i, &l2, &r2);
 
-        out[h] = (l1 << 16) | (r1 << 8) | ((l1 + r1) >> 1);
+        out[h] = l1 | ALT_CI_SHIFT_L(r1, 8) | ALT_CI_SHIFT_L((l1 + r1) & 0x1fe,15);
 
-        a = (l1 + l2) >> 1;
-        b = (r1 + r2) >> 1;
-        out[h + 1] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        a = ALT_CI_SHIFT_R(l1 + l2, 1);
+        b = ALT_CI_SHIFT_R(r1 + r2, 1);
+        out[h + 1] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
 
         l1 = l2;
         r1 = r2;
     }
 
     for (h = 128; h < 448; h++) {
-        switch (h >> 6) {
+        switch (ALT_CI_SHIFT_R(h, 6)) {
             case 2:
                 i = h - 80;
                 break;
 
             case 3:
-                i = (h << 1) - 272;
+                i = ALT_CI_SHIFT_L(h, 1) - 272;
                 break;
 
             case 4:
-                i = (h << 2) - 784;
+                i = ALT_CI_SHIFT_L(h, 2) - 784;
                 break;
 
             case 5:
-                i = (h << 3) - 2064;
+                i = ALT_CI_SHIFT_L(h, 3) - 2064;
                 break;
 
             case 6:
-                i = (h << 4) - 5136;
+                i = ALT_CI_SHIFT_L(h, 4) - 5136;
                 break;
         }
 
         get_freq_abs(freq, i, &a, &b);
-        out[h] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        out[h] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
     }
 
     for (h = 448; h < 480; h++)
@@ -100,7 +102,7 @@ static void get_spectrum(fft_complex *freq, uint32_t *out)
 #else
     for (h = 0; h < 480; h++) {
         get_freq_abs(freq, h * 4, &a, &b);
-        out[h] = (a << 16) | (b << 8) | ((a + b) >> 1);
+        out[h] = a | ALT_CI_SHIFT_L(b, 8) | ALT_CI_SHIFT_L((a + b) & 0x1fe, 15);
     }
 #endif
 }

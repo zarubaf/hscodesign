@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Dec 31, 2014 4:37:45 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1420040265549</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Jan 2, 2015 3:01:20 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1420207280807</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -882,31 +882,31 @@
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>performance_counter</slaveDescriptor>
-                <addressRange>0x00010580 - 0x000105BF</addressRange>
-                <addressSpan>64</addressSpan>
+                <addressRange>0x00010480 - 0x000104FF</addressRange>
+                <addressSpan>128</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>altpll</slaveDescriptor>
-                <addressRange>0x000105C0 - 0x000105CF</addressRange>
+                <addressRange>0x00010500 - 0x0001050F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio_config</slaveDescriptor>
-                <addressRange>0x000105D0 - 0x000105DF</addressRange>
+                <addressRange>0x00010510 - 0x0001051F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>audio</slaveDescriptor>
-                <addressRange>0x000105E0 - 0x000105EF</addressRange>
+                <addressRange>0x00010520 - 0x0001052F</addressRange>
                 <addressSpan>16</addressSpan>
                 <attributes/>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>jtag_uart</slaveDescriptor>
-                <addressRange>0x000105F0 - 0x000105F7</addressRange>
+                <addressRange>0x00010530 - 0x00010537</addressRange>
                 <addressSpan>8</addressSpan>
                 <attributes>printable</attributes>
         </MemoryMap>
