@@ -14,6 +14,6 @@ END shift_ri;
 architecture rtl of shift_ri is
 
 begin
-   r <= std_logic_vector(shift_right(signed(a), to_integer(unsigned(n))));
+   r <= std_logic_vector(shift_left(unsigned(a), to_integer(unsigned(n))));
 end rtl;
 
