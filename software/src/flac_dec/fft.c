@@ -85,20 +85,27 @@ DECL_FFT(4096,2048,1024)
 FFT_PERM(4096)
 {
     fft_complex *z;
-    int i, j;
+    int mask, i;
+    const uint16_t *bit_rev = bit_rev_4096;
 
     in_prev_l += len - 2048;
     in_prev_r += len - 2048;
 
+    mask = 0;
+
     for (i = 0; i < 2048; i++) {
-        z = &out[bit_rev_4096[i]];
-        z->re = ALT_CI_ASHIFT_R(in_prev_l[i] * fft_mask_4096[i], 16);
-        z->im = ALT_CI_ASHIFT_R(in_prev_r[i] * fft_mask_4096[i], 16);
+        z = &out[*(bit_rev++)];
+        //mask = *(mask_p++);
+        mask += 32;
+        z->re = ALT_CI_ASHIFT_R(*(in_prev_l++) * mask, 16);
+        z->im = ALT_CI_ASHIFT_R(*(in_prev_r++) * mask, 16);
     }
 
-    for (j = 0; j < 2048; i++, j++) {
-        z = &out[bit_rev_4096[i]];
-        z->re = ALT_CI_ASHIFT_R(in_post_l[j] * fft_mask_4096[i], 16);
-        z->im = ALT_CI_ASHIFT_R(in_post_r[j] * fft_mask_4096[i], 16);
+    for (i = 0; i < 2048; i++) {
+        z = &out[*(bit_rev++)];
+        //mask = *(mask_p++);
+        mask -= 32;
+        z->re = ALT_CI_ASHIFT_R(*(in_post_l++) * mask, 16);
+        z->im = ALT_CI_ASHIFT_R(*(in_post_r++) * mask, 16);
     }
 }
