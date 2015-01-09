@@ -14,8 +14,8 @@ entity de0_nano is
 		DRAM_CAS_N                     	: out   	std_logic;                                        -- cas_n
 		DRAM_CKE                       	: out   	std_logic;                                        -- cke
 		DRAM_CS_N                     	: out   	std_logic;                                        -- cs_n
-		DRAM_DQ                        	: inout 	std_logic_vector(15 downto 0) := (others => 'X'); -- dq
-		DRAM_DQM                       	: out   	std_logic_vector(1 downto 0);                     -- dqm
+		DRAM_DQ                        	: inout 	std_logic_vector(31 downto 0) := (others => 'X'); -- dq
+		DRAM_DQM                       	: out   	std_logic_vector(3 downto 0);                     -- dqm
 		DRAM_RAS_N                     	: out   	std_logic;                                        -- ras_n
 		DRAM_WE_N                      	: out   	std_logic;                                        -- we_n
 		DRAM_CLK                       	: out   	std_logic;                                         -- clk
@@ -60,8 +60,8 @@ architecture arch of de0_nano is
             sdram_cas_n                     	: out   	std_logic;                                        -- cas_n
             sdram_cke                       	: out   	std_logic;                                        -- cke
             sdram_cs_n                      	: out   	std_logic;                                        -- cs_n
-            sdram_dq                        	: inout 	std_logic_vector(15 downto 0) := (others => 'X'); -- dq
-            sdram_dqm                       	: out   	std_logic_vector(1 downto 0);                     -- dqm
+            sdram_dq                        	: inout 	std_logic_vector(31 downto 0) := (others => 'X'); -- dq
+            sdram_dqm                       	: out   	std_logic_vector(3 downto 0);                     -- dqm
             sdram_ras_n                     	: out   	std_logic;                                        -- ras_n
             sdram_we_n                      	: out   	std_logic;                                        -- we_n
             sdram_clk_clk                   	: out   	std_logic;                                        -- clk

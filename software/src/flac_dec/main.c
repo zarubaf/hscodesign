@@ -76,12 +76,17 @@ static void read_block(GetBitContext *gb)
 
     // swap bytes
     for (i = 0; i < 128; i++) {
-        gb->buf[i] = ((int32_t *)sd_card_dev->base)[i];
+
+        gb->buf[i] =  (uint32_t) IORD_32DIRECT(sd_card_dev->base, 4*i); //
+        //gb->buf[i] = ((int32_t *)sd_card_dev->base)[i];
+        //printf("%08x\t",gb->buf[i]);
         gb->buf[i] = (gb->buf[i]<<24) | (gb->buf[i]<<8&0x00FF0000) | (gb->buf[i]>>8&0x0000FF00) | (gb->buf[i]>>24);
     }
-
-    *sdcard_com_arg_reg = ++gb->blk_cnt * 512;
-    *sdcard_com_reg = READ_BLOCK;
+	//printf("\n");
+    //*sdcard_com_arg_reg = ++gb->blk_cnt * 512;
+    IOWR_32DIRECT(sdcard_com_arg_reg, 0,  ++gb->blk_cnt* 512);
+    IOWR_16DIRECT(sdcard_com_reg, 0, READ_BLOCK);
+    //*sdcard_com_reg = READ_BLOCK;
 
     gb->pos -= 4096;
 }
@@ -148,8 +153,8 @@ int main()
 
     PERF_RESET (PERFORMANCE_COUNTER_BASE);
 
-    *sdcard_com_arg_reg = 0;
-    *sdcard_com_reg = READ_BLOCK;
+    IOWR_32DIRECT(sdcard_com_arg_reg, 0, 0);
+    IOWR_16DIRECT(sdcard_com_reg, 0, READ_BLOCK);
 
     PERF_START_MEASURING (PERFORMANCE_COUNTER_BASE);
     decode_main();
