@@ -10,18 +10,6 @@
     y = ALT_CI_BUTTERFLY_2(a, b); \
 }
 
-/*
-#define CMUL(dre, dim, are, aim, bre, bim) {\
-    dre = ALT_CI_ASHIFT_R(are * bre - aim * bim, 15);    \
-    dim = ALT_CI_ASHIFT_R(are * bim + aim * bre, 15);    \
-}
-*/
-/*
-#define CMUL(dre, dim, are, aim, bre, bim) { \
-    dre = ALT_CI_ASHIFT_R_15(are * bre - aim * bim); \
-    dim = ALT_CI_ASHIFT_R_15(are * bim + aim * bre); \
-}
-*/
 #define CMUL(dre, dim, are, aim, bre, bim) { \
     dre = ALT_CI_SUB_ASR_15(are * bre, aim * bim); \
     dim = ALT_CI_ADD_ASR_15(are * bim, aim * bre); \

@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Jan 9, 2015 9:14:11 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1420834451259</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Jan 12, 2015 6:20:40 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1421083240210</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -862,12 +862,6 @@
                 <Enabled>false</Enabled>
                 <Group xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
         </Setting>
-        <MemoryMap>
-                <slaveDescriptor>onchip_mem</slaveDescriptor>
-                <addressRange>0x00000000 - 0x0000B3FF</addressRange>
-                <addressSpan>46080</addressSpan>
-                <attributes>memory</attributes>
-        </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sdcard</slaveDescriptor>
                 <addressRange>0x00010000 - 0x000103FF</addressRange>

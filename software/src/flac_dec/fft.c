@@ -97,15 +97,15 @@ FFT_PERM(4096)
         z = &out[*(bit_rev++)];
         //mask = *(mask_p++);
         mask += 32;
-        z->re = ALT_CI_ASHIFT_R(*(in_prev_l++) * mask, 16);
-        z->im = ALT_CI_ASHIFT_R(*(in_prev_r++) * mask, 16);
+        z->re = ((*(in_prev_l++) * mask) >> 16);
+        z->im = ((*(in_prev_r++) * mask) >> 16);
     }
 
     for (i = 0; i < 2048; i++) {
         z = &out[*(bit_rev++)];
         //mask = *(mask_p++);
         mask -= 32;
-        z->re = ALT_CI_ASHIFT_R(*(in_post_l++) * mask, 16);
-        z->im = ALT_CI_ASHIFT_R(*(in_post_r++) * mask, 16);
+        z->re = ((*(in_post_l++) * mask) >> 16);
+        z->im = ((*(in_post_r++) * mask) >> 16);
     }
 }

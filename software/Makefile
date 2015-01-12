@@ -52,7 +52,6 @@ $(BSP_DIR): $(SOPC_FILE) $(BSP_SETTINGS_FILE)
 	mkdir -p $(BSP_DIR)
 	nios2-bsp-update-settings --settings $(BSP_SETTINGS_FILE) --sopc $(SOPC_FILE)
 	nios2-bsp-generate-files --settings $(BSP_SETTINGS_FILE) --bsp-dir $(BSP_DIR)
-	cp src/system.h bsp/system.h -f
 
 clean:
 	rm -rf $(BSP_DIR)
