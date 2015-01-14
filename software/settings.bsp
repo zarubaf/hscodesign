@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Jan 12, 2015 6:20:40 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1421083240210</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Jan 14, 2015 1:18:14 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1421237894431</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>bsp/</BspGeneratedLocation>
         <BspSettingsFile>./settings.bsp</BspSettingsFile>
         <SopcDesignFile>../quartus/de0_nano_nios2.sopcinfo</SopcDesignFile>
@@ -871,12 +871,6 @@
         <MemoryMap>
                 <slaveDescriptor>framereader</slaveDescriptor>
                 <addressRange>0x00010400 - 0x0001047F</addressRange>
-                <addressSpan>128</addressSpan>
-                <attributes/>
-        </MemoryMap>
-        <MemoryMap>
-                <slaveDescriptor>performance_counter</slaveDescriptor>
-                <addressRange>0x00010480 - 0x000104FF</addressRange>
                 <addressSpan>128</addressSpan>
                 <attributes/>
         </MemoryMap>

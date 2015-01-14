@@ -33,18 +33,18 @@
 #include "altera_up_avalon_audio_and_video_config.h"
 
 #ifdef __ALTERA_AVALON_PERFORMANCE_COUNTER
-	#include "altera_avalon_performance_counter.h"
+    #include "altera_avalon_performance_counter.h"
 #else
-			#define	PERFORMANCE_COUNTER_BASE 
-            #define    PERF_BEGIN(A, B) 
-            #define    PERF_END(A, B) 
-            #define    PERF_START_MEASURING(A) 
-            #define    PERF_STOP_MEASURING(A) 
-            #define 	PERF_RESET(A)
-                
+            #define PERFORMANCE_COUNTER_BASE
+            #define    PERF_BEGIN(A, B)
+            #define    PERF_END(A, B)
+            #define    PERF_START_MEASURING(A)
+            #define    PERF_STOP_MEASURING(A)
+            #define     PERF_RESET(A)
+
 #endif
 
-    
+
 #define READ_BLOCK 17
 
 #define SD_CARD_STATUS      0x0234
@@ -92,7 +92,7 @@ static void read_block(GetBitContext *gb)
         gb->buf[i] =  (uint32_t) IORD_32DIRECT(sd_card_dev->base, 4*i); //
         gb->buf[i] = (gb->buf[i]<<24) | (gb->buf[i]<<8&0x00FF0000) | (gb->buf[i]>>8&0x0000FF00) | (gb->buf[i]>>24);
     }
-    
+
     IOWR_32DIRECT(sdcard_com_arg_reg, 0,  ++gb->blk_cnt* 512);
     IOWR_16DIRECT(sdcard_com_reg, 0, READ_BLOCK);
 
@@ -164,14 +164,14 @@ int main()
     IOWR_32DIRECT(sdcard_com_arg_reg, 0, 0);
     IOWR_16DIRECT(sdcard_com_reg, 0, READ_BLOCK);
 
-	PERF_START_MEASURING (PERFORMANCE_COUNTER_BASE);
+    PERF_START_MEASURING (PERFORMANCE_COUNTER_BASE);
     decode_main();
     PERF_STOP_MEASURING (PERFORMANCE_COUNTER_BASE);
-	
-	#ifdef __ALTERA_AVALON_PERFORMANCE_COUNTER
-		perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 140000000, 4, "idle", "permute", "fft", "spectrum");
-	#endif
-	
+
+    #ifdef __ALTERA_AVALON_PERFORMANCE_COUNTER
+        perf_print_formatted_report(PERFORMANCE_COUNTER_BASE, 100000000, 4, "idle", "permute", "fft", "spectrum");
+    #endif
+
     return 0;
 }
 
